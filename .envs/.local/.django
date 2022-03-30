@@ -1,0 +1,32 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+USE_CELERY_BEAT=yes
+IPYTHONDIR=/app/.ipython
+SERVICE_HOST=0.0.0.0
+WEBAPP_URL=0.0.0.0
+
+# email
+# ------------------------------------------------------------------------------
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+REDIS_RESULT_URL=redis://redis:6379/0
+
+# Flower
+# ------------------------------------------------------------------------------
+FLOWER_PURGE_OFFLINE_WORKERS=10
+CELERY_FLOWER_USER=spray_site_user
+CELERY_FLOWER_PASSWORD=spray_site_user!
+
+# rabbitmq
+# ------------------------------------------------------------------------------
+RABBITMQ_DEFAULT_HOST=rabbitmq
+RABBITMQ_DEFAULT_PORT=5672
+RABBITMQ_DEFAULT_VHOST=/
+RABBITMQ_DEFAULT_USER=spray_site_user
+RABBITMQ_DEFAULT_PASS=spray_site_user!
+
+# other
+# ------------------------------------------------------------------------------

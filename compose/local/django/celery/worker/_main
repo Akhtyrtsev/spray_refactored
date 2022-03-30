@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+
+watchgod celery.__main__.main --args -A config.celery_app worker --queues=queue_main,queue_main2,queue_main3,queue_main4,queue_main5,queue_main6,queue_main7,queue_main8,queue_schedule --loglevel=INFO --pool=gevent --concurrency=20

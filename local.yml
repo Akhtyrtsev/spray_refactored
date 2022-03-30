@@ -1,0 +1,89 @@
+version: '3'
+
+volumes:
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+
+services:
+  django: &django
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: spray_local_django
+    container_name: spray_local_django
+    sysctls:
+      - net.core.somaxconn=65535
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:5000"
+    command: /start
+
+  postgres:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./compose/local/postgres/Dockerfile
+    image: spray_local_postgres
+    container_name: spray_local_postgres
+    sysctls:
+      - net.core.somaxconn=65535
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data:z
+      - local_postgres_data_backups:/backups:z
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5433:5432"
+
+  redis:
+    restart: unless-stopped
+    image: redis:5.0
+    container_name: spray_local_redis
+    sysctls:
+      - net.core.somaxconn=65535
+
+  rabbitmq:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./compose/local/rabbitmq/Dockerfile
+    image: spray_local_rabbitmq
+    container_name: spray_local_rabbitmq
+    sysctls:
+      - net.core.somaxconn=65535
+    env_file:
+      - ./.envs/.local/.django
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+
+  celeryworker-main:
+    <<: *django
+    image: spray_local_celeryworker_main
+    container_name: spray_local_celeryworker_main
+    ports: []
+    command: /start-celeryworker-main
+
+  celerybeat:
+    <<: *django
+    image: spray_local_celerybeat
+    container_name: spray_local_celerybeat
+    ports: []
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: spray_local_flower
+    container_name: spray_local_flower
+    ports:
+      - "5555:5555"
+    command: /start-flower

@@ -1,0 +1,7 @@
+-r base.txt
+
+gunicorn==20.1.0                         # https://github.com/benoitc/gunicorn
+
+# Django
+# ------------------------------------------------------------------------------
+django-storages[boto3]==1.12.3           # https://github.com/jschneier/django-storages
