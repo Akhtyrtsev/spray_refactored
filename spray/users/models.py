@@ -77,3 +77,12 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+
+class Client(User):
+
+    test_client = models.CharField(max_length=128)
+
+
+class Valet(User):
+
+    test_valet = models.CharField(max_length=128)

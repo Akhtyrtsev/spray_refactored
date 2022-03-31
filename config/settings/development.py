@@ -91,15 +91,15 @@ REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = [
 
 # jwt
 # -------------------------------------------------------------------------------
-#TODO jwt conf
-# JWT_AUTH = {
-#     "JWT_PAYLOAD_GET_USERNAME_HANDLER": "orbital.core.jwt.jwt_get_username_from_payload_handler",
-#     "JWT_DECODE_HANDLER": "orbital.utils.base_func.jwt_decode_token",
-#     "JWT_ALGORITHM": "RS256",
-#     "JWT_AUDIENCE": AUTH0_API_IDENTIFIER,
-#     "JWT_ISSUER": f"https://{AUTH0_API_DOMAIN}/",
-#     "JWT_AUTH_HEADER_PREFIX": "Bearer",
-# }
+
+JWT_AUTH = {
+    "JWT_PAYLOAD_GET_USERNAME_HANDLER": "orbital.core.jwt.jwt_get_username_from_payload_handler",
+    "JWT_DECODE_HANDLER": "orbital.utils.base_func.jwt_decode_token",
+    "JWT_ALGORITHM": "RS256",
+    "JWT_AUDIENCE": AUTH0_API_IDENTIFIER,
+    "JWT_ISSUER": f"https://{AUTH0_API_DOMAIN}/",
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
+}
 
 # corsheaders
 # ------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 from .base import *  # noqa
 import environ
+import datetime
 
 env = environ.Env()
 
@@ -92,9 +93,8 @@ CELERY_TASK_EAGER_PROPAGATES = True
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = [
-    # "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+    "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
     "rest_framework.authentication.SessionAuthentication",
-    "rest_framework.authentication.TokenAuthentication",
     "rest_framework.authentication.BasicAuthentication",
 ]
 
@@ -118,6 +118,45 @@ CORS_ALLOW_CREDENTIALS = True
 # bins
 # ------------------------------------------------------------------------------
 
+# JWT
+# ------------------------------------------------------------------------------
+
+JWT_AUTH = {
+    "JWT_SECRET_KEY": SECRET_KEY,
+    "JWT_GET_USER_SECRET_KEY": None,
+    "JWT_PRIVATE_KEY": None,
+    "JWT_PUBLIC_KEY": None,
+    "JWT_ALGORITHM": "HS256",
+    "JWT_INSIST_ON_KID": False,
+    "JWT_TOKEN_ID": "include",
+    "JWT_AUDIENCE": None,
+    "JWT_ISSUER": None,
+    "JWT_ENCODE_HANDLER":
+        "rest_framework_jwt.utils.jwt_encode_payload",
+    "JWT_DECODE_HANDLER":
+        "rest_framework_jwt.utils.jwt_decode_token",
+    "JWT_PAYLOAD_HANDLER":
+        "rest_framework_jwt.utils.jwt_create_payload",
+    "JWT_PAYLOAD_GET_USERNAME_HANDLER":
+        "rest_framework_jwt.utils.jwt_get_username_from_payload_handler",
+    "JWT_PAYLOAD_INCLUDE_USER_ID": True,
+    "JWT_VERIFY": True,
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_LEEWAY": 0,
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(seconds=300),
+    "JWT_ALLOW_REFRESH": True,
+    "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=7),
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
+    "JWT_RESPONSE_PAYLOAD_HANDLER":
+        "rest_framework_jwt.utils.jwt_create_response_payload",
+    "JWT_AUTH_COOKIE": None,
+    "JWT_AUTH_COOKIE_DOMAIN": None,
+    "JWT_AUTH_COOKIE_PATH": "/",
+    "JWT_AUTH_COOKIE_SECURE": True,
+    "JWT_AUTH_COOKIE_SAMESITE": "Lax",
+    "JWT_IMPERSONATION_COOKIE": None,
+    "JWT_DELETE_STALE_BLACKLISTED_TOKENS": False,
+}
 # LOGGING
 # ------------------------------------------------------------------------------
 LOGGING = {

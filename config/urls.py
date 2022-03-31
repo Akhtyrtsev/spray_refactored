@@ -36,7 +36,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # ---------------------------- api ---------------------------- #
     # ------------------------------------------------------------- #
-    #path("api/v1/", include("spray.api.urls", namespace="api_v1")),
+    path("api/v1/", include("spray.api.urls", namespace="api_v1")),
     # ---------------------------- docs --------------------------- #
     # ------------------------------------------------------------- #
     # path(
