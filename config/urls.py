@@ -9,21 +9,20 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-#TODO docs
-#from spray.core.generators import CustomOpenAPISchemaGenerator
+from spray.doc.generators import CustomOpenAPISchemaGenerator
 
-# schema_view = get_schema_view(
-#     openapi.Info(
-#         title="Spray API",
-#         default_version="v1",
-#         contact=openapi.Contact(email="support@spray.com"),
-#         description=render_to_string("drf-yasg/description.html"),
-#         x_logo={"url": "/static/images/logo-title.svg"},
-#     ),
-#     public=True,
-#     permission_classes=(permissions.AllowAny,),
-#     generator_class=CustomOpenAPISchemaGenerator,
-# )
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Spray API",
+        default_version="v1",
+        contact=openapi.Contact(email="support@spray.com"),
+        description=render_to_string("drf-yasg/description.html"),
+        x_logo={"url": "/static/images/logo-title.svg"},
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+    generator_class=CustomOpenAPISchemaGenerator,
+)
 
 
 # ----------------------------------------------------------------------- #
@@ -39,11 +38,11 @@ urlpatterns = [
     path("api/v1/", include("spray.api.urls", namespace="api_v1")),
     # ---------------------------- docs --------------------------- #
     # ------------------------------------------------------------- #
-    # path(
-    #     "api/docs/",
-    #     schema_view.with_ui("redoc", cache_timeout=0),
-    #     name="docs_api_v1_view",
-    # ),
+    path(
+        "api/docs/",
+        schema_view.with_ui("redoc", cache_timeout=0),
+        name="docs_api_v1_view",
+    ),
     # ------------------------------------------------------------- #
     # ------------------------------------------------------------- #
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

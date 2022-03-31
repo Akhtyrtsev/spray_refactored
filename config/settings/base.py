@@ -39,6 +39,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework_jwt",
     "rest_framework_jwt.blacklist",
+    "drf_yasg",
 ]
 
 LOCAL_APPS = [
@@ -98,6 +99,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "drf_yasg.middleware.SwaggerExceptionMiddleware",
 ]
 
 # static
@@ -225,7 +227,7 @@ SWAGGER_SETTINGS = {
 # ------------------------------------------------------------------------------
 # REDOC_SETTINGS = {"SPEC_URL": ("schema-json", {"format": ".json"})}
 DOCS_BASE_SCHEMES = "https"
-
+DOCS_BASE_URL = ""
 # bins
 # ------------------------------------------------------------------------------
 
