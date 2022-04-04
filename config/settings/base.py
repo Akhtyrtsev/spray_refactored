@@ -40,6 +40,11 @@ THIRD_PARTY_APPS = [
     "rest_framework_jwt",
     "rest_framework_jwt.blacklist",
     "drf_yasg",
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 LOCAL_APPS = [
@@ -86,6 +91,17 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+# user registration
+# ------------------------------------------------------------------------------
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_EMAIL_FIELD = 'email'
+
 
 # middleware
 # ------------------------------------------------------------------------------
@@ -293,3 +309,5 @@ LOGGING = {
 }
 
 WEBAPP_URL = ""
+
+SITE_ID = 1

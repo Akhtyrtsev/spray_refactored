@@ -6,6 +6,9 @@ app_name = "api"
 
 
 urlpatterns = [
+    # ----------------------- registration ----------------------- #
+    # ------------------------------------------------------------- #
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # ----------------------- authentication ----------------------- #
     # ------------------------------------------------------------- #
     path("", include(authentication_urls)),
