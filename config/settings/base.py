@@ -40,11 +40,12 @@ THIRD_PARTY_APPS = [
     "rest_framework_jwt",
     "rest_framework_jwt.blacklist",
     "drf_yasg",
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    "allauth",
+    "allauth.account",
+    "rest_auth.registration",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.facebook",
+    "allauth.socialaccount.providers.google",
 ]
 
 LOCAL_APPS = [
@@ -66,6 +67,7 @@ EMAIL_BACKEND = "sparkpost.django.email_backend.SparkPostEmailBackend"
 # auth
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
+    "allauth.account.auth_backends.AuthenticationBackend",
     "django.contrib.auth.backends.ModelBackend",
     "django.contrib.auth.backends.RemoteUserBackend",
 ]
@@ -98,6 +100,7 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_SUBJECT_PREFIX = None
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = None  # if you need to verify email change to "mandatory"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_USER_EMAIL_FIELD = 'email'
