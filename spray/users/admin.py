@@ -1,5 +1,5 @@
 from django.contrib import admin
-from spray.users.models import User, Client, Valet
+from spray.users.models import User, Valet, Client
 
 admin.site.register(User)
 admin.site.register(Client)
