@@ -127,41 +127,60 @@ class User(AbstractUser):
     is_blocked = models.BooleanField(
         default=False,
     )
-    user_type = models.ForeignKey(
-        Group,
-        blank=True,
-        null=True,
-        related_name="users",
-        on_delete=models.SET_NULL,
-    )
+    # user_type = models.ForeignKey(
+    #     Group,
+    #     blank=True,
+    #     null=True,
+    #     related_name="users",
+    #     on_delete=models.SET_NULL,
+    # )
+
+    # -------------------------------------------------- #
+    # -------------------------------------------------- #
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.initial_phone = self.phone
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}, {self.email}'
+
+    def fullname(self):
+        return f'{self.first_name} {self.last_name}'
+
+
+class Client(User):
     customer_status = models.CharField(
         max_length=100,
         blank=True,
         null=True,
-        help_text="clients field",
         choices=CUSTOMER_STATUSES,
-    )
-    notification_text_magic = models.BooleanField(
-        default=True,
-        help_text="clients field"
     )
     referal_code = models.CharField(
         null=True,
         blank=True,
         max_length=32,
-        help_text="clients field"
     )
+    notification_text_magic = models.BooleanField(
+        default=True,
+    )
+
+
+class Valet(User):
     valet_experience = models.TextField(
         blank=True,
         null=True,
-        help_text="valets field"
     )
     valet_personal_phone = models.CharField(
         max_length=255,
         blank=True,
         null=True,
         verbose_name="Personal phone",
-        help_text="valets field"
     )
     notification_only_working_hours = models.BooleanField(
         default=False,
@@ -213,17 +232,3 @@ class User(AbstractUser):
         max_length=64,
         help_text="valets field"
     )
-    valet_id = models.CharField(
-        null=True,
-        blank=True,
-        max_length=256,
-        help_text="valets field"
-    )
-
-    # -------------------------------------------------- #
-    # -------------------------------------------------- #
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
