@@ -5,7 +5,7 @@ from pathlib import Path
 
 # general
 # ------------------------------------------------------------------------------
-DEBUG = False
+DEBUG = True
 PROD = False
 TIME_ZONE = "UTC"
 LANGUAGE_CODE = "en-us"
