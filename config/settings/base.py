@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "spray.users.apps.UsersConfig",
+    "spray.appointments.apps.AppointmentsConfig",
 
 ]
 

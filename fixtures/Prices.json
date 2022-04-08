@@ -1,0 +1,6064 @@
+[
+  {
+    "model": "appointments.price",
+    "pk": 1,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90027",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 2,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90028",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 3,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90038",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 4,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90068",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 5,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91403",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Sherman Oaks"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 6,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91413",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Sherman Oaks"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 7,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91423",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Sherman Oaks"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 8,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91495",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Sherman Oaks"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 9,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90209",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 10,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90210",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 11,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90211",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 12,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90212",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 13,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90213",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 14,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91501",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 15,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91502",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 16,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91503",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 17,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91504",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 18,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91505",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 19,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91506",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 20,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91507",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 21,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91508",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 22,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91510",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 23,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91521",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 24,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91522",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 25,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91525",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 26,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91526",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 27,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91201",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 30,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91204",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 31,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91205",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 32,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91208",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 33,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91209",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 34,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91210",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 35,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91221",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 36,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91222",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 37,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91225",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 38,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91226",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 39,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90017",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 40,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90021",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 41,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90053",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 42,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90055",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 43,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90071",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 44,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90074",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 45,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90079",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 46,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90081",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 47,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90086",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 48,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91101",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 49,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91102",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 50,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91103",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 51,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91104",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 52,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91105",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 53,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91106",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 54,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91107",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 55,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91108",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "San Marino"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 56,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91109",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 57,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91110",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 58,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91114",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 59,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91115",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 60,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91116",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 61,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91117",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 62,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91121",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 63,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91123",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 64,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91124",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 65,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91125",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 66,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91126",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 67,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91129",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 68,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91182",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 69,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91184",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 70,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91185",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 71,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91188",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 72,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91189",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 73,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91199",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 74,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90230",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 75,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90231",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 76,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90232",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 77,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90233",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 78,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90066",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 79,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90272",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Topanga"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 80,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90290",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Topanga"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 81,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91302",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 30,
+      "night_price": 135,
+      "district": "Hidden Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 82,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90263",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 30,
+      "night_price": 135,
+      "district": "Malibu"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 83,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90264",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 30,
+      "night_price": 135,
+      "district": "Malibu"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 84,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90265",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 30,
+      "night_price": 135,
+      "district": "Malibu"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 85,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89106",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 86,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89107",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 87,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89108",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 88,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89117",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 89,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89128",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 90,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89134",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 91,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89135",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 92,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89030",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 93,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89031",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 94,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89032",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 95,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89033",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 96,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89036",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 97,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89081",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 98,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89084",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 99,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89085",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 100,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89086",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 101,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89087",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 102,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89125",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 103,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89127",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 104,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89133",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 105,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89137",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 106,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89101",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Sunrise Manor"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 107,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89110",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Sunrise Manor"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 108,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89115",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Sunrise Manor"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 109,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89104",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 110,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89109",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 111,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89112",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 112,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89114",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 113,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89116",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 114,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89121",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 115,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89102",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 116,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89103",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 117,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89118",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 118,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89126",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 119,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89140",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 120,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89111",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 121,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89119",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 122,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89120",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 123,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89122",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 124,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89132",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 125,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89105",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 126,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89113",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 127,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89123",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 128,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89129",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 129,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89130",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 130,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89131",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 131,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89136",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 132,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89139",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 133,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89002",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 134,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89009",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 135,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89011",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 136,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89012",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 137,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89014",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 138,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89015",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 139,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89016",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 140,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89044",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 141,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89052",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 142,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89053",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 143,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89074",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 144,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89077",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Henderson"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 145,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89165",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 146,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89166",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 147,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89178",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 148,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89179",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 149,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89183",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 20,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 150,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89150",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 151,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89152",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 152,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89155",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 153,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89163",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 154,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89156",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Sunrise Manor"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 155,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89154",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 156,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89185",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 157,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89151",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 158,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89173",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 159,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89180",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 160,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89158",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 161,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89159",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 162,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89160",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 163,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89170",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 165,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90001",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 167,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90003",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 168,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90004",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 169,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90005",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 170,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90006",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 171,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90007",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 172,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90008",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 173,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90009",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 174,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90010",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 175,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90011",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 176,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90012",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 177,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90013",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 178,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90014",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 179,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90015",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 180,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90016",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 181,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90018",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 182,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90019",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 183,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90020",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 184,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90023",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 185,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90024",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 186,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90025",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 187,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90026",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 188,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90029",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 189,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90030",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 190,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90031",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Lincoln Heights"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 191,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90032",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 192,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90033",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 193,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90034",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 194,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90035",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 195,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90036",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 196,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90037",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 197,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90039",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 198,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90041",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Engle Rock"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 199,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90042",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Highland Park"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 200,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90043",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Windsor Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 201,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90044",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 202,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90045",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Westchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 203,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90046",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "West Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 204,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90047",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 206,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90049",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Topanga"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 207,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90050",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 208,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90052",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 209,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90054",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 210,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90056",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Windsor Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 211,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90057",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 212,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90058",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 214,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90060",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 216,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90062",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Culver City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 217,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90063",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Hazard"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 218,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90064",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 219,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90065",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 220,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90067",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 221,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90069",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 222,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90070",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 223,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90072",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 224,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90075",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 225,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90076",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 226,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90077",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Bel Air"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 227,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90078",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 228,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90080",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 229,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90082",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 230,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90083",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 231,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90084",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 232,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90087",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 233,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90088",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 234,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90089",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 235,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90090",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Echo Park"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 236,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90093",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 237,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90094",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Playa Vista"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 238,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90095",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Beverly Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 239,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90099",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 240,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90189",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 242,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90291",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Venice"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 243,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90292",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Marina Del Rey"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 244,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90294",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Venice"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 245,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90295",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Marina Del Rey"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 246,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90402",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Santa Monica"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 247,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90403",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Santa Monica"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 248,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90404",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Santa Monica"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 249,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90405",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Santa Monica"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 250,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91040",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Shadow Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 251,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91041",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Tujunga"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 252,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91042",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Tujunga"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 253,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91043",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Tujunga"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 254,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89146",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 255,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91202",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 256,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91203",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 257,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91206",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 258,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91207",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Glendale"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 259,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91214",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Crescenta Highlands"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 260,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91303",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Canoga Park"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 261,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91304",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Canoga Park"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 262,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91305",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Canoga Park"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 263,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91306",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Winnetka"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 264,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91307",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 30,
+      "night_price": 135,
+      "district": "Hidden Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 265,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91308",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Hidden Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 266,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91309",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Canoga Park"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 267,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91316",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Encino"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 268,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91324",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Northridge"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 269,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91325",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Northridge"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 270,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91326",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Porter Ranch"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 271,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91327",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Porter Ranch"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 272,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91328",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Northridge"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 273,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91329",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Northridge"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 274,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91330",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Northridge"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 275,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91331",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 276,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91333",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pacoima"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 277,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91334",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Arleta"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 278,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91335",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Tarzana"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 279,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91337",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Reseda"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 280,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91340",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "San Fernando"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 281,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91341",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Topanga"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 282,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91342",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 283,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91343",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 284,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91344",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 285,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91345",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 286,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91346",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "San Fernando"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 287,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91352",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 288,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91353",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 289,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91356",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Tarzana"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 290,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91357",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Tarzana"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 291,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91364",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Woodland Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 292,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91365",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Woodland Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 293,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91367",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Woodland Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 294,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91371",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Woodland Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 295,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91392",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 15,
+      "night_price": 135,
+      "district": "Sylmar"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 296,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91393",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 297,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91394",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Granada Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 298,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91395",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Mission Hills"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 299,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91396",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Winnetka"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 300,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91401",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Valley Glen"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 301,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91402",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Panorama City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 302,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91404",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 303,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91405",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Valley Glen"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 304,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91406",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Sherman Oaks"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 305,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91407",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 307,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91408",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 308,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91409",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 309,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91410",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 310,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91411",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 311,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91412",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Panorama City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 312,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91416",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Encino"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 313,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91426",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Encino"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 314,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91436",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Sherman Oaks"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 315,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91470",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 316,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91482",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 317,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91496",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 318,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91499",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Van Nuys"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 319,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91601",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Toluca Terrace"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 320,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91602",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 321,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91603",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 322,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91604",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Studio City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 323,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91605",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 324,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91606",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 325,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91607",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 326,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91608",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 327,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91609",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 328,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91610",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 329,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91611",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 330,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91612",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 331,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91614",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 332,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91615",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 333,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91616",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 334,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91617",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 335,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91618",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 336,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91523",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Burbank"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 337,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90002",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Los Angeles"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 338,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "88901",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 339,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "88905",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 340,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89138",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 341,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89141",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 342,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89142",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 343,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89143",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 344,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89144",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 345,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89145",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 346,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89147",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 347,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89148",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 348,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89149",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 10,
+      "night_price": 165,
+      "district": "Enterprise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 349,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89153",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Spring Valley"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 350,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89157",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 351,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89162",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "North Las Vegas"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 352,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89164",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Summerlin"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 353,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89169",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Winchester"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 355,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89193",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 356,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89195",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 357,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89199",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 358,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91776",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "San Gabriel"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 359,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91801",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Alhambra"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 360,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91803",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Pasadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 361,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91754",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 362,
+    "fields": {
+      "city": "Las Vegas",
+      "zip_code": "89177",
+      "basic_price": 65,
+      "hotel_price": 90,
+      "hotel_night_price": 165,
+      "service_area_fee": 0,
+      "night_price": 165,
+      "district": "Paradise"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 363,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90022",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 364,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90255",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Huntington Park"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 365,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91046",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Verdugo City"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 367,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "91001",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Altadena"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 368,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90293",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Playa Del Rey"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 369,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90296",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "Playa Del Rey"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 370,
+    "fields": {
+      "city": "Los Angeles",
+      "zip_code": "90048",
+      "basic_price": 75,
+      "hotel_price": 95,
+      "hotel_night_price": 155,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "West Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 371,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33010",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hiadlead"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 372,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33012",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hiadlead"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 373,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33013",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hiadlead"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 374,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33014",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Hiadlead"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 375,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33015",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Hiadlead"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 376,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33016",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Hiadlead"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 377,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33018",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Hialeah"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 378,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33054",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Opa Locka"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 379,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33055",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Miami Gardens"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 380,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33056",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Opa Locka"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 381,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33122",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N. W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 382,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33125",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N. W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 383,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33126",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N. W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 384,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33127",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N. W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 385,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33128",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 386,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33129",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 387,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33130",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 388,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33131",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Downtown"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 389,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33132",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.E"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 390,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33133",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Coral"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 391,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33134",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 392,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33135",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 393,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33136",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 394,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33137",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.E"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 395,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33138",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.E"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 396,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33139",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Miami Beach"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 397,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33140",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Miami Beach"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 398,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33141",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Miami Beach"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 399,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33142",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N. W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 400,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33143",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 401,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33144",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "West Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 402,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33145",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 403,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33146",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 404,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33147",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 405,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33149",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Key Biscayne"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 406,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33150",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 407,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33154",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Miami Beach"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 408,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33155",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 409,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33156",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 410,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33160",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Miami Beach"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 411,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33161",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.E"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 412,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33162",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.E"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 413,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33165",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Olympia Heights"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 414,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33166",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Virginia Gardens"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 415,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33167",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 416,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33168",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 418,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33169",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 419,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33172",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 420,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33173",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 421,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33174",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 422,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33175",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 423,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33176",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 424,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33178",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 425,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33179",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "N.E"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 426,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33180",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "Aventura"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 427,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33181",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "North Miami Beach"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 428,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33182",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "N.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 429,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33183",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 430,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33184",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 431,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33185",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 432,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33186",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 433,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33192",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Doral"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 434,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33193",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 435,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33194",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 20,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 436,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33196",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 10,
+      "night_price": 135,
+      "district": "S.W. Miami"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 437,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33004",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 5,
+      "night_price": 135,
+      "district": "Dania Beach"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 438,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33019",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 439,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33020",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 440,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33021",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 441,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33022",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 442,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33024",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 443,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33081",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 444,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33083",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  },
+  {
+    "model": "appointments.price",
+    "pk": 445,
+    "fields": {
+      "city": "Miami",
+      "zip_code": "33314",
+      "basic_price": 70,
+      "hotel_price": 85,
+      "hotel_night_price": 150,
+      "service_area_fee": 0,
+      "night_price": 135,
+      "district": "Hollywood"
+    }
+  }
+]

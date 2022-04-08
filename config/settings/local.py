@@ -28,10 +28,10 @@ USE_DO_SPACES = True
 
 # DATABASES
 # ------------------------------------------------------------------------------
+
 DATABASES = {"default": env.db("DATABASE_URL")}  # noqa F405
 DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
 DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=0)  # noqa F405
-
 
 
 # CACHES
@@ -143,7 +143,7 @@ JWT_AUTH = {
     "JWT_VERIFY": True,
     "JWT_VERIFY_EXPIRATION": True,
     "JWT_LEEWAY": 0,
-    "JWT_EXPIRATION_DELTA": datetime.timedelta(seconds=300),
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=1),
     "JWT_ALLOW_REFRESH": True,
     "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=7),
     "JWT_AUTH_HEADER_PREFIX": "Bearer",
