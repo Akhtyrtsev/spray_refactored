@@ -1,29 +1,25 @@
-from spray.api.users.permissions import IsNoValet, IsNoClient
+from rest_framework import status
+from rest_framework.response import Response
+
+from spray.api.users.permissions import IsValet, IsClient
 from spray.users.models import Client, Valet
 from rest_framework.viewsets import ModelViewSet
-from spray.api.users.serializers import ClientPostPutPatchSerializer, ClientGetSerializer, ValetPostPutPatchSerializer, \
-    ValetGetSerializer
+from spray.api.users.serializers import ClientGetSerializer, ValetGetSerializer
 
 
 class ClientModelViewSet(ModelViewSet):
     queryset = Client.objects.all()
-    permission_classes = [IsNoValet]
+    permission_classes = [IsClient]
+    serializer_class = ClientGetSerializer
 
-    def get_serializer_class(self):
-        if self.request.method != 'GET':
-            return ClientPostPutPatchSerializer
-        else:
-            return ClientGetSerializer
+    def create(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 class ValetModelViewSet(ModelViewSet):
     queryset = Valet.objects.all()
-    permission_classes = [IsNoClient]
+    permission_classes = [IsValet]
+    serializer_class = ValetGetSerializer
 
-    def get_serializer_class(self):
-        if self.request.method != 'GET':
-            return ValetPostPutPatchSerializer
-        else:
-            return ValetGetSerializer
-
-
+    def create(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
