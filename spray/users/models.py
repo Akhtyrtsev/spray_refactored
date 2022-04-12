@@ -3,11 +3,16 @@ Models used by the users app
 """
 import logging
 
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser, UserManager as BaseUserManager
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models import ObjectDoesNotExist
+# from python_http_client import BadRequestsError
+from validate_email import validate_email
 
+from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES
 from spray.users.managers import UserManager
 from spray.contrib.choices.users import ADDRESS_TYPES
 
@@ -16,6 +21,22 @@ log = logging.getLogger("django")
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
+
+class Group(models.Model):
+    name = models.CharField(
+        max_length=255,
+    )
+    description = models.CharField(
+        max_length=512,
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        db_table = 'group'
 
 
 class User(AbstractUser):
@@ -61,11 +82,52 @@ class User(AbstractUser):
     is_staff = models.BooleanField(
         default=False,
     )
+    is_confirmed = models.BooleanField(
+        default=False,
+    )
     avatar_url = models.CharField(
         max_length=4096,
         null=True,
         blank=True,
     )
+    notification_sms = models.BooleanField(
+        default=True,
+    )
+    notification_email = models.BooleanField(
+        default=True,
+    )
+    notification_push = models.BooleanField(
+        default=True,
+    )
+    rating = models.IntegerField(
+        blank=True,
+        null=True,
+    )
+    stripe_id = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True,
+    )
+    apple_id = models.CharField(
+        max_length=60,
+        blank=True,
+        null=True,
+    )
+    docusign_envelope = models.CharField(
+        max_length=60,
+        blank=True,
+        null=True,
+    )
+    is_phone_verified = models.BooleanField(
+        default=False,
+    )
+    is_new = models.BooleanField(
+        default=True,
+    )
+    is_blocked = models.BooleanField(
+        default=False,
+    )
+
     # -------------------------------------------------- #
     # -------------------------------------------------- #
 
@@ -74,15 +136,32 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.initial_phone = self.phone
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}, {self.email}'
+
+    def fullname(self):
+        return f'{self.first_name} {self.last_name}'
+
 
 class Client(User):
-
-    test_client = models.CharField(max_length=128)
-
-
-class Valet(User):
-
-    test_valet = models.CharField(max_length=128)
+    customer_status = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=CUSTOMER_STATUSES,
+    )
+    referal_code = models.CharField(
+        null=True,
+        blank=True,
+        max_length=32,
+    )
+    notification_text_magic = models.BooleanField(
+        default=True,
+    )
 
 
 # ----------------------------------------------------------------------- #
@@ -176,4 +255,61 @@ class Address(models.Model):
     class Meta:
         verbose_name = "Address"
         verbose_name_plural = "Addresses"
+
+
+class Valet(User):
+    valet_experience = models.TextField(
+        blank=True,
+        null=True,
+    )
+    valet_personal_phone = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name="Personal phone",
+    )
+    notification_only_working_hours = models.BooleanField(
+        default=False,
+        help_text="valets field"
+    )
+    notification_shift = models.BooleanField(
+        default=True,
+        help_text="valets field"
+    )
+    notification_appointment = models.BooleanField(
+        default=True,
+        help_text="valets field"
+    )
+    valet_reaction_time = models.IntegerField(
+        default=0,
+        help_text="valets field"
+    )
+    valet_available_not_on_call = models.BooleanField(
+        default=False,
+        help_text="valets field"
+    )
+    city = models.CharField(
+        max_length=255,
+        choices=CITY_CHOICES,
+        null=True,
+        blank=True,
+        help_text="valets field"
+    )
+    feedback_popup_show_date = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="valets field"
+    )
+    emergency_name = models.CharField(
+        null=True,
+        blank=True,
+        max_length=64,
+        help_text="valets field"
+    )
+    license = models.CharField(
+        null=True,
+        blank=True,
+        max_length=64,
+        help_text="valets field"
+    )
 

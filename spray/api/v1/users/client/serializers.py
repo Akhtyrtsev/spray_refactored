@@ -1,10 +1,12 @@
 from rest_framework import serializers, status
 from rest_framework.exceptions import ValidationError
+from rest_framework.serializers import ModelSerializer
+
 
 from spray.users.models import Address
 from spray.appointments.models import Price
-
 from spray.contrib.choices.appointments import CITY_CHOICES
+from spray.users.models import Client
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
@@ -59,3 +61,26 @@ class ClientAddressSerializer(serializers.ModelSerializer):
         except Exception:
             pass
         return super(ClientAddressSerializer, self).create(validated_data)
+
+
+class ClientGetSerializer(ModelSerializer):
+    class Meta:
+        model = Client
+        fields = ('first_name',
+                  'last_name',
+                  'email',
+                  'phone',
+                  'avatar_url',
+                  'notification_email',
+                  'notification_sms',
+                  'notification_push',
+                  'stripe_id',
+                  'apple_id',
+                  'docusign_envelope',
+                  'customer_status',
+                  'referal_code',
+                  'notification_text_magic',
+                  'is_phone_verified',
+                  'is_new',
+                  'is_blocked',
+                  )

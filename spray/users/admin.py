@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from spray.users.models import Address
+from spray.users.models import Address, User, Client, Valet
 
 
 @admin.register(Address)
@@ -14,3 +14,8 @@ class AddressAdmin(admin.ModelAdmin):
                      'user__email__icontains')
 
     list_filter = ('city', 'zip_code', 'address_string', 'user')
+
+admin.site.register(User)
+admin.site.register(Client)
+admin.site.register(Valet)
+# Register your models here.

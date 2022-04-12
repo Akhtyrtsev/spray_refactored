@@ -3,14 +3,17 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters, generics, mixins, viewsets, status
 
 from spray.users.models import Address
-from spray.api.v1.users.client.serializers import ClientAddressSerializer
-
+from spray.api.v1.users.client.serializers import ClientAddressSerializer, ClientGetSerializer
+from spray.users.models import Client, Valet
+from spray.users.permissions import IsValet, IsClient
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
+
 
 class HelloView(APIView):
 
@@ -47,3 +50,12 @@ class AddressViewSet(viewsets.ModelViewSet):
         instance.is_deleted = True
         instance.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ClientModelViewSet(ModelViewSet):
+    queryset = Client.objects.all()
+    permission_classes = [IsClient]
+    serializer_class = ClientGetSerializer
+
+    def create(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
