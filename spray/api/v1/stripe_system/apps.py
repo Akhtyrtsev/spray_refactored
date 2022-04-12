@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class PaymentConfig(AppConfig):
-    name = "spray.api.stripe_system"
+    name = "spray.api.v1.stripe_system"
     verbose_name = "Payments"
 
     def ready(self):

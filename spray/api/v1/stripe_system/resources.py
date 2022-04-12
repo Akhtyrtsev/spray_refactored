@@ -1,8 +1,8 @@
 from django.conf import settings
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
-from spray.api.stripe_system.models import Payments
-from spray.api.stripe_system.serializers import PaymentGetSerializer, PaymentPostSerializer
+from spray.api.v1.stripe_system.models import Payments
+from spray.api.v1.stripe_system.serializers import PaymentGetSerializer, PaymentPostSerializer
 from rest_framework.response import Response
 import stripe
 

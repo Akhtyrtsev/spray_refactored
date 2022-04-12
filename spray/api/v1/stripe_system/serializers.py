@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from spray.api.stripe_system.models import Payments
+from spray.api.v1.stripe_system.models import Payments
 from spray.api.users.serializers import ClientGetSerializer
 
 

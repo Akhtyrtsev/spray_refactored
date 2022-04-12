@@ -1,13 +1,3 @@
-import datetime
-
-from django.db import models
-
-from spray.api.stripe_system.models import Payments
-from spray.data.choices import CITY_CHOICES, APPOINTMENT_STATUSES, APPOINTMENT_MICRO_STATUSES, REFUND_CHOICES, \
-    CANCELLED_BY_CHOICES
-from spray.users.models import Client, Valet, Address
-
-
 # class Appointment(models.Model):
 #
 #     client = models.ForeignKey(Client, on_delete=models.SET_NULL, related_name='client_appointments', null=True)
