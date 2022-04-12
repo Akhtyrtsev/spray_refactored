@@ -53,6 +53,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "spray.users.apps.UsersConfig",
+    "spray.appointments.apps.AppointmentsConfig",
 
 ]
 
@@ -80,6 +81,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Google auth configuration
+
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '500523430131-h2uik7t96o5ekgbsrkr79k9a2lln0ab3.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
@@ -89,8 +91,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 ]
 
 # Facebook auth configuration
+
 SOCIAL_AUTH_FACEBOOK_KEY = '1618139408555120'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'a7d1669d0bd877f0daf450181480f35b'
+
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {

@@ -1,33 +1,24 @@
-from rest_framework.serializers import ModelSerializer
-from rest_framework import serializers
+from rest_framework import serializers, status
 
-from spray.users.models import Client, User, Valet
+from spray.users.models import Address, Valet
+
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
 
 
-class ClientGetSerializer(ModelSerializer):
+class ValetAddressSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = Client
-        fields = ('first_name',
-                  'last_name',
-                  'email',
-                  'phone',
-                  'avatar_url',
-                  'notification_email',
-                  'notification_sms',
-                  'notification_push',
-                  'stripe_id',
-                  'apple_id',
-                  'docusign_envelope',
-                  'customer_status',
-                  'referal_code',
-                  'notification_text_magic',
-                  'is_phone_verified',
-                  'is_new',
-                  'is_blocked',
-                  )
+        model = Address
+        fields = '__all__'
+        extra_kwargs = {
+            'zip_code': {
+                'required': False,
+            },
+        }
 
 
-class ValetGetSerializer(ModelSerializer):
+class ValetGetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Valet
