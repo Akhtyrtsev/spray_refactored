@@ -11,7 +11,8 @@ urlpatterns = [
     # -------------------------- users -------------------------- #
     # ------------------------------------------------------------- #
     path("", include(users_urls)),
-    path("", include('spray.api.users.urls'))
+    path("", include('spray.api.users.urls')),
+    path("", include('spray.api.stripe_system.urls')),
     # -------------------------- reports -------------------------- #
     # ------------------------------------------------------------- #
 ]
