@@ -1,0 +1,41 @@
+[
+  {
+    "model": "restApi.BillingDetails",
+    "pk": 1,
+    "fields": {
+      "city": "Los Angeles",
+      "locals": 20,
+      "late_night": 60,
+      "parking_fee": 20,
+      "cancelled_fee": 10,
+      "cancelled_no_show_fee": 20,
+      "cancelled_no_show_fee_night": 60
+    }
+  },
+  {
+    "model": "restApi.BillingDetails",
+    "pk": 2,
+    "fields": {
+      "city": "Las Vegas",
+      "locals": 20,
+      "late_night": 60,
+      "parking_fee": 15,
+      "cancelled_fee": 10,
+      "cancelled_no_show_fee": 20,
+      "cancelled_no_show_fee_night": 60
+    }
+  },
+  {
+    "model": "restApi.BillingDetails",
+    "pk": 3,
+    "fields": {
+      "city": "Miami",
+      "locals": 20,
+      "late_night": 60,
+      "parking_fee": 15,
+      "cancelled_fee": 10,
+      "cancelled_no_show_fee": 20,
+      "cancelled_no_show_fee_night": 60
+    }
+  }
+]

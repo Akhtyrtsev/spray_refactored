@@ -36,6 +36,7 @@ urlpatterns = [
     # ---------------------------- api ---------------------------- #
     # ------------------------------------------------------------- #
     path("api/v1/", include("spray.api.urls", namespace="api_v1")),
+    path('api/v1/auth/', include('drf_social_oauth2.urls', namespace='drf')),  # OAuth2 social authentication
     # ---------------------------- docs --------------------------- #
     # ------------------------------------------------------------- #
     path(

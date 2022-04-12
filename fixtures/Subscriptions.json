@@ -1,0 +1,63 @@
+[
+  {
+    "model": "restApi.Subscription",
+    "pk": 1,
+    "fields": {
+      "price": 60,
+      "subscription_type": "Weekly",
+      "city": "Los Angeles",
+      "save_percent": 25
+
+    }
+  },
+  {
+    "model": "restApi.Subscription",
+    "pk": 2,
+    "fields": {
+      "price": 65,
+      "subscription_type": "Every 10 days",
+      "city": "Los Angeles",
+      "save_percent": 15
+    }
+  },
+  {
+    "model": "restApi.Subscription",
+    "pk": 3,
+    "fields": {
+      "price": 70,
+      "subscription_type": "2x a month",
+      "city": "Los Angeles",
+      "save_percent": 7
+    }
+  },
+  {
+    "model": "restApi.Subscription",
+    "pk": 4,
+    "fields": {
+      "price": 50,
+      "subscription_type": "Weekly",
+      "city": "Las Vegas",
+      "save_percent": 30
+    }
+  },
+  {
+    "model": "restApi.Subscription",
+    "pk": 5,
+    "fields": {
+      "price": 55,
+      "subscription_type": "Every 10 days",
+      "city": "Las Vegas",
+      "save_percent": 18
+    }
+  },
+  {
+    "model": "restApi.Subscription",
+    "pk": 6,
+    "fields": {
+      "price": 60,
+      "subscription_type": "2x a month",
+      "city": "Las Vegas",
+      "save_percent": 8
+    }
+  }
+]

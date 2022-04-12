@@ -14,6 +14,7 @@ from validate_email import validate_email
 
 from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES, ADDRESS_TYPES
 from spray.users.managers import UserManager
+from spray.contrib.choices.users import ADDRESS_TYPES
 
 log = logging.getLogger("django")
 
@@ -126,13 +127,6 @@ class User(AbstractUser):
     is_blocked = models.BooleanField(
         default=False,
     )
-    # user_type = models.ForeignKey(
-    #     Group,
-    #     blank=True,
-    #     null=True,
-    #     related_name="users",
-    #     on_delete=models.SET_NULL,
-    # )
 
     # -------------------------------------------------- #
     # -------------------------------------------------- #
@@ -168,6 +162,99 @@ class Client(User):
     notification_text_magic = models.BooleanField(
         default=True,
     )
+
+
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
+
+class Address(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='address',
+    )
+    address_string = models.CharField(
+        max_length=128,
+    )
+    note_parking = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+    )
+    selected_parking_option = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+    )
+    is_hotel = models.BooleanField(
+        default=False,
+    )
+    hotel_name = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+    )
+    room_number = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+    )
+    latitude = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    longitude = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    city = models.CharField(
+        max_length=128,
+    )
+    zip_code = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+    address_type = models.CharField(
+        max_length=128,
+        default="Client",
+        choices=ADDRESS_TYPES,
+    )
+    state = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+    country = models.CharField(
+        max_length=128,
+        default='USA',
+    )
+    apartment = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    gate_code = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    is_deleted = models.BooleanField(
+        default=False,
+    )
+
+    def __str__(self):
+        base = f'{self.city}, {self.address_string}, {self.zip_code}, '
+        if self.is_hotel:
+            base += f'Hotel: {self.hotel_name}, '
+        base += f'{self.room_number}, {self.gate_code}'
+        return base
+
+    class Meta:
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
 
 
 class Valet(User):
@@ -226,97 +313,3 @@ class Valet(User):
         help_text="valets field"
     )
 
-
-class Address(models.Model):
-    user = models.ForeignKey(
-        Client,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='address'
-    )
-    address = models.CharField(
-        max_length=100
-    )
-    note_parking = models.CharField(
-        max_length=200,
-        null=True,
-        blank=True
-    )
-    selected_parking_option = models.CharField(
-        max_length=200,
-        null=True,
-        blank=True
-    )
-    hotel_name = models.CharField(
-        max_length=200,
-        null=True,
-        blank=True
-    )
-    room_number = models.CharField(
-        max_length=20,
-        null=True,
-        blank=True
-    )
-    code = models.CharField(
-        max_length=20,
-        null=True,
-        blank=True
-    )
-    latitude = models.FloatField(
-        null=True,
-        blank=True
-    )
-    longitude = models.FloatField(
-        null=True,
-        blank=True
-    )
-    city = models.CharField(
-        max_length=100
-    )
-    zip_code = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True
-    )
-    address_type = models.CharField(
-        max_length=100,
-        default="For appointment",
-        choices=ADDRESS_TYPES
-    )
-    state = models.CharField(
-        max_length=127,
-        blank=True,
-        null=True,
-    )
-    country = models.CharField(
-        max_length=127,
-        default='USA',
-    )
-    is_hotel = models.BooleanField(
-        default=False,
-    )
-    apartment = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    gate_code = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    is_deleted = models.BooleanField(
-        default=False,
-    )
-
-    def __str__(self):
-        base = f'{self.city}, {self.address}, {self.zip_code}, '
-        if self.is_hotel and self.hotel_name:
-            base += f'Hotel: {self.hotel_name}, '
-        base += f'{self.room_number}, {self.code}'
-        return base
-
-    class Meta:
-        verbose_name = "Client's address"
-        verbose_name_plural = "Clients' addresses"
