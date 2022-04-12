@@ -3,7 +3,6 @@
 """
 import os
 from pathlib import Path
-from social_auth.keys import GOOGLE_OAUTH2_KEY, GOOGLE_OAUTH2_SECRET, FACEBOOK_KEY, FACEBOOK_SECRET
 
 # general
 # ------------------------------------------------------------------------------
@@ -81,8 +80,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Google auth configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE_OAUTH2_KEY
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_OAUTH2_SECRET
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '500523430131-h2uik7t96o5ekgbsrkr79k9a2lln0ab3.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
@@ -90,8 +89,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 ]
 
 # Facebook auth configuration
-SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_KEY
-SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
+SOCIAL_AUTH_FACEBOOK_KEY = '1618139408555120'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'a7d1669d0bd877f0daf450181480f35b'
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
@@ -342,5 +341,3 @@ LOGGING = {
 }
 
 WEBAPP_URL = ""
-
-SITE_ID = 1
