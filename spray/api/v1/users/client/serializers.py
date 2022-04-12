@@ -27,6 +27,10 @@ class ClientAddressSerializer(serializers.ModelSerializer):
         }
 
     def validate(self, data):
+        """
+        Some addresses returned from google can contain actual district in city field. We have to make proper
+        mapping for this field
+        """
         data = super(ClientAddressSerializer, self).validate(data)
         valid_cities = [x[0] for x in CITY_CHOICES]
         city = data["city"]
