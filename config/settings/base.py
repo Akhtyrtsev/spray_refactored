@@ -3,6 +3,7 @@
 """
 import os
 from pathlib import Path
+from social_auth.keys import GOOGLE_OAUTH2_KEY, GOOGLE_OAUTH2_SECRET, FACEBOOK_KEY, FACEBOOK_SECRET
 
 # general
 # ------------------------------------------------------------------------------
@@ -39,9 +40,16 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "rest_framework",
     "rest_framework_jwt",
     "rest_framework_jwt.blacklist",
     "drf_yasg",
+    "allauth",
+    "allauth.account",
+    "rest_auth.registration",
+    'oauth2_provider',      # OAuth2 social authentication
+    'social_django',        # OAuth2 social authentication
+    'drf_social_oauth2',    # OAuth2 social authentication
 ]
 
 LOCAL_APPS = [
@@ -63,9 +71,32 @@ EMAIL_BACKEND = "sparkpost.django.email_backend.SparkPostEmailBackend"
 # auth
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',            # Google OAuth2
+    'social_core.backends.facebook.FacebookAppOAuth2',     # Facebook OAuth2
+    'social_core.backends.facebook.FacebookOAuth2',        # Facebook OAuth2
+    'drf_social_oauth2.backends.DjangoOAuth2',             # OAuth2 social authentication
+    "allauth.account.auth_backends.AuthenticationBackend",
     "django.contrib.auth.backends.ModelBackend",
     "django.contrib.auth.backends.RemoteUserBackend",
 ]
+
+# Google auth configuration
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE_OAUTH2_KEY
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_OAUTH2_SECRET
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+]
+
+# Facebook auth configuration
+SOCIAL_AUTH_FACEBOOK_KEY = FACEBOOK_KEY
+SOCIAL_AUTH_FACEBOOK_SECRET = FACEBOOK_SECRET
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email'
+}
 
 AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "/"
@@ -88,6 +119,18 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+# user registration
+# ------------------------------------------------------------------------------
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = None  # if you need to verify email change to "mandatory"
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_EMAIL_FIELD = 'email'
+
 
 # middleware
 # ------------------------------------------------------------------------------
@@ -138,6 +181,8 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
+                'social_django.context_processors.backends',        # OAuth2 social authentication
+                'social_django.context_processors.login_redirect',  # OAuth2 social authentication
             ],
         },
     }
@@ -192,6 +237,8 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # OAuth2 social authentication
+        'drf_social_oauth2.authentication.SocialAuthentication',        # OAuth2 social authentication
     ],
     "DEFAULT_THROTTLE_RATES": {
         "base": "5/min",
@@ -295,3 +342,5 @@ LOGGING = {
 }
 
 WEBAPP_URL = ""
+
+SITE_ID = 1
