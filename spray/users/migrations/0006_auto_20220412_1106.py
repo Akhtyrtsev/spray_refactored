@@ -21,14 +21,6 @@ class Migration(migrations.Migration):
                 'db_table': 'group',
             },
         ),
-        migrations.RemoveField(
-            model_name='client',
-            name='test_client',
-        ),
-        migrations.RemoveField(
-            model_name='valet',
-            name='test_valet',
-        ),
         migrations.AddField(
             model_name='client',
             name='customer_status',

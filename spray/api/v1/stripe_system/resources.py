@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.conf import settings
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
@@ -15,20 +17,41 @@ class PaymentViewSet(ModelViewSet):
     queryset = Payments.objects.all()
 
     def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return PaymentGetSerializer
-        else:
+        if self.request.method != 'GET':
             return PaymentPostSerializer
+        else:
+            return PaymentGetSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer_class()(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        token = serializer.validated_data['token']
         user = Client.objects.get(pk=self.request.user.pk, email=self.request.user.email)
-        stripe.Charge.create(
-            amount=100,
-            currency='usd',
-            source=token
+        token = serializer.validated_data['token']
+        try:
+            customer = stripe.Customer.retrieve(user.stripe_id)
+        except Exception:
+            customer = stripe.Customer.create(email=user.email)
+            user.stripe_id = customer.id
+            user.save()
+        stripe_token = stripe.Token.retrieve(token)
+        card = stripe_token['card']
+        stripe_id = customer.id
+        card_type = card['brand']
+        last_4 = card['last4']
+        exp_date = str(card['exp_month']) + '/' + str(card['exp_year'])
+        expire_date = datetime.strptime(exp_date, '%m/%Y')
+        fingerprint = card['fingerprint']
+        Payments.objects.create(
+            user=user,
+            stripe_id=stripe_id,
+            card_type=card_type,
+            last_4=last_4,
+            expire_date=expire_date,
+            fingerprint=fingerprint,
         )
-        Payments.objects.create(user=user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(user=self.request.user)
