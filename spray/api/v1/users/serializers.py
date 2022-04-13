@@ -13,15 +13,10 @@ class UserTokenSerializer(serializers.Serializer):
 
     def validate(self, data):
         email = data.get("email", None)
-        user = User.objects.get(email=email)
-        if user is None:
-            raise serializers.ValidationError(
-                'A user with this email is not found.'
-            )
         try:
+            user = User.objects.get(email=email)
             payload = JWT_PAYLOAD_HANDLER(user)
             jwt_token = JWT_ENCODE_HANDLER(payload)
-            update_last_login(None, user)
         except User.DoesNotExist:
             raise serializers.ValidationError(
                 'User with given email does not exists'
