@@ -9,12 +9,14 @@ from rest_framework.response import Response
 import stripe
 
 from spray.users.models import Client
+from spray.users.permissions import IsClient
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class PaymentViewSet(ModelViewSet):
     queryset = Payments.objects.all()
+    permission_classes = [IsClient]
 
     def get_serializer_class(self):
         if self.request.method != 'GET':
@@ -50,7 +52,6 @@ class PaymentViewSet(ModelViewSet):
             fingerprint=fingerprint,
         )
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
     def get_queryset(self):
         qs = super().get_queryset()
