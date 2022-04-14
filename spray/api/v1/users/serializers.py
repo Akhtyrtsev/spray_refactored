@@ -15,12 +15,13 @@ class UserTokenSerializer(serializers.Serializer):
     def validate(self, data):
         access_token = data.get("access_token", None)
         try:
-            user = User.objects.get(pk=AccessToken.objects.get(token=access_token).user_id)
+            user_id = AccessToken.objects.get(token=access_token).user_id
+            user = User.objects.get(pk=user_id)
             payload = JWT_PAYLOAD_HANDLER(user)
             jwt_token = JWT_ENCODE_HANDLER(payload)
-        except (User.DoesNotExist, AccessToken.DoesNotExist):
+        except (AccessToken.DoesNotExist, User.DoesNotExist):
             raise serializers.ValidationError(
-                "Unable to get token."
+                "Unable to convert token."
             )
         return {
             'email': user.email,
