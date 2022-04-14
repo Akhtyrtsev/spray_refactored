@@ -25,3 +25,6 @@ class PaymentPostSerializer(ModelSerializer):
         fields = (
             'token',
         )
+
+    def create(self, validated_data):
+        return Payments.save(self, validated_data=validated_data)

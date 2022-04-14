@@ -2,17 +2,11 @@
 Models used by the users app
 """
 import logging
-
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager as BaseUserManager
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models import ObjectDoesNotExist
-# from python_http_client import BadRequestsError
-from validate_email import validate_email
-
-from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES, ADDRESS_TYPES
+from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES
 from spray.users.managers import UserManager
 from spray.contrib.choices.users import ADDRESS_TYPES
 

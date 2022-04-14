@@ -29,30 +29,10 @@ class PaymentViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         user = Client.objects.get(pk=self.request.user.pk, email=self.request.user.email)
         token = serializer.validated_data['token']
-        try:
-            customer = stripe.Customer.retrieve(user.stripe_id)
-        except Exception:
-            customer = stripe.Customer.create(email=user.email)
-            user.stripe_id = customer.id
-            user.save()
-        stripe_token = stripe.Token.retrieve(token)
-        card = stripe_token['card']
-        stripe_id = customer.id
-        card_type = card['brand']
-        last_4 = card['last4']
-        exp_date = str(card['exp_month']) + '/' + str(card['exp_year'])
-        expire_date = datetime.strptime(exp_date, '%m/%Y')
-        fingerprint = card['fingerprint']
-        Payments.objects.create(
-            user=user,
-            stripe_id=stripe_id,
-            card_type=card_type,
-            last_4=last_4,
-            expire_date=expire_date,
-            fingerprint=fingerprint,
-        )
+        p = Payments()
+        p.save(user=user, token=token)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(user=self.request.user)
+        user = self.request.user
+        return Payments.objects.get_queryset(user=user)

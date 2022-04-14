@@ -1,8 +1,7 @@
+from datetime import datetime
+import stripe
 from django.db import models
-from django.db.models import JSONField
-from django.utils import timezone
-#
-# from spray.products.models import Appointment
+from spray.api.v1.stripe_system.managers import PaymentsManager
 from spray.users.models import Client, Valet
 
 
@@ -38,23 +37,31 @@ class Payments(models.Model):
         blank=True,
     )
 
+    objects = PaymentsManager()
+
     def __str__(self):
         return f'Stripe Payment by {self.user}, {self.date_created}'
 
+    def save(self, *args, **kwargs):
+        token = kwargs.pop('token')
+        user = kwargs.pop('user')
+        try:
+            customer = stripe.Customer.retrieve(user.stripe_id)
+        except Exception:
+            customer = stripe.Customer.create(email=user.email)
+            user.stripe_id = customer.id
+            user.save()
+        stripe_token = stripe.Token.retrieve(token)
+        card = stripe_token['card']
+        self.user = user
+        self.stripe_id = customer.id
+        self.card_type = card['brand']
+        self.last_4 = card['last4']
+        exp_date = str(card['exp_month']) + '/' + str(card['exp_year'])
+        self.expire_date = datetime.strptime(exp_date, '%m/%Y')
+        self.fingerprint = card['fingerprint']
+        super().save(*args, **kwargs)
 
-# class Payout(models.Model):
-#     valet = models.ForeignKey(Valet, on_delete=models.SET_NULL, related_name='payouts', null=True, blank=True)
-#     date_created = models.DateTimeField(auto_now_add=True)
-#     date_completed = models.DateTimeField(blank=True, null=True)
-#     amount = models.IntegerField(default=0)
-#     details = JSONField(blank=True, null=True)
-#     payment_method = models.CharField(max_length=30, null=True, blank=True)
-#     is_done = models.BooleanField(default=False)
-#     is_confirmed = models.BooleanField(default=False)
-#     appointment = models.ForeignKey(Appointment, on_delete=models.SET_NULL, related_name='payouts', null=True, blank=True)
-#
-#     def save(self, *args, **kwargs):
-#         if self.is_done:
-#             now = timezone.now()
-#             self.date_completed = now
-#         super(Payout, self).save(*args, **kwargs)
+
+
+
