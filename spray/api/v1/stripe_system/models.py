@@ -52,7 +52,7 @@ class Payments(models.Model):
         user.stripe_id = customer.id
         user.save()
         stripe_token = stripe.Token.retrieve(token)
-        payment = Payments.objects.filter(stripe_id=stripe_token['card']['id'])
+        payment = Payments.objects.filter(stripe_id=stripe_token['card']['id'], user=user)
         if not payment:
             stripe.Customer.create_source(
                 user.stripe_id,
