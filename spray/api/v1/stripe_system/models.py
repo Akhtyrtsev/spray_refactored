@@ -49,12 +49,18 @@ class Payments(models.Model):
             customer = stripe.Customer.retrieve(user.stripe_id)
         except Exception:
             customer = stripe.Customer.create(email=user.email)
-            user.stripe_id = customer.id
-            user.save()
+        user.stripe_id = customer.id
+        user.save()
         stripe_token = stripe.Token.retrieve(token)
+        payment = Payments.objects.filter(stripe_id=stripe_token['card']['id'])
+        if not payment:
+            stripe.Customer.create_source(
+                user.stripe_id,
+                source=token
+            )
         card = stripe_token['card']
         self.user = user
-        self.stripe_id = customer.id
+        self.stripe_id = card['id']
         self.card_type = card['brand']
         self.last_4 = card['last4']
         exp_date = str(card['exp_month']) + '/' + str(card['exp_year'])
