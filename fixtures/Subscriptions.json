@@ -1,0 +1,62 @@
+[
+  {
+    "model": "subscriptions.Subscription",
+    "pk": 1,
+    "fields": {
+      "price": 62.5,
+      "subscription_type": "Stay Golden",
+      "city": "Los Angeles",
+      "appointments_left": 4
+    }
+  },
+  {
+    "model": "subscriptions.Subscription",
+    "pk": 2,
+    "fields": {
+      "price": 70,
+      "subscription_type": "Sunkissed",
+      "city": "Los Angeles",
+      "appointments_left": 2
+    }
+  },
+  {
+    "model": "subscriptions.Subscription",
+    "pk": 3,
+    "fields": {
+      "price": 62.5,
+      "subscription_type": "Stay Golden",
+      "city": "Las Vegas",
+      "appointments_left": 4
+    }
+  },
+  {
+    "model": "subscriptions.Subscription",
+    "pk": 4,
+    "fields": {
+      "price": 70,
+      "subscription_type": "Sunkissed",
+      "city": "Las Vegas",
+      "appointments_left": 2
+    }
+  },
+  {
+    "model": "subscriptions.Subscription",
+    "pk": 5,
+    "fields": {
+      "price": 62.5,
+      "subscription_type": "Stay Golden",
+      "city": "Miami",
+      "appointments_left": 4
+    }
+  },
+  {
+    "model": "subscriptions.Subscription",
+    "pk": 6,
+    "fields": {
+      "price": 70,
+      "subscription_type": "Sunkissed",
+      "city": "Miami",
+      "appointments_left": 2
+    }
+  }
+]

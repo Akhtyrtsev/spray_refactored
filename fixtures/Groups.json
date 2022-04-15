@@ -1,0 +1,26 @@
+[
+  {
+    "model": "restApi.Group",
+    "pk": 1,
+    "fields": {
+      "name": "Admin",
+      "description": ""
+    }
+  },
+  {
+    "model": "restApi.Group",
+    "pk": 2,
+    "fields": {
+      "name": "Client",
+      "description": ""
+    }
+  },
+  {
+    "model": "restApi.Group",
+    "pk": 3,
+    "fields": {
+      "name": "Valet",
+      "description": ""
+    }
+  }
+]
