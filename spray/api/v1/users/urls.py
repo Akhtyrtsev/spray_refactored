@@ -4,7 +4,7 @@ from rest_framework import routers
 
 from spray.api.v1.users.client import views as client_views
 from spray.api.v1.users.valet import views as valet_views
-from spray.api.v1.users.views import UserGetTokenView
+from spray.api.v1.users.client.views import UserGetTokenView
 
 
 router = routers.DefaultRouter()

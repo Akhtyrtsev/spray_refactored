@@ -7,10 +7,9 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters, generics, mixins, viewsets, status
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import AllowAny
-from spray.api.v1.users.serializers import UserTokenSerializer
 
 from spray.users.models import Address
-from spray.api.v1.users.client.serializers import ClientAddressSerializer, ClientGetSerializer
+from spray.api.v1.users.client.serializers import ClientAddressSerializer, ClientGetSerializer, UserTokenSerializer
 from spray.users.models import Client, Valet
 from spray.users.permissions import IsValet, IsClient
 
