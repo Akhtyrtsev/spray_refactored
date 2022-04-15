@@ -84,8 +84,8 @@ class User(AbstractUser):
     is_confirmed = models.BooleanField(
         default=False,
     )
-    avatar_url = models.CharField(
-        max_length=4096,
+
+    avatar_url = models.URLField(
         null=True,
         blank=True,
     )
