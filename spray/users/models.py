@@ -22,7 +22,7 @@ log = logging.getLogger("django")
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
-class Group(models.Model):
+class Groups(models.Model):
     name = models.CharField(
         max_length=255,
     )
@@ -36,7 +36,7 @@ class Group(models.Model):
         return f'{self.name}'
 
     class Meta:
-        db_table = 'group'
+        db_table = 'groups'
 
 
 class User(AbstractUser):
@@ -85,8 +85,8 @@ class User(AbstractUser):
     is_confirmed = models.BooleanField(
         default=False,
     )
-
-    avatar_url = models.URLField(
+    avatar_url = models.CharField(
+        max_length=4096,
         null=True,
         blank=True,
     )
