@@ -1,9 +1,7 @@
-from datetime import datetime
-
 from django.conf import settings
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
-from spray.api.v1.stripe_system.models import Payments
+from spray.payment.models import Payments
 from spray.api.v1.stripe_system.serializers import PaymentGetSerializer, PaymentPostSerializer
 from rest_framework.response import Response
 import stripe
@@ -29,8 +27,10 @@ class PaymentViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         user = Client.objects.get(pk=self.request.user.pk, email=self.request.user.email)
         token = serializer.validated_data['token']
-        p = Payments()
-        p.save(user=user, token=token)
+
+        # p = Payments()
+        # p.save(user=user, token=token)
+        Payments.objects.create_payment(user=user, token=token)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get_queryset(self):
