@@ -5,14 +5,14 @@ import logging
 
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager as BaseUserManager
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models import ObjectDoesNotExist
 # from python_http_client import BadRequestsError
 from validate_email import validate_email
 
-from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES
+from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES, USER_TYPE_CHOICES
 from spray.users.managers import UserManager
 from spray.contrib.choices.users import ADDRESS_TYPES
 
@@ -21,6 +21,17 @@ log = logging.getLogger("django")
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
+
+class UserType(models.Model):
+    type = models.PositiveSmallIntegerField(
+        null=True,
+    )
+
+    def __str__(self):
+        return f'{self.type}'
+
+    def __int__(self):
+        return self.type
 
 class Groups(models.Model):
     name = models.CharField(
@@ -71,6 +82,10 @@ class User(AbstractUser):
         max_length=30,
         blank=True,
     )
+    user_type = models.PositiveSmallIntegerField(
+        null=True,
+        choices=USER_TYPE_CHOICES
+    )
     date_joined = models.DateTimeField(
         _('date joined'),
         auto_now_add=True,
@@ -85,8 +100,7 @@ class User(AbstractUser):
     is_confirmed = models.BooleanField(
         default=False,
     )
-    avatar_url = models.CharField(
-        max_length=4096,
+    avatar_url = models.URLField(
         null=True,
         blank=True,
     )
@@ -312,4 +326,3 @@ class Valet(User):
         max_length=64,
         help_text="valets field"
     )
-

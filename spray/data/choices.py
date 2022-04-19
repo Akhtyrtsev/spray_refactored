@@ -10,3 +10,10 @@ CUSTOMER_STATUSES = [
     ('Member', 'Member'),
     ('Subscriber', 'Subscriber'),
 ]
+
+USER_TYPE_CHOICES = [
+    (1, 'superuser'),
+    (2, 'staff'),
+    (3, 'client'),
+    (4, 'valet'),
+]
