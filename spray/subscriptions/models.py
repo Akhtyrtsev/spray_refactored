@@ -13,7 +13,7 @@ import spray.subscriptions.managers as sub_managers
 
 class Subscription(models.Model):
     city = models.CharField(
-        max_length=100,
+        max_length=128,
         null=True,
         blank=True,
         choices=CITY_CHOICES,
@@ -23,7 +23,7 @@ class Subscription(models.Model):
         blank=True,
     )
     subscription_type = models.CharField(
-        max_length=200,
+        max_length=256,
         null=True,
         blank=True,
         choices=SUBSCRIPTION_TYPES,
@@ -41,12 +41,12 @@ class Subscription(models.Model):
         default=0,
     )
 
+    def __str__(self):
+        return f"{self.subscription_type}, {self.city}"
+
     class Meta:
         verbose_name = 'Subscription type/price'
         verbose_name_plural = 'Subscriptions type/price'
-
-    def __str__(self):
-        return f'{"(deprecated) " if self.is_deprecated else ""}{self.city}, {self.subscription_type}'
 
 
 class ClientSubscription(models.Model):
