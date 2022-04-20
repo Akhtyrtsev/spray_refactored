@@ -33,6 +33,7 @@ class UserType(models.Model):
     def __int__(self):
         return self.type
 
+
 class Groups(models.Model):
     name = models.CharField(
         max_length=255,
