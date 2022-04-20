@@ -92,7 +92,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    'api.v1.users.pipeline.update_user_social_data',
+    # 'api.v1.users.pipeline.update_user_social_data',
 )
 # Google auth configuration
 

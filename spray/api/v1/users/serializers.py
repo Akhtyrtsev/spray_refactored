@@ -5,7 +5,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from rest_framework_jwt.settings import api_settings
 from oauth2_provider.models import AccessToken
-from spray.users.models import User
+from spray.users.models import User, Valet, Client
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
@@ -58,11 +58,28 @@ class RegistrationSerializer(serializers.ModelSerializer):
         fields = ['email', 'user_type', 'password', 'password2', ]
 
     def save(self):
-        user = User(email=self.validated_data['email'], user_type=self.validated_data['user_type'])
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
         if password != password2:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
+        user_type = int(self.validated_data['user_type'])
+        fields = {
+            'email': self.validated_data['email'],
+            'user_type': self.validated_data['user_type']
+        }
+        #-----------------------------------------------------------------------------------------------
+        # user_type
+        # (1, 'superuser'),
+        # (2, 'staff'),
+        # (3, 'client'),
+        # (4, 'valet'),
+        #-----------------------------------------------------------------------------------------------
+        if user_type == 3:
+            user = Client(**fields)
+        elif user_type == 4:
+            user = Valet(**fields)
+        else:
+            user = User(**fields)
         user.set_password(password)
         user.save()
         return user

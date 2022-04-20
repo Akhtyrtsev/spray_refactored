@@ -1,9 +1,7 @@
 from social_core.backends.google import GoogleOAuth2
 from social_core.backends.facebook import FacebookOAuth2
 
-from spray.users.models import UserType
-
-USER_FIELDS = ['username', 'email']
+from spray.users.models import UserType, Client, Valet, User
 
 
 def update_user_social_data(strategy, response, *args, **kwargs):
@@ -29,16 +27,31 @@ def update_user_social_data(strategy, response, *args, **kwargs):
     user.save()
 
 
-def create_user(strategy, details, backend, user=None, *args, **kwargs):
+def create_user(user=None, *args, **kwargs):
     if user:
         return {'is_new': False}
-
-    fields = {name: kwargs.get(name, details.get(name))
-              for name in backend.setting('USER_FIELDS', USER_FIELDS)}
-    fields['user_type'] = int(UserType.objects.first())
-    if not fields:
-        return
-    return {
+    user_data = kwargs['response']
+    user_type = int(UserType.objects.first())
+    fields = {
+        'first_name': user_data.get('given_name'),
+        'last_name': user_data.get('family_name'),
+        'avatar_url': user_data.get('picture'),
+        'email': user_data.get('email'),
         'is_new': True,
-        'user': strategy.create_user(**fields)
+        'user_type': int(UserType.objects.first())
     }
+    # -----------------------------------------------------------------------------------------------
+    # user_type
+    # (1, 'superuser'),
+    # (2, 'staff'),
+    # (3, 'client'),
+    # (4, 'valet'),
+    # -----------------------------------------------------------------------------------------------
+    if user_type == 3:
+        user = Client(**fields)
+    elif user_type == 4:
+        user = Valet(**fields)
+    else:
+        user = User(**fields)
+    user.save()
+    return user

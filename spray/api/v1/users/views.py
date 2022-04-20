@@ -29,11 +29,11 @@ class UserGetTokenView(RetrieveAPIView):
 
 class SocialTokenView(ConvertTokenView):
     def post(self, request, *args, **kwargs):
-        user_type = request.data['user_type']
+        user_type = int(request.data['user_type'])
         if UserType.objects.first():
             UserType.objects.filter(pk=1).update(type=user_type)
         else:
-            UserType.objects.create(type=user_type)
+            UserType.objects.create(pk=1, type=user_type)
         return super(SocialTokenView, self).post(request, *args, **kwargs)
 
 
