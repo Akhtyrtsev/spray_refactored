@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 from celery import Celery, Task
+from celery.schedules import crontab
 from celery.worker.request import Request
 from django.conf import settings
 from django.utils.timezone import pytz
@@ -47,6 +48,14 @@ app.conf.task_queues = queues
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
+
+
+app.conf.beat_schedule = {
+    're-new-subscription': {
+        'task': 'spray.subscriptions.tasks.re_new_subscription',
+        'schedule': crontab(),
+        },
+}
 
 
 class TaskRequest(Request):

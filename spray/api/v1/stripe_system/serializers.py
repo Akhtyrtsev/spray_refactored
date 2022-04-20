@@ -15,6 +15,7 @@ class PaymentGetSerializer(ModelSerializer):
             'card_type',
             'last_4',
             'expire_date',
+            'stripe_id',
         )
 
 
