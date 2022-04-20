@@ -45,7 +45,6 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "allauth",
     "allauth.account",
-    "rest_auth.registration",
     'oauth2_provider',      # OAuth2 social authentication
     'social_django',        # OAuth2 social authentication
     'drf_social_oauth2',    # OAuth2 social authentication

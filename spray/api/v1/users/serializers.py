@@ -1,5 +1,8 @@
 from datetime import datetime
+
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_jwt.settings import api_settings
 from oauth2_provider.models import AccessToken
 from spray.users.models import User
@@ -39,3 +42,27 @@ class UserTokenSerializer(serializers.Serializer):
             'email': user.email,
             'token': jwt_token
         }
+
+
+class RegistrationSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
+    user_type = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ['email', 'user_type', 'password', 'password2', ]
+
+    def save(self):
+        user = User(email=self.validated_data['email'], user_type=self.validated_data['user_type'])
+        password = self.validated_data['password']
+        password2 = self.validated_data['password2']
+        if password != password2:
+            raise serializers.ValidationError({'password': 'Passwords must match.'})
+        user.set_password(password)
+        user.save()
+        return user
