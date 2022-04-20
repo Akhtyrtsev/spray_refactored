@@ -54,7 +54,9 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "spray.users.apps.UsersConfig",
     "spray.appointments.apps.AppointmentsConfig",
-    "spray.api.v1.stripe_system.apps.PaymentConfig",
+    "spray.payment.apps.PaymentConfig",
+    "spray.subscriptions.apps.SubscriptionsConfig",
+
 
 ]
 

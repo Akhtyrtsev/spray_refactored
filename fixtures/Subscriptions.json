@@ -1,63 +1,62 @@
 [
   {
-    "model": "restApi.Subscription",
+    "model": "subscriptions.Subscription",
     "pk": 1,
     "fields": {
-      "price": 60,
-      "subscription_type": "Weekly",
+      "price": 62.5,
+      "subscription_type": "Stay Golden",
       "city": "Los Angeles",
-      "save_percent": 25
-
+      "appointments_left": 4
     }
   },
   {
-    "model": "restApi.Subscription",
+    "model": "subscriptions.Subscription",
     "pk": 2,
     "fields": {
-      "price": 65,
-      "subscription_type": "Every 10 days",
+      "price": 70,
+      "subscription_type": "Sunkissed",
       "city": "Los Angeles",
-      "save_percent": 15
+      "appointments_left": 2
     }
   },
   {
-    "model": "restApi.Subscription",
+    "model": "subscriptions.Subscription",
     "pk": 3,
     "fields": {
-      "price": 70,
-      "subscription_type": "2x a month",
-      "city": "Los Angeles",
-      "save_percent": 7
+      "price": 62.5,
+      "subscription_type": "Stay Golden",
+      "city": "Las Vegas",
+      "appointments_left": 4
     }
   },
   {
-    "model": "restApi.Subscription",
+    "model": "subscriptions.Subscription",
     "pk": 4,
     "fields": {
-      "price": 50,
-      "subscription_type": "Weekly",
+      "price": 70,
+      "subscription_type": "Sunkissed",
       "city": "Las Vegas",
-      "save_percent": 30
+      "appointments_left": 2
     }
   },
   {
-    "model": "restApi.Subscription",
+    "model": "subscriptions.Subscription",
     "pk": 5,
     "fields": {
-      "price": 55,
-      "subscription_type": "Every 10 days",
-      "city": "Las Vegas",
-      "save_percent": 18
+      "price": 62.5,
+      "subscription_type": "Stay Golden",
+      "city": "Miami",
+      "appointments_left": 4
     }
   },
   {
-    "model": "restApi.Subscription",
+    "model": "subscriptions.Subscription",
     "pk": 6,
     "fields": {
-      "price": 60,
-      "subscription_type": "2x a month",
-      "city": "Las Vegas",
-      "save_percent": 8
+      "price": 70,
+      "subscription_type": "Sunkissed",
+      "city": "Miami",
+      "appointments_left": 2
     }
   }
 ]
