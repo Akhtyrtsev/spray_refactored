@@ -312,9 +312,7 @@ MAIN_QUEUES = [
 
 SCHEDULE_QUEUES = [
     "queue_schedule",
-    "re_new_subscription",
 ]
-
 # other
 # ------------------------------------------------------------------------------
 USER_AGENT = (
