@@ -2,7 +2,6 @@ import logging
 
 from kombu import Exchange, Queue
 
-
 log = logging.getLogger("django")
 
 
@@ -19,5 +18,28 @@ def create_queue(queue_name: str) -> Queue:
     )
 
 
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
+
+def default_working_hours():
+    return {
+        "data": [
+            {
+                "start": None,
+                "to": None
+            }
+        ]
+    }
+
+
+def default_break_hours():
+    return {
+        "data": [
+            {
+                "start": None,
+                "to": None
+            }
+        ]
+    }
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #

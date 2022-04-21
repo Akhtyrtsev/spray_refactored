@@ -55,6 +55,7 @@ LOCAL_APPS = [
     "spray.users.apps.UsersConfig",
     "spray.appointments.apps.AppointmentsConfig",
     "spray.subscriptions.apps.SubscriptionsConfig",
+    "spray.schedule.apps.ScheduleConfig",
 
 ]
 
