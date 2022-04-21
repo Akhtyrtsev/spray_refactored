@@ -54,7 +54,7 @@ app.conf.beat_schedule = {
         'task': 'spray.subscriptions.tasks.re_new_subscription',
         'schedule': crontab(),
         'options': {
-            'queue': 're_new_subscription',
+            'queue': 'queue_schedule',
         }
     }
 }
