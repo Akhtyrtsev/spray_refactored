@@ -310,7 +310,10 @@ MAIN_QUEUES = [
     "queue_main",
 ]
 
-SCHEDULE_QUEUES = ["queue_schedule"]
+SCHEDULE_QUEUES = [
+    "queue_schedule",
+    "re_new_subscription",
+]
 
 # other
 # ------------------------------------------------------------------------------
