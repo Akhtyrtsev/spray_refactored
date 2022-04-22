@@ -10,6 +10,13 @@ from spray.utils.parse_schedule import parse_schedule, closest_to_now
 
 from spray.schedule.models import ValetScheduleDay
 
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
+admin.site.register(ValetScheduleDay)
+
+
+# ----------------------------------------------------------------------- #
+# ----------------------------------------------------------------------- #
 
 class WorkingDayForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -117,5 +124,3 @@ class WorkingDaysInline(admin.TabularInline):  # CantDeleteMixin, CantAddMixin
     }
     exclude = ('break_hours', 'working_hours')
 
-
-# admin.site.register(User)

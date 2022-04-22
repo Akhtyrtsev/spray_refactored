@@ -20,6 +20,17 @@ lxml==4.6.4                              # https://github.com/lxml/lxml
 bcrypt==3.2.0                            # https://github.com/pyca/bcrypt
 cryptography==36.0.0                     # https://github.com/pyca/cryptography
 
+future==0.18.2
+arrow==1.2.2
+backports.zoneinfo==0.2.1
+dateparser==1.1.1
+moment==0.12.1
+pytz-deprecation-shim==0.1.0.post0
+regex==2022.3.2
+times==0.7
+tzdata==2022.1
+tzlocal==4.2
+
 requests==2.26.0                         # https://github.com/psf/requests
 gevent==21.8.0                           # https://github.com/gevent/gevent
 tldextract==3.1.2                        # https://github.com/john-kurkowski/tldextract
@@ -49,6 +60,7 @@ django-ratelimit==3.0.1                  # https://github.com/jsocol/django-rate
 django-crispy-forms==1.13.0              # https://github.com/django-crispy-forms/django-crispy-forms
 django-tables2==2.4.1                    # https://github.com/jieter/django-tables2
 django-oauth-toolkit==1.5.0              # https://github.com/jazzband/django-oauth-toolkit
+django-json-widget==1.1.1
 
 # Django REST Framework
 djangorestframework==3.12.4              # https://github.com/encode/django-rest-framework

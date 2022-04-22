@@ -36,6 +36,8 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.forms",
+    "django_json_widget",
+
 ]
 
 THIRD_PARTY_APPS = [
