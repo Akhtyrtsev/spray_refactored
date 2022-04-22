@@ -107,9 +107,7 @@ class ClientSubscription(models.Model):
         default=False,
     )
 
-    create_objects = sub_managers.ClientSubscriptionCreateManager()
-    update_objects = sub_managers.ClientSubscriptionUpdateManager()
-    destroy_objects = sub_managers.ClientSubscriptionDestroyManager()
+    client_sub_objects = sub_managers.ClientSubscriptionCreateManager()
     objects = models.Manager()
 
     class Meta:

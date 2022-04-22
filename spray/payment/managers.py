@@ -6,7 +6,11 @@ from django.db import models
 import spray.payment.models as p
 
 
-class PaymentsCreateManager(models.Manager):
+class PaymentsManager(models.Manager):
+
+    def get_queryset(self, *args, **kwargs):
+        user = kwargs.get('user')
+        return super().get_queryset().filter(user=user)
 
     def create_payment(self, *args, **kwargs):
         token = kwargs.pop('token')
@@ -34,10 +38,3 @@ class PaymentsCreateManager(models.Manager):
                                    last_4=payment['last_4'], expire_date=payment['expire_date'],
                                    fingerprint=payment['fingerprint'])
         return instance
-
-
-class PaymentsGetManager(models.Manager):
-
-    def get_queryset(self, *args, **kwargs):
-        user = kwargs.pop('user')
-        return super(PaymentsGetManager, self).get_queryset().filter(user=user)

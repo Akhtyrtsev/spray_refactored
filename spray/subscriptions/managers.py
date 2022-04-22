@@ -18,9 +18,9 @@ from spray.users.models import Client
 class ClientSubscriptionCreateManager(models.Manager):
 
     def create_client_subscription(self, *args, **kwargs):
-        client = kwargs.pop('client')
-        payment = kwargs.pop('payment')
-        subscription = kwargs.pop('subscription')
+        client = kwargs.get('client')
+        payment = kwargs.get('payment')
+        subscription = kwargs.get('subscription')
         appointments_left = subscription.appointments_left
         price = subscription.price
         new_client_sub = self.create(client=client, subscription=subscription, payment=payment,
@@ -36,14 +36,11 @@ class ClientSubscriptionCreateManager(models.Manager):
             raise ValidationError(detail={'detail': e.error.message})
         return new_client_sub
 
-
-class ClientSubscriptionUpdateManager(models.Manager):
-
     def update_client_subscription(self, *args, **kwargs):
-        client = kwargs.pop('client')
-        payment = kwargs.pop('payment')
-        subscription = kwargs.pop('subscription')
-        instance = kwargs.pop('instance')
+        client = kwargs.get('client')
+        payment = kwargs.get('payment')
+        subscription = kwargs.get('subscription')
+        instance = kwargs.get('instance')
         all_subscriptions = sub_models.ClientSubscription.objects.filter(client=client, is_deleted=False).order_by('pk')
         current = all_subscriptions.first()
         if current.subscription.city != subscription.city:
@@ -73,11 +70,8 @@ class ClientSubscriptionUpdateManager(models.Manager):
             sp = SubscriptionProcessing(instance, subscription, payment)
             sp.update_subscription()
 
-
-class ClientSubscriptionDestroyManager(models.Manager):
-
     def destroy_client_subscription(self, *args, **kwargs):
-        instance = kwargs.pop('instance')
+        instance = kwargs.get('instance')
         if instance.is_paused:
             raise ValidationError(detail={'detail': 'You have a membership that has been frozen.'
                                                     ' Please contact customer support to unfreeze your membership'})
@@ -98,6 +92,5 @@ class ClientSubscriptionDestroyManager(models.Manager):
             instance.is_deleted = True
             instance.save()
         if not instance.client.client_subscriptions.filter(is_deleted=False).count():
-            Client.objects.filter(pk=instance.user.pk).update(customer_status=None)
+            Client.objects.filter(pk=instance.client.pk).update(customer_status=None)
         MembershipEvent.objects.create(client=instance.client, action='Deleted')
-

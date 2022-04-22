@@ -49,9 +49,9 @@ class ClientSubscriptionViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         subscription = serializer.validated_data['subscription']
         payment = serializer.validated_data['payment']
-        ClientSubscription.create_objects.create_client_subscription(client=client,
-                                                                     subscription=subscription,
-                                                                     payment=payment)
+        ClientSubscription.client_sub_objects.create_client_subscription(client=client,
+                                                                         subscription=subscription,
+                                                                         payment=payment)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
@@ -64,15 +64,15 @@ class ClientSubscriptionViewSet(viewsets.ModelViewSet):
         subscription = serializer.validated_data['subscription']
         client = instance.client
         payment = serializer.validated_data['payment']
-        ClientSubscription.update_objects.update_client_subscription(client=client,
-                                                                     subscription=subscription,
-                                                                     payment=payment,
-                                                                     instance=instance)
+        ClientSubscription.client_sub_objects.update_client_subscription(client=client,
+                                                                         subscription=subscription,
+                                                                         payment=payment,
+                                                                         instance=instance)
         return Response(serializer.data)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        ClientSubscription.destroy_objects.destroy_client_subscription(instance=instance)
+        ClientSubscription.client_sub_objects.destroy_client_subscription(instance=instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(detail=True, methods=['put'], url_path='change-payment', url_name='change-payment')

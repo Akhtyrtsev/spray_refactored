@@ -1,7 +1,7 @@
 from datetime import datetime
 import stripe
 from django.db import models
-import spray.payment.managers as user_manager
+import spray.payment.managers as payment_manager
 from spray.users.models import Client, Valet
 
 
@@ -38,8 +38,7 @@ class Payments(models.Model):
     )
 
     objects = models.Manager()
-    create_objects = user_manager.PaymentsCreateManager()
-    get_objects = user_manager.PaymentsGetManager()
+    payment_objects = payment_manager.PaymentsManager()
 
     def __str__(self):
         return f'Stripe Payment by {self.user}, {self.date_created}'

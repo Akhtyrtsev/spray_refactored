@@ -27,9 +27,9 @@ class PaymentViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         user = Client.objects.get(pk=self.request.user.pk, email=self.request.user.email)
         token = serializer.validated_data['token']
-        Payments.create_objects.create_payment(client=user, token=token)
+        Payments.payment_objects.create_payment(client=user, token=token)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get_queryset(self):
         user = Client.objects.get(pk=self.request.user.pk, email=self.request.user.email)
-        return Payments.get_objects.get_queryset(user=user)
+        return Payments.payment_objects.get_queryset(user=user)

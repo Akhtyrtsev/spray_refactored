@@ -171,6 +171,8 @@ class Address(models.Model):
     )
     address_string = models.CharField(
         max_length=128,
+        null=True,
+        blank=True,
     )
     note_parking = models.CharField(
         max_length=256,
