@@ -39,6 +39,9 @@ class SubscriptionProcessing:
             current_subscription.appointments_left -= appointments_left
             current_subscription.save()
             raise ValidationError(detail={'detail': e.error.message})
+        result = dict(already_payed=already_payed, payed_appointments=payed_appointments,
+                      current_sub=current_subscription, to_pay=to_pay)
+        return result
 
     def update_current_subscription(self):
         now = timezone.now()
@@ -64,6 +67,8 @@ class SubscriptionProcessing:
                 MembershipEvent.objects.create(client=current_subscription.client, action='Deleted')
                 current_subscription.is_deleted = True
                 current_subscription.save()
+        result = dict(current_subscription=current_subscription, to_pay=to_pay)
+        return result
 
     def handle_deprecated_subscription(self):
         subscription = self.current_subscription
@@ -73,3 +78,5 @@ class SubscriptionProcessing:
         MembershipEvent.objects.create(client=client, action='Deleted')
         print("NOT IMPLEMENTED")
         print(f"sent deprecation email to {client.email}")
+        result = dict(subscription=subscription)
+        return result

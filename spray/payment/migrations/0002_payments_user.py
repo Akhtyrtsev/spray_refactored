@@ -14,9 +14,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='payments',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='payments', to='users.client'),
-        ),
+        # migrations.AddField(
+        #     model_name='payments',
+        #     name='user',
+        #     field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='payments', to='users.client'),
+        # ),
     ]

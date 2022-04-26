@@ -16,19 +16,19 @@ class Migration(migrations.Migration):
             name='address',
             options={'verbose_name': 'Address', 'verbose_name_plural': 'Addresses'},
         ),
-        migrations.RemoveField(
-            model_name='address',
-            name='address',
-        ),
-        migrations.RemoveField(
-            model_name='address',
-            name='code',
-        ),
-        migrations.AddField(
-            model_name='address',
-            name='address_string',
-            field=models.CharField(blank=True, max_length=128, null=True),
-        ),
+        # migrations.RemoveField(
+        #     model_name='address',
+        #     name='address',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='address',
+        #     name='code',
+        # ),
+        # migrations.AddField(
+        #     model_name='address',
+        #     name='address_string',
+        #     field=models.CharField(blank=True, max_length=128, null=True),
+        # ),
         migrations.AlterField(
             model_name='address',
             name='address_type',
