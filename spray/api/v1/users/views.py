@@ -16,15 +16,8 @@ class UserGetTokenView(RetrieveAPIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        response = {
-            'success': 'True',
-            'status code': status.HTTP_200_OK,
-            'email': serializer.data['email'],
-            'token': serializer.data['token'],
-            'token_type': 'Bearer'
-        }
-        status_code = status.HTTP_200_OK
-        return Response(response, status=status_code)
+        response_data = serializer.data
+        return Response(response_data, status=status.HTTP_200_OK)
 
 
 class SocialTokenView(ConvertTokenView):
@@ -45,8 +38,6 @@ class UserRegistrationView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
         user_data = serializer.data
-
         return Response(user_data, status=status.HTTP_201_CREATED)
 

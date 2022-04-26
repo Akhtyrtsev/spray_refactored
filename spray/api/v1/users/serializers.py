@@ -40,7 +40,7 @@ class UserTokenSerializer(serializers.Serializer):
             )
         return {
             'email': user.email,
-            'token': jwt_token
+            'token': jwt_token,
         }
 
 
@@ -57,29 +57,29 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email', 'user_type', 'password', 'password2', ]
 
-    def save(self):
-        password = self.validated_data['password']
-        password2 = self.validated_data['password2']
-        if password != password2:
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({'password': 'Passwords must match.'})
+        return attrs
+
+    def save(self):
         user_type = int(self.validated_data['user_type'])
         fields = {
             'email': self.validated_data['email'],
             'user_type': self.validated_data['user_type']
         }
-        #-----------------------------------------------------------------------------------------------
-        # user_type
-        # (1, 'superuser'),
-        # (2, 'staff'),
-        # (3, 'client'),
-        # (4, 'valet'),
-        #-----------------------------------------------------------------------------------------------
+        """ USER TYPE:
+        1 => superuser,
+        2 => staff,
+        3 => client,
+        4 => valet
+        """
         if user_type == 3:
             user = Client(**fields)
         elif user_type == 4:
             user = Valet(**fields)
         else:
             user = User(**fields)
-        user.set_password(password)
+        user.set_password(self.validated_data['password'])
         user.save()
         return user
