@@ -4,13 +4,9 @@ Models used by the users app
 import logging
 
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models import ObjectDoesNotExist
-# from python_http_client import BadRequestsError
-from validate_email import validate_email
 
 from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES, USER_TYPE_CHOICES
 from spray.users.managers import UserManager
@@ -178,6 +174,10 @@ class Client(User):
         default=True,
     )
 
+    class Meta:
+        verbose_name = "Client"
+        verbose_name_plural = "Clients"
+
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
@@ -327,3 +327,7 @@ class Valet(User):
         max_length=64,
         help_text="valets field"
     )
+
+    class Meta:
+        verbose_name = "Valet"
+        verbose_name_plural = "Valets"

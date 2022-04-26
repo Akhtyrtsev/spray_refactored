@@ -38,15 +38,14 @@ def create_user(user=None, *args, **kwargs):
         'avatar_url': user_data.get('picture'),
         'email': user_data.get('email'),
         'is_new': True,
-        'user_type': int(UserType.objects.first())
+        'user_type': user_type
     }
-    # -----------------------------------------------------------------------------------------------
-    # user_type
-    # (1, 'superuser'),
-    # (2, 'staff'),
-    # (3, 'client'),
-    # (4, 'valet'),
-    # -----------------------------------------------------------------------------------------------
+    """ USER TYPE:
+        1 => superuser,
+        2 => staff,
+        3 => client,
+        4 => valet
+        """
     if user_type == 3:
         user = Client(**fields)
     elif user_type == 4:
