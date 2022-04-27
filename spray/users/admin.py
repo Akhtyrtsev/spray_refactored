@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from spray.users.forms import UserModelForm, ClientModelForm
+from spray.users.forms import UserModelForm, ClientModelForm, ValetModelForm
 from spray.users.models import Address, User, Client, Valet
 
 
@@ -45,5 +45,16 @@ class ClientAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Valet)
+@admin.register(Valet)
+class ValetAdmin(admin.ModelAdmin):
+    form = ValetModelForm
+    list_display = (
+        'id',
+        'first_name',
+        'last_name',
+        'email',
+        'date_joined',
+        'phone',
+    )
+    readonly_fields = ('id', )
 # Register your models here.
