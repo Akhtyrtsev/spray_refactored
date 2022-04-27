@@ -175,8 +175,8 @@ class Client(User):
     )
 
     class Meta:
-        verbose_name = "Client"
-        verbose_name_plural = "Clients"
+        verbose_name = 'Client'
+        verbose_name_plural = 'Users: Clients'
 
 
 # ----------------------------------------------------------------------- #
@@ -329,5 +329,5 @@ class Valet(User):
     )
 
     class Meta:
-        verbose_name = "Valet"
-        verbose_name_plural = "Valets"
+        verbose_name = 'Valet'
+        verbose_name_plural = 'Users: Valets'
