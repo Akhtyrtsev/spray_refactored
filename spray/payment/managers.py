@@ -5,7 +5,7 @@ from django.db import models
 
 import spray.payment.models as p
 
-
+'jjk'
 class PaymentsManager(models.Manager):
 
     def get_queryset(self, *args, **kwargs):
