@@ -4,13 +4,9 @@ Models used by the users app
 import logging
 
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager as BaseUserManager
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models import ObjectDoesNotExist
-# from python_http_client import BadRequestsError
-from validate_email import validate_email
 
 from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES
 from spray.users.managers import UserManager
@@ -313,3 +309,10 @@ class Valet(User):
         help_text="valets field"
     )
 
+
+class FavoriteValets(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, blank=True, null=True, related_name='client_valets')
+    valet = models.ForeignKey(Valet, on_delete=models.SET_NULL, blank=True, null=True, related_name='clients_who_liked')
+    preferred = models.BooleanField(null=True, blank=True, default=False)
+    only = models.BooleanField(null=True, blank=True, default=False)
+    favorite = models.BooleanField(null=True, blank=True, default=False)

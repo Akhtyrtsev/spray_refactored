@@ -26,3 +26,36 @@ class ValetScheduleDay(models.Model):
 
     class Meta:
         verbose_name_plural = 'Valets: Working hours'
+
+
+class ValetScheduleOccupiedTime(models.Model):
+    valet = models.ForeignKey(Valet, on_delete=models.SET_NULL, related_name='day_offs', null=True)
+    date = models.DateField()
+    break_hours = JSONField(blank=True, null=True)
+    is_confirmed = models.BooleanField(default=False)
+    start_time = models.TimeField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
+
+    def __str__(self):
+        if self.valet:
+            return f"{self.valet.email} busy time"
+        else:
+            return str(self.id)
+
+    class Meta:
+        verbose_name_plural = 'Valets: day offs / breaks'
+
+
+class ValetScheduleAdditionalTime(models.Model):
+    valet = models.ForeignKey(Valet, on_delete=models.SET_NULL, related_name='additional_days', null=True)
+    date = models.DateField()
+    break_hours = JSONField(blank=True, null=True)
+    is_confirmed = models.BooleanField(default=False)
+    start_time = models.TimeField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.valet.email} working time"
+
+    class Meta:
+        verbose_name_plural = 'Valets: Additional working days'

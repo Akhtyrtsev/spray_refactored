@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from spray.schedule.models import ValetScheduleDay
+
+from spray.schedule.models import ValetScheduleDay, ValetScheduleOccupiedTime, ValetScheduleAdditionalTime
 
 
 # ----------------------------------------------------------------------- #
@@ -9,4 +10,16 @@ from spray.schedule.models import ValetScheduleDay
 class ValetScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = ValetScheduleDay
+        fields = '__all__'
+
+
+class ValetScheduleOccupiedTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ValetScheduleOccupiedTime
+        exclude = ('valet',)
+
+
+class ValetScheduleAdditionalTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ValetScheduleAdditionalTime
         fields = '__all__'
