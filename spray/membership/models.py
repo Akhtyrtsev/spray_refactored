@@ -2,7 +2,7 @@ from django.db import models
 
 from spray.contrib.choices.membership import MEMBERSHIP_ACTION
 from spray.contrib.choices.promocodes import TYPES
-from spray.users.models import Client
+from spray.api.v1.users.client.models import Client
 
 
 class MembershipEvent(models.Model):

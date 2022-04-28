@@ -57,6 +57,7 @@ LOCAL_APPS = [
     "spray.payment.apps.PaymentConfig",
     "spray.subscriptions.apps.SubscriptionsConfig",
     "spray.membership.apps.MembershipConfig",
+    "spray.api.v1.users.client.apps.ClientConfig"
 
 ]
 

@@ -2,7 +2,9 @@ from datetime import datetime
 import stripe
 from django.db import models
 import spray.payment.managers as payment_manager
-from spray.users.models import Client, Valet
+from spray.api.v1.users.client.models import Client
+from spray.users.models import Valet
+
 
 
 class Payments(models.Model):

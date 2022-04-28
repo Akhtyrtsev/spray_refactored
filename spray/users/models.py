@@ -141,23 +141,6 @@ class User(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
 
-class Client(User):
-    customer_status = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        choices=CUSTOMER_STATUSES,
-    )
-    referal_code = models.CharField(
-        null=True,
-        blank=True,
-        max_length=32,
-    )
-    notification_text_magic = models.BooleanField(
-        default=True,
-    )
-
-
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 

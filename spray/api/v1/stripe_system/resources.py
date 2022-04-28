@@ -6,8 +6,8 @@ from spray.api.v1.stripe_system.serializers import PaymentGetSerializer, Payment
 from rest_framework.response import Response
 import stripe
 
-from spray.users.models import Client
-from spray.users.permissions import IsClient
+from spray.api.v1.users.client.models import Client
+from spray.api.v1.users.client.permissions import IsClient
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -27,7 +27,7 @@ class PaymentViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         user = Client.objects.get(pk=self.request.user.pk, email=self.request.user.email)
         token = serializer.validated_data['token']
-        Payments.payment_objects.create_payment(client=user, token=token)
+        Payments.payment_objects.create_payment(user=user, token=token)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get_queryset(self):

@@ -1,8 +1,16 @@
+import logging
+
 import stripe
 from rest_framework.exceptions import ValidationError
 
+from spray.payment.managers import log
+
 
 class ChargeProcessing:
+    """
+    Class for stripe charge processing.
+    Takes amount to pay, payment and client-subscription objects.
+    """
     def __init__(self, amount, payment, subscription):
         self.amount = amount
         self.subscription = subscription
@@ -20,6 +28,9 @@ class ChargeProcessing:
         return charge
 
     def pay_subscription(self):
+        """
+        Creates stripe charge and returns charge object.
+        """
         client = self.subscription.client
         if client.is_blocked:
             raise ValidationError(detail={'detail': 'Sorry, you are not allowed to do that. '
@@ -33,5 +44,6 @@ class ChargeProcessing:
             source=stripe_id,
             customer=customer_id
         )
+        log.info('Retrieved charge object from stripe')
         return charge
 

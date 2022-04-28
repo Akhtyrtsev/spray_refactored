@@ -11,7 +11,7 @@ from spray.api.v1.subscriptions.serializers import SubscriptionSerializer, \
 from spray.charge_processing.make_charge import ChargeProcessing
 from spray.subscriptions.models import Subscription, ClientSubscription
 from spray.subscriptions.subscription_processing import SubscriptionProcessing
-from spray.users.models import Client
+from spray.api.v1.users.client.models import Client
 
 
 class SubscriptionViewSet(viewsets.ModelViewSet):
@@ -41,7 +41,7 @@ class ClientSubscriptionViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         user = self.request.user
-        client = Client.objects.get(pk=user.pk, email=user.email)
+        client = Client.objects.get(pk=user.pk)
         client_subscription = ClientSubscription.objects.filter(client=client, is_deleted=False)
         if client_subscription:
             raise MethodNotAllowed(method='post', detail={'detail': 'You already have a membership'})
