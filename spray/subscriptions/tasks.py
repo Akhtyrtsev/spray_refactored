@@ -10,6 +10,7 @@ from config.celery_app import app as celery_app
 from spray.payment.managers import log
 from spray.subscriptions.models import ClientSubscription
 from spray.api.v1.users.client.models import Client
+from spray.subscriptions.subscription_processing import SubscriptionProcessing
 
 logger = get_task_logger(__name__)
 
@@ -41,7 +42,6 @@ def send_mail(**kwargs):
 
 @celery_app.task
 def re_new_subscription():  # refresh client subscription
-    from spray.subscriptions.subscription_processing import SubscriptionProcessing
     clients = Client.objects.exclude(client_subscriptions__isnull=True)
     for client in clients:
         subscriptions = ClientSubscription.objects.filter(client=client, is_deleted=False).order_by('pk')

@@ -4,7 +4,7 @@ from django.test import TestCase
 import stripe
 
 from spray.charge_processing.make_charge import ChargeProcessing
-from spray.users.models import Client
+from spray.api.v1.users.client.models import Client
 from spray.subscriptions.models import ClientSubscription, Subscription
 from spray.payment.models import Payments
 
@@ -28,20 +28,3 @@ class ChargeProcessingTestCase(TestCase):
         self.assertIsInstance(cp.payment, Payments)
         self.assertIsInstance(cp.subscription, ClientSubscription)
         self.assertIsInstance(cp.amount, int)
-
-    # @patch('stripe.Charge', autospec=True)
-    # def test_pay_subscription_args(self, charge_create_func):
-    #     mock_charge = charge_create_func.create()
-    #     client = Client.objects.get(email='tst@gmail')
-    #     payment = Payments.objects.get(user=client)
-    #     client_sub = ClientSubscription.objects.get(payment=payment)
-    #     subscription = Subscription.objects.get(price=50)
-    #     cp = ChargeProcessing(1000, payment, client_sub)
-    #     res = cp.pay_subscription()
-    #     with self.assertRaises(TypeError):
-    #         cp = ChargeProcessing('std', payment, client_sub)
-    #         cp.pay_subscription()
-    #     with self.assertRaises(AttributeError):
-    #         cp = ChargeProcessing(1000, subscription, client_sub)
-    #         cp.pay_subscription()
-

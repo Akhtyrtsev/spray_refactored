@@ -32,12 +32,8 @@ class ClientSubscriptionViewSet(viewsets.ModelViewSet):
             return ClientSubscriptionGetSerializer
 
     def get_queryset(self):
-        qs = super().get_queryset()
-        if self.request.user.is_superuser:
-            return qs.all()
-        else:
-            client = Client.objects.get(email=self.request.user.email)
-            return client.client_subscriptions.filter(is_deleted=False).order_by('pk')
+        client = Client.objects.get(email=self.request.user.email)
+        return client.client_subscriptions.filter(is_deleted=False).order_by('pk')
 
     def create(self, request, *args, **kwargs):
         user = self.request.user
