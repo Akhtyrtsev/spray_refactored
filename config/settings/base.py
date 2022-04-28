@@ -54,7 +54,10 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "spray.users.apps.UsersConfig",
     "spray.appointments.apps.AppointmentsConfig",
+    "spray.payment.apps.PaymentConfig",
     "spray.subscriptions.apps.SubscriptionsConfig",
+    "spray.membership.apps.MembershipConfig",
+    "spray.api.v1.users.client.apps.ClientConfig"
 
 ]
 
@@ -308,8 +311,9 @@ MAIN_QUEUES = [
     "queue_main",
 ]
 
-SCHEDULE_QUEUES = ["queue_schedule"]
-
+SCHEDULE_QUEUES = [
+    "queue_schedule",
+]
 # other
 # ------------------------------------------------------------------------------
 USER_AGENT = (
@@ -346,3 +350,5 @@ LOGGING = {
 }
 
 WEBAPP_URL = ""
+
+DEFAULT_FROM_EMAIL = "SprayValetSupport"

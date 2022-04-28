@@ -2,16 +2,10 @@
 Models used by the users app
 """
 import logging
-
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager as BaseUserManager
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models import ObjectDoesNotExist
-# from python_http_client import BadRequestsError
-from validate_email import validate_email
-
 from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES
 from spray.users.managers import UserManager
 from spray.contrib.choices.users import ADDRESS_TYPES
@@ -147,23 +141,6 @@ class User(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
 
-class Client(User):
-    customer_status = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-        choices=CUSTOMER_STATUSES,
-    )
-    referal_code = models.CharField(
-        null=True,
-        blank=True,
-        max_length=32,
-    )
-    notification_text_magic = models.BooleanField(
-        default=True,
-    )
-
-
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
@@ -177,6 +154,8 @@ class Address(models.Model):
     )
     address_string = models.CharField(
         max_length=128,
+        null=True,
+        blank=True,
     )
     note_parking = models.CharField(
         max_length=256,

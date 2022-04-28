@@ -1,18 +1,12 @@
-from django.urls import path, include
-
+from django.urls import include, path
+from spray.api.v1.subscriptions.resources import ClientSubscriptionViewSet, SubscriptionViewSet
 from rest_framework import routers
 
-from spray.api.v1.subscriptions import views
-
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
+router.register('subscription', SubscriptionViewSet)
+router.register('client-subscription', ClientSubscriptionViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('subscriptions', views.SubscriptionView.as_view({
-        "get": "list",
-    }), name='subscriptions'),
-    path('subscriptions/<int:pk>', views.SubscriptionView.as_view({
-        "get": "retrieve",
-    }), name='subscriptions'),
+    path('membership/', include(router.urls)),
 
 ]
