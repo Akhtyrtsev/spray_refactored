@@ -1,7 +1,11 @@
 from django.contrib import admin
 
+
 from spray.users.forms import UserModelForm, ClientModelForm, ValetModelForm
-from spray.users.models import Address, User, Client, Valet
+
+from spray.users.models import Address, User, Valet
+from spray.api.v1.users.clent.models import Client
+
 
 
 @admin.register(Address)
@@ -57,4 +61,6 @@ class ValetAdmin(admin.ModelAdmin):
         'phone',
     )
     readonly_fields = ('id', )
+
+
 # Register your models here.

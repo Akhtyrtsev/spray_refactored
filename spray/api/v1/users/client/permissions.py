@@ -1,6 +1,7 @@
 from rest_framework import permissions
 
-from spray.users.models import Client, Valet
+from spray.users.models import Valet
+from spray.api.v1.users.client.models import Client
 
 
 class IsValet(permissions.BasePermission):

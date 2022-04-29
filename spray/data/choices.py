@@ -10,3 +10,10 @@ CUSTOMER_STATUSES = [
     ('Member', 'Member'),
     ('Subscriber', 'Subscriber'),
 ]
+
+ADDRESS_TYPES = [
+    ('For appointment', 'For appointment'),
+    ('For Valet', 'For Valet'),
+]
+
+
