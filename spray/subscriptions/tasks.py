@@ -43,7 +43,7 @@ def re_new_subscription():  # refresh client subscription
                 title=title,
                 to=to,
             )
-            sm.send_mail()
+            sm.notify()
             log.info('Sent mail about deprecated subscription')
         if not current.days_to_update:
             log.info('Days to update equal to zero')

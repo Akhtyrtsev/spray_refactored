@@ -5,13 +5,14 @@ from config.celery_app import app as celery_app
 
 
 class Notifications:
-    def __init__(self, context=None, template=None, to=None, title=None):
+    def __init__(self, notification_type='email', context=None, template=None, to=None, title=None):
         self.context = context
         self.template = template
         self.to = to
         self.title = title
+        self.notification_type = notification_type
 
-    def send_mail(self):
+    def _send_mail(self):
         context = self.context
         template = self.template
         to = self.to
@@ -33,4 +34,10 @@ class Notifications:
             "text/html",
         )
         msg.send()
+
+    def notify(self):
+        if self.notification_type == 'email':
+            self._send_mail()
+        elif self.notification_type == 'push':
+            pass
 
