@@ -11,7 +11,6 @@ class Notifications:
         self.to = to
         self.title = title
 
-    @celery_app.task
     def send_mail(self):
         context = self.context
         template = self.template
