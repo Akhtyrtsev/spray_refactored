@@ -17,29 +17,15 @@ class UserModelForm(forms.ModelForm):
         return data
 
 
-class ClientModelForm(forms.ModelForm):
+class ClientModelForm(UserModelForm):
 
     class Meta:
         model = Client
         fields = '__all__'
 
-    def save(self, commit=True):
-        data = super().save(commit=False)
-        data.set_password(data.password)
-        if commit:
-            data.save()
-        return data
 
-
-class ValetModelForm(forms.ModelForm):
+class ValetModelForm(UserModelForm):
     class Meta:
         model = Valet
         fields = '__all__'
-
-    def save(self, commit=True):
-        data = super().save(commit=False)
-        data.set_password(data.password)
-        if commit:
-            data.save()
-        return data
 
