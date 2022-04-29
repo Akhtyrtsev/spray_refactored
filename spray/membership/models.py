@@ -62,3 +62,15 @@ class Promocode(models.Model):
     def __str__(self):
         return f"{self.code_type} {self.code} {self.value}"
 
+
+class MemberReferral(models.Model):
+    client = models.ForeignKey(
+        Client,
+        models.CASCADE,
+    )
+    count = models.IntegerField(
+        default=0,
+    )
+    used_promo = models.BooleanField(
+        default=False,
+    )
