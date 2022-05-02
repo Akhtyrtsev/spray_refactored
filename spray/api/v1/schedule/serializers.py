@@ -16,7 +16,8 @@ class ValetScheduleSerializer(serializers.ModelSerializer):
 class ValetScheduleOccupiedTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ValetScheduleOccupiedTime
-        exclude = ('valet',)
+        fields = '__all__'
+        # exclude = ('valet',)
 
 
 class ValetScheduleAdditionalTimeSerializer(serializers.ModelSerializer):

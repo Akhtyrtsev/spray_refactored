@@ -10,16 +10,44 @@ from spray.utils.base_func import default_working_hours, default_break_hours
 # ----------------------------------------------------------------------- #
 
 class ValetScheduleDay(models.Model):
-    weekday = models.CharField(max_length=32, choices=WEEKDAYS)
-    working_hours = JSONField(default=default_working_hours)
-    start_working_hours = models.TimeField(blank=True, null=True)
-    end_working_hours = models.TimeField(blank=True, null=True)
-    start_break_hours = models.TimeField(blank=True, null=True)
-    end_break_hours = models.TimeField(blank=True, null=True)
-    break_hours = JSONField(default=default_break_hours)
-    is_working = models.BooleanField(default=True)
-    is_required_to_work = models.BooleanField(default=False)
-    valet = models.ForeignKey(Valet, on_delete=models.SET_NULL, related_name="working_days", null=True)
+    valet = models.ForeignKey(
+        Valet,
+        on_delete=models.SET_NULL,
+        related_name="working_days",
+        null=True,
+    )
+    weekday = models.CharField(
+        max_length=32,
+        choices=WEEKDAYS,
+    )
+    working_hours = JSONField(
+        default=default_working_hours,
+    )
+    start_working_hours = models.TimeField(
+        blank=True,
+        null=True,
+    )
+    end_working_hours = models.TimeField(
+        blank=True,
+        null=True,
+    )
+    start_break_hours = models.TimeField(
+        blank=True,
+        null=True
+    )
+    end_break_hours = models.TimeField(
+        blank=True,
+        null=True,
+    )
+    break_hours = JSONField(
+        default=default_break_hours,
+    )
+    is_working = models.BooleanField(
+        default=True,
+    )
+    is_required_to_work = models.BooleanField(
+        default=False,
+    )
 
     def __str__(self):
         return f"{self.weekday} Schedule"
@@ -29,12 +57,28 @@ class ValetScheduleDay(models.Model):
 
 
 class ValetScheduleOccupiedTime(models.Model):
-    valet = models.ForeignKey(Valet, on_delete=models.SET_NULL, related_name='day_offs', null=True)
+    valet = models.ForeignKey(
+        Valet,
+        on_delete=models.SET_NULL,
+        related_name='day_offs',
+        null=True,
+    )
     date = models.DateField()
-    break_hours = JSONField(blank=True, null=True)
-    is_confirmed = models.BooleanField(default=False)
-    start_time = models.TimeField(blank=True, null=True)
-    end_time = models.TimeField(blank=True, null=True)
+    break_hours = JSONField(
+        blank=True,
+        null=True,
+    )
+    is_confirmed = models.BooleanField(
+        default=False,
+    )
+    start_time = models.TimeField(
+        blank=True,
+        null=True,
+    )
+    end_time = models.TimeField(
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         if self.valet:
@@ -47,12 +91,28 @@ class ValetScheduleOccupiedTime(models.Model):
 
 
 class ValetScheduleAdditionalTime(models.Model):
-    valet = models.ForeignKey(Valet, on_delete=models.SET_NULL, related_name='additional_days', null=True)
+    valet = models.ForeignKey(
+        Valet,
+        on_delete=models.SET_NULL,
+        related_name='additional_days',
+        null=True,
+    )
     date = models.DateField()
-    break_hours = JSONField(blank=True, null=True)
-    is_confirmed = models.BooleanField(default=False)
-    start_time = models.TimeField(blank=True, null=True)
-    end_time = models.TimeField(blank=True, null=True)
+    break_hours = JSONField(
+        blank=True,
+        null=True,
+    )
+    is_confirmed = models.BooleanField(
+        default=False,
+    )
+    start_time = models.TimeField(
+        blank=True,
+        null=True,
+    )
+    end_time = models.TimeField(
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return f"{self.valet.email} working time"

@@ -5,7 +5,6 @@ from django.db.models import Q
 from django.utils import timezone
 
 from spray.data.timezones import TIMEZONE_OFFSET
-from spray.users.models import FavoriteValets
 from spray.utils.parse_schedule import closest_to_now, get_time_range, sort_time
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime, ValetScheduleOccupiedTime
 
@@ -76,11 +75,6 @@ def get_available_per_valet(valet, date, schedule=False, client=None, city=None,
 
     additional_available = []
     if client:
-        if rebook:
-            is_only = FavoriteValets.objects.filter(client=client, valet=valet)
-        else:
-            is_only = FavoriteValets.objects.filter(only=True, client=client, valet=valet)
-
         if valet.valet_available_not_on_call:
             additional_available = HOURS
             if date.date() == now.date():
