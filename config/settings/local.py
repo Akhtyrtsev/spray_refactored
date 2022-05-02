@@ -32,7 +32,7 @@ USE_DO_SPACES = True
 DATABASES = {"default": env.db("DATABASE_URL")}  # noqa F405
 DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
 DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=0)  # noqa F405
-
+DATABASES["default"]["TEST"] = {"NAME": "test_spray_db"}
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -94,6 +94,7 @@ CELERY_TASK_EAGER_PROPAGATES = True
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = [
     "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+    'rest_framework.authentication.TokenAuthentication',
     "rest_framework.authentication.SessionAuthentication",
     "rest_framework.authentication.BasicAuthentication",
 ]
@@ -196,3 +197,6 @@ LOGGING = {
         },
     },
 }
+
+STRIPE_PUBLIC_KEY = 'pk_test_51KnOKuJIsScGKPaNVXM3xuicCIa98Y3m73b1WMwngvj3L0WSP1WALFUz219xrvkO2V1SfdoSYrt6JlyAtKtUWznA00gR277axx'
+STRIPE_SECRET_KEY = 'sk_test_51KnOKuJIsScGKPaNtwvJrsnekggV9qz5amBYnM7bnN1d4A9Dn1myTq3RKdODWi9obQ0wDXBH4qBdTyBrncbUt6FT00JMkpjZTr'

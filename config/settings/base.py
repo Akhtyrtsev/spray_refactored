@@ -47,7 +47,6 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "allauth",
     "allauth.account",
-    "rest_auth.registration",
     'oauth2_provider',      # OAuth2 social authentication
     'social_django',        # OAuth2 social authentication
     'drf_social_oauth2',    # OAuth2 social authentication
@@ -56,8 +55,11 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "spray.users.apps.UsersConfig",
     "spray.appointments.apps.AppointmentsConfig",
+    "spray.payment.apps.PaymentConfig",
     "spray.subscriptions.apps.SubscriptionsConfig",
     "spray.schedule.apps.ScheduleConfig",
+    "spray.membership.apps.MembershipConfig",
+    "spray.api.v1.users.client.apps.ClientConfig"
 
 ]
 
@@ -84,6 +86,20 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.RemoteUserBackend",
 ]
 
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.mail.mail_validation',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.get_username',
+    'api.v1.users.pipeline.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    # 'api.v1.users.pipeline.update_user_social_data',
+)
 # Google auth configuration
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '500523430131-h2uik7t96o5ekgbsrkr79k9a2lln0ab3.apps.googleusercontent.com'
@@ -92,7 +108,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
+    'openid'
 ]
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name', 'fullname', 'username', 'picture']
 
 # Facebook auth configuration
 
@@ -349,3 +367,5 @@ LOGGING = {
 }
 
 WEBAPP_URL = ""
+
+DEFAULT_FROM_EMAIL = "SprayValetSupport"

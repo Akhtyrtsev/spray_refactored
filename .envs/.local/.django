@@ -29,4 +29,5 @@ RABBITMQ_DEFAULT_USER=spray_site_user
 RABBITMQ_DEFAULT_PASS=spray_site_user!
 
 # other
+CANCELLATION_DATE_DELTA_ATTRIBUTE=minutes
 # ------------------------------------------------------------------------------
