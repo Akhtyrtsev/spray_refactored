@@ -11,6 +11,11 @@ CUSTOMER_STATUSES = [
     ('Subscriber', 'Subscriber'),
 ]
 
+ADDRESS_TYPES = [
+    ('For appointment', 'For appointment'),
+    ('For Valet', 'For Valet'),
+]
+
 USER_TYPE_CHOICES = [
     (1, 'superuser'),
     (2, 'staff'),
