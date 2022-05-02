@@ -11,13 +11,11 @@ class Pricing:
     Class for getting price for appointments.
     Returns sum which client need to pay.
     """
-    def __init__(self, date, address, number_of_people, subscription=None,
-                 has_members_pricing=False, promo_code=None):
+    def __init__(self, date, address, number_of_people, subscription=None, promo_code=None):
         self.address = address
         self.number_of_people = number_of_people
         self.date = date
         self.subscription = subscription
-        self.has_members_pricing = has_members_pricing
         self.promo_code = promo_code
         self.pay_as_you_go_price = 0
 
@@ -35,7 +33,7 @@ class Pricing:
             self.pay_as_you_go_price += price_list.basic_price
         self.pay_as_you_go_price += price_list.service_area_fee
 
-    def _get_base_city_pricing_with_sub(self, is_night):
+    def _get_base_city_pricing_with_sub(self, is_night, price_list):
         if self.promo_code:
             raise ValidationError(detail={'detail': 'You can`t use promo with subscription'})
         elif self.number_of_people > 1:
@@ -43,11 +41,12 @@ class Pricing:
         elif is_night:
             raise ValidationError(detail={'detail': 'Subscription is not allowed at night time'})
         elif self.address.hotel_name or self.address.is_hotel:
-            raise ValidationError(detail={'detail': 'Subscription is not allowed for a hotels'})
-        elif self.address.city != self.subscription.city:
+            raise ValidationError(detail={'detail': 'Subscription is not allowed for hotels'})
+        elif self.address.city != self.subscription.subscription.city:
             raise ValidationError(detail={'detail': 'You have not subscription in this city'})
         else:
             self.pay_as_you_go_price += self.subscription.subscription.price
+            self.pay_as_you_go_price += price_list.service_area_fee
 
     def _get_tips(self):
         self.pay_as_you_go_price *= 1.2
@@ -63,12 +62,14 @@ class Pricing:
         else:
             raise ValidationError(detail={'detail': 'Your promo code is not active'})
 
-    def _get_group_pricing(self):
+    def _get_group_pricing(self, price_list):
         value = self.number_of_people - 1
+        value_for_service_area = value - 1
         self.pay_as_you_go_price *= value
+        self.pay_as_you_go_price -= value_for_service_area * price_list.service_area_fee
 
     def get_price(self):
-        time = self.date.time
+        time = self.date
         address = self.address
         is_night = not (time < datetime.time(hour=21) and time >= datetime.time(hour=9))
         subscription = self.subscription
@@ -77,7 +78,7 @@ class Pricing:
         except Exception:
             raise ValidationError(detail={'detail': 'Address not allowed'})
         if subscription:
-            self._get_base_city_pricing_with_sub(is_night=is_night)
+            self._get_base_city_pricing_with_sub(is_night=is_night, price_list=price_list)
             log.info('Price with subscription: ', self.pay_as_you_go_price)
         else:
             if is_night:
@@ -87,7 +88,7 @@ class Pricing:
                 self._get_base_city_pricing_without_sub(price_list=price_list)
                 log.info('Base price: ', self.pay_as_you_go_price)
         if self.number_of_people > 1:
-            self._get_group_pricing()
+            self._get_group_pricing(price_list=price_list)
             log.info('Price for group', self.pay_as_you_go_price)
         if self.promo_code and not subscription:
             self._get_price_with_promo()
