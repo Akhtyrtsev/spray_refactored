@@ -11,10 +11,8 @@ class Pricing:
     Class for getting price for appointments.
     Returns sum which client need to pay.
     """
-    def __init__(self, appointment, address, number_of_people=None,
-                 date=None, subscription=None,
+    def __init__(self, date, address, number_of_people, subscription=None,
                  has_members_pricing=False, promo_code=None):
-        self.appointment = appointment
         self.address = address
         self.number_of_people = number_of_people
         self.date = date
@@ -70,10 +68,9 @@ class Pricing:
         self.pay_as_you_go_price *= value
 
     def get_price(self):
-        time = self.appointment.time
+        time = self.date.time
         address = self.address
         is_night = not (time < datetime.time(hour=21) and time >= datetime.time(hour=9))
-        self.number_of_people = self.appointment.number_of_people
         subscription = self.subscription
         try:
             price_list = Price.objects.filter(zip_code=address.zip_code).first()
