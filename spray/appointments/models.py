@@ -1,14 +1,6 @@
-import datetime
-
 from django.db import models
 
-from spray.contrib.choices.appointments import CITY_CHOICES, APPOINTMENT_STATUSES, APPOINTMENT_MICRO_STATUSES, \
-    REFUND_CHOICES, CANCELLED_BY_CHOICES
-from spray.membership.models import Promocode
-from spray.payment.models import Payments
-from spray.subscriptions.models import Subscription
-from spray.users.models import Address, Valet
-from spray.api.v1.users.client.models import Client
+from spray.contrib.choices.appointments import CITY_CHOICES
 
 
 class Price(models.Model):

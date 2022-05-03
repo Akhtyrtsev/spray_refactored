@@ -6,8 +6,8 @@ from spray.api.v1.stripe_system.serializers import PaymentGetSerializer, Payment
 from rest_framework.response import Response
 import stripe
 
-from spray.api.v1.users.client.models import Client
 from spray.api.v1.users.client.permissions import IsClient
+from spray.users.models import Client
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
