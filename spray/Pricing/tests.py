@@ -5,64 +5,26 @@ from django.test import TestCase
 from rest_framework.exceptions import ValidationError
 
 from spray.Pricing.get_price import Pricing
+
 from spray.api.v1.users.client.models import Client
 from spray.appointments.models import Price
 from spray.membership.models import Promocode
-from spray.payment.models import Payments
-from spray.subscriptions.models import Subscription, ClientSubscription
+from spray.subscriptions.models import Subscription
 from spray.users.models import Address
 
 
 class TestPricing(TestCase):
+    fixtures = ['fixtures/Prices.json']
+
     def setUp(self):
         client = Client.objects.create(
             email='tst@gmail.com',
             password=make_password('test'),
         )
-        payment = Payments.objects.create(
-            user=client,
-            stripe_id='test',
-        )
-        subscription = Subscription.objects.create(
+        Subscription.objects.create(
             price=50,
             appointments_left=4,
             city='Los Angeles',
-        )
-        ClientSubscription.objects.create(
-            client=client,
-            subscription=subscription,
-            payment=payment,
-            appointments_left=4,
-        )
-        Price.objects.create(
-            city='Los Angeles',
-            zip_code='90001',
-            basic_price=75,
-            hotel_price=95,
-            hotel_night_price=155,
-            night_price=135,
-            service_area_fee=5,
-            district='Los Angeles',
-        )
-        Price.objects.create(
-            city='Los Angeles',
-            zip_code='89146',
-            basic_price=75,
-            hotel_price=95,
-            hotel_night_price=155,
-            night_price=135,
-            service_area_fee=15,
-            district='Los Angeles',
-        )
-        Price.objects.create(
-            city='Las Vegas',
-            zip_code='89145',
-            basic_price=65,
-            hotel_price=90,
-            hotel_night_price=165,
-            service_area_fee=0,
-            night_price=165,
-            district='Spring Valley',
         )
         Address.objects.create(
             user=client,
@@ -103,7 +65,11 @@ class TestPricing(TestCase):
         number_of_people = 1
         test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
-        self.assertEqual(result, 96)
+        res_dict = test_gp.get_result_dict()
+        self.assertEqual(result, 114)
+        self.assertEqual(res_dict['tips'], 19)
+        self.assertEqual(res_dict['city_base_price'], 75)
+        self.assertEqual(res_dict['service_area_fee'], 20)
 
     def test_get_price_night_without_sub(self):
         address = Address.objects.get(city='Los Angeles', zip_code='90001')
@@ -111,30 +77,41 @@ class TestPricing(TestCase):
         number_of_people = 1
         test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
-        self.assertEqual(result, 168)
+        res_dict = test_gp.get_result_dict()
+        self.assertEqual(result, 186)
+        self.assertEqual(res_dict['tips'], 31)
+        self.assertEqual(res_dict['city_night_price'], 135)
+        self.assertEqual(res_dict['service_area_fee'], 20)
 
     def test_get_price_base_hotel(self):
-        address = Address.objects.get(city='Los Angeles', zip_code='89146')
+        address = Address.objects.get(zip_code='89146')
         time = datetime.time(hour=16)
         number_of_people = 1
         test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
-        self.assertEqual(result, 132)
+        res_dict = test_gp.get_result_dict()
+        self.assertEqual(result, 108)
+        self.assertEqual(res_dict['tips'], 18)
+        self.assertEqual(res_dict['hotel_base_price'], 90)
+        self.assertEqual(res_dict['service_area_fee'], 0)
 
     def test_get_price_night_hotel(self):
-        address = Address.objects.get(city='Los Angeles', zip_code='89146')
+        address = Address.objects.get(zip_code='89146')
         time = datetime.time(hour=23)
         number_of_people = 1
         test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
-        self.assertEqual(result, 204)
+        res_dict = test_gp.get_result_dict()
+        self.assertEqual(result, 198)
+        self.assertEqual(res_dict['tips'], 33)
+        self.assertEqual(res_dict['hotel_night_price'], 165)
+        self.assertEqual(res_dict['service_area_fee'], 0)
 
     def test_get_price_with_sub(self):
-        client = Client.objects.get(email='tst@gmail.com')
         address = Address.objects.get(city='Los Angeles', zip_code='90001')
         time = datetime.time(hour=18)
         number_of_people = 1
-        subscription = ClientSubscription.objects.get(client=client)
+        subscription = Subscription.objects.get(city='Los Angeles')
         test_gp = Pricing(
             date=time,
             address=address,
@@ -142,7 +119,11 @@ class TestPricing(TestCase):
             subscription=subscription,
         )
         result = test_gp.get_price()
-        self.assertEqual(result, 66)
+        res_dict = test_gp.get_result_dict()
+        self.assertEqual(result, 84)
+        self.assertEqual(res_dict['tips'], 14)
+        self.assertEqual(res_dict['subscription_price'], 50)
+        self.assertEqual(res_dict['service_area_fee'], 20)
         with self.assertRaises(ValidationError) as context:
             time_test = datetime.time(hour=22)
             test_gp = Pricing(
@@ -202,7 +183,11 @@ class TestPricing(TestCase):
         number_of_people = 1
         test_gp = Pricing(date=time, address=address, number_of_people=number_of_people, promo_code=promo)
         result = test_gp.get_price()
-        self.assertEqual(result, 76.8)
+        res_dict = test_gp.get_result_dict()
+        self.assertEqual(result, 91.2)
+        self.assertEqual(res_dict['tips'], 15.2)
+        self.assertEqual(res_dict['promo_value'], 19)
+        self.assertEqual(res_dict['service_area_fee'], 20)
 
     def test_get_price_with_group(self):
         address = Address.objects.get(city='Los Angeles', zip_code='90001')
@@ -210,5 +195,9 @@ class TestPricing(TestCase):
         number_of_people = 3
         test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
-        self.assertEqual(result, 186)
+        res_dict = test_gp.get_result_dict()
+        self.assertEqual(result, 204)
+        self.assertEqual(res_dict['tips'], 34)
+        self.assertEqual(res_dict['group_price'], 170)
+        self.assertEqual(res_dict['service_area_fee'], 20)
 
