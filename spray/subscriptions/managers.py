@@ -16,6 +16,8 @@ from spray.subscriptions.subscription_processing import SubscriptionProcessing
 from spray.users.models import Client
 
 
+
+
 class ClientSubscriptionCreateManager(models.Manager):
     """
     Client-subscription model manager for overriding create, update, destroy logics.

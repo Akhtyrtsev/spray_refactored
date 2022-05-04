@@ -59,7 +59,6 @@ LOCAL_APPS = [
     "spray.subscriptions.apps.SubscriptionsConfig",
     "spray.schedule.apps.ScheduleConfig",
     "spray.membership.apps.MembershipConfig",
-    "spray.api.v1.users.client.apps.ClientConfig"
 
 ]
 
