@@ -7,8 +7,7 @@ from spray.contrib.choices.appointments import CITY_CHOICES, APPOINTMENT_STATUSE
 from spray.membership.models import Promocode
 from spray.payment.models import Payments
 from spray.subscriptions.models import Subscription
-from spray.users.models import Address, Valet
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Address, Valet, Client
 
 
 class Price(models.Model):

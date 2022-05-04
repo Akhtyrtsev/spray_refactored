@@ -11,7 +11,7 @@ from spray.api.v1.subscriptions.serializers import SubscriptionSerializer, \
 from spray.charge_processing.make_charge import ChargeProcessing
 from spray.subscriptions.models import Subscription, ClientSubscription
 from spray.subscriptions.subscription_processing import SubscriptionProcessing
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Client
 
 
 class SubscriptionViewSet(viewsets.ModelViewSet):

@@ -2,10 +2,9 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
-from spray.users.models import Address
+from spray.users.models import Address, Client
 from spray.appointments.models import Price
 from spray.contrib.choices.appointments import CITY_CHOICES
-from spray.api.v1.users.client.models import Client
 
 
 # ----------------------------------------------------------------------- #

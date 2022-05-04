@@ -1,6 +1,6 @@
 from django import forms
 
-from spray.users.models import User, Client, Valet
+from spray.users.models import User, Valet, Client
 
 
 class UserModelForm(forms.ModelForm):

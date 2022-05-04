@@ -9,7 +9,7 @@ from celery.utils.log import get_task_logger
 from config.celery_app import app as celery_app
 from spray.payment.managers import log
 from spray.subscriptions.models import ClientSubscription
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Client
 from spray.subscriptions.subscription_processing import SubscriptionProcessing
 
 logger = get_task_logger(__name__)

@@ -3,9 +3,7 @@ from django.contrib import admin
 
 from spray.users.forms import UserModelForm, ClientModelForm, ValetModelForm
 
-from spray.users.models import Address, User, Valet
-from spray.api.v1.users.clent.models import Client
-
+from spray.users.models import Address, User, Valet, Client
 
 
 @admin.register(Address)
