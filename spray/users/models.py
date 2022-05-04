@@ -7,9 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models import ObjectDoesNotExist
-# from python_http_client import BadRequestsError
-from validate_email import validate_email
+
 
 from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES, USER_TYPE_CHOICES
 from spray.users.managers import UserManager
@@ -337,33 +335,3 @@ class Valet(User):
         verbose_name = 'Valet'
         verbose_name_plural = 'Users: Valets'
 
-# class FavoriteValets(models.Model):
-#     client = models.ForeignKey(
-#         Client,
-#         on_delete=models.SET_NULL,
-#         blank=True,
-#         null=True,
-#         related_name='client_valets',
-#     )
-#     valet = models.ForeignKey(
-#         Valet,
-#         on_delete=models.SET_NULL,
-#         blank=True,
-#         null=True,
-#         related_name='clients_who_liked',
-#     )
-#     preferred = models.BooleanField(
-#         null=True,
-#         blank=True,
-#         default=False,
-#     )
-#     only = models.BooleanField(
-#         null=True,
-#         blank=True,
-#         default=False,
-#     )
-#     favorite = models.BooleanField(
-#         null=True,
-#         blank=True,
-#         default=False,
-#     )
