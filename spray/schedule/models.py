@@ -98,7 +98,7 @@ class ValetScheduleAdditionalTime(models.Model):
         null=True,
     )
     date = models.DateField()
-    break_hours = JSONField(
+    additional_hours = JSONField(
         blank=True,
         null=True,
     )
