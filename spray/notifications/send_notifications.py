@@ -1,15 +1,21 @@
+import datetime
+
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
+from django.utils import timezone
 
+from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.payment.managers import log
-from spray.users.models import User, Device
+from spray.schedule.check_working_hours import is_working_hours
+from spray.users.models import User, Device, Valet
 from onesignal_sdk.client import Client
 from django.conf import settings
 
 
-class Notification:
-    def __init__(self, notification_type='email', context=None, data=None, template=None, to=None, title=None, user_id=None):
+class Notifier:
+    def __init__(self, notification_type='email', context=None,
+                 data=None, template=None, to=None, title=None, user_id=None):
         self.context = context
         self.template = template
         self.to = to
@@ -21,7 +27,7 @@ class Notification:
     def send_push(self):
         web_client = Client(
             app_id=settings.WEB_APP_ID,
-            rest_api_key=settings.REST_API_KEY[0],
+            rest_api_key=settings.ONE_SIGNAL_API_KEY[0],
             user_auth_key=settings.USER_AUTH_KEY,
         )
         user = User.objects.get(pk=self.user_id)
@@ -38,7 +44,7 @@ class Notification:
 
         android_client = Client(
             app_id=settings.ANDROID_APP_ID,
-            rest_api_key=settings.REST_API_KEY[1],
+            rest_api_key=settings.ONE_SIGNAL_API_KEY[1],
             user_auth_key=settings.USER_AUTH_KEY,
         )
         android_notification_body = {
@@ -72,6 +78,19 @@ class Notification:
             "text/html",
         )
         msg.send()
+
+    def is_notification_on_rest(self):
+        user = User.objects.get(pk=self.user_id)
+        try:
+            now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[user.city])
+        except Exception as e:
+            now = timezone.now()
+            log.info(e)
+        date = now
+        if Valet.objects.exists(pk=user.pk):
+            if user.notification_only_working_hours:
+                return is_working_hours(valet=user, date=date)
+        return True
 
     def notify(self):
         if self.notification_type == 'email':

@@ -1,8 +1,7 @@
 from abc import ABC
 
 from spray.notifications.models import Notifications
-from spray.notifications.rest_notify import RestNotify
-from spray.notifications.send_notifications import Notification
+from spray.notifications.send_notifications import Notifier
 from spray.users.models import Valet
 
 
@@ -52,7 +51,7 @@ class NotifyProcessing(ABC):
 
     def change_time_notification(self):
         is_valet = Valet.objects.exists(pk=self.user.pk)
-        rn = RestNotify(self.user)
+        rn = Notifier(user_id=self.user.id)
         check_valet_notify_rest = rn.is_notification_on_rest()
         if self.user.notification_appointment and check_valet_notify_rest:
             if self.appointment.additional_price:
@@ -63,7 +62,7 @@ class NotifyProcessing(ABC):
                 notification = self._change_time_for_valet()
             if self.user.notification_email or is_valet:
                 to = [self.user.email]
-                n = Notification(
+                n = Notifier(
                     context=self.context,
                     template=self.template,
                     title=self.title,
@@ -77,7 +76,7 @@ class NotifyProcessing(ABC):
                 'meta': self.data,
                 'notification_id': notification.pk,
             }
-            n = Notification(
+            n = Notifier(
                 notification_type='push',
                 user_id=self.user.id,
                 context=self.text,
@@ -86,12 +85,12 @@ class NotifyProcessing(ABC):
             n.notify()
 
     def appointment_notification(self):
-        rn = RestNotify(self.user)
+        rn = Notifier(user_id=self.user.id)
         check_valet_notify_rest = rn.is_notification_on_rest()
         if self.user.notification_appointment and check_valet_notify_rest:
             if self.mail:
                 if self.user.notification_email:
-                    sm = Notification(
+                    sm = Notifier(
                         context=self.context,
                         template=self.template,
                         title=self.title
@@ -107,7 +106,7 @@ class NotifyProcessing(ABC):
                     'appointment_id': self.appointment.pk,
                     'notification_id': n.pk
                     }
-            push_notify = Notification(
+            push_notify = Notifier(
                 notification_type='push',
                 user_id=self.user.id,
                 context=self.text,
@@ -116,7 +115,7 @@ class NotifyProcessing(ABC):
             push_notify.notify()
 
     def feed_notification(self):
-        rn = RestNotify(self.user)
+        rn = Notifier(user_id=self.user.id)
         check_valet_notify_rest = rn.is_notification_on_rest()
         if check_valet_notify_rest:
             n = Notifications.objects.create(user=self.user, text=self.text,
@@ -128,7 +127,7 @@ class NotifyProcessing(ABC):
                     'feed_id': self.appointment.pk,
                     'notification_id': n.pk
                 }
-                push_notify = Notification(
+                push_notify = Notifier(
                     notification_type='push',
                     user_id=self.user.id,
                     context=self.text,
@@ -146,7 +145,7 @@ class NotifyProcessing(ABC):
                 'type': self.notification_type,
                 'notification_id': notification.pk,
             }
-            push_notify = Notification(
+            push_notify = Notifier(
                 notification_type='push',
                 user_id=self.user.id,
                 context=self.text,
