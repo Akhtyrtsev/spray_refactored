@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
 from spray.schedule.models import ValetScheduleDay, ValetScheduleOccupiedTime, ValetScheduleAdditionalTime
+from spray.users.models import Valet
+
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
-from spray.users.models import Valet
 
 
 class ValetScheduleGetSerializer(serializers.ModelSerializer):

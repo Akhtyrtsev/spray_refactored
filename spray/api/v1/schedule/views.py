@@ -1,20 +1,21 @@
 import datetime
 
-from rest_framework import viewsets, generics, mixins, status
+from rest_framework import viewsets, mixins, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from spray.api.v1.schedule.serializers import ValetScheduleOccupiedTimeSerializer, \
-    ValetScheduleAdditionalTimeSerializer, ValetScheduleGetSerializer, ValetSchedulePostSerializer
+from spray.api.v1.schedule.serializers import ValetScheduleAdditionalTimeSerializer, ValetScheduleGetSerializer, \
+    ValetSchedulePostSerializer
 from spray.api.v1.users.valet.serializers import ValetGetSerializer
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime
 from spray.users.models import Valet
 from spray.utils.get_availability_data import get_available_times
+from spray.utils.parse_schedule import sort_time
+
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
-from spray.utils.parse_schedule import sort_time
 
 
 class AvailableTimesViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):

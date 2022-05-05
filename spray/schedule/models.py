@@ -50,7 +50,7 @@ class ValetScheduleDay(models.Model):
     )
 
     def __str__(self):
-        return f"{self.weekday} Schedule"
+        return f"{self.valet} {self.weekday} schedule"
 
     class Meta:
         verbose_name_plural = 'Valets: Working hours'
