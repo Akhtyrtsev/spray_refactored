@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from spray.users.forms import UserModelForm, ClientModelForm, ValetModelForm
 
-from spray.users.models import Address, User, Valet, Client
+from spray.users.models import Address, User, Valet, Client, Device
 
 
 @admin.register(Address)
@@ -46,7 +46,6 @@ class ClientAdmin(admin.ModelAdmin):
     readonly_fields = ('id', )
 
 
-
 @admin.register(Valet)
 class ValetAdmin(admin.ModelAdmin):
     form = ValetModelForm
@@ -61,4 +60,7 @@ class ValetAdmin(admin.ModelAdmin):
     readonly_fields = ('id', )
 
 
+@admin.register(Device)
+class DeviceAdmin(admin.ModelAdmin):
+    pass
 # Register your models here.
