@@ -5,8 +5,8 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from spray.api.v1.schedule.serializers import ValetScheduleSerializer, ValetScheduleOccupiedTimeSerializer, \
-    ValetScheduleAdditionalTimeSerializer
+from spray.api.v1.schedule.serializers import ValetScheduleOccupiedTimeSerializer, \
+    ValetScheduleAdditionalTimeSerializer, ValetScheduleGetSerializer, ValetSchedulePostSerializer
 from spray.api.v1.users.valet.serializers import ValetGetSerializer
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime
 from spray.users.models import Valet
@@ -35,11 +35,14 @@ class AvailableTimesViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixi
 
 
 class ValetScheduleViewSet(viewsets.ModelViewSet):
-    queryset = ValetScheduleDay.objects.all()
-    serializer_class = ValetScheduleSerializer
+    queryset = ValetScheduleDay.objects.filter(is_working=True)
+    permission_classes = [AllowAny]
 
-    def get_queryset(self):
-        return ValetScheduleDay.objects.filter(valet=self.request.user).order_by('pk')
+    def get_serializer_class(self):
+        if self.request.method != 'GET':
+            return ValetSchedulePostSerializer
+        else:
+            return ValetScheduleGetSerializer
 
 
 class ValetScheduleAdditionalTimeView(viewsets.ModelViewSet):
