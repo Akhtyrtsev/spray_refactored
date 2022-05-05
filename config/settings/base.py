@@ -56,6 +56,7 @@ LOCAL_APPS = [
     "spray.payment.apps.PaymentConfig",
     "spray.subscriptions.apps.SubscriptionsConfig",
     "spray.membership.apps.MembershipConfig",
+    "spray.notifications.apps.NotificationsConfig",
 
 ]
 
@@ -366,3 +367,12 @@ LOGGING = {
 WEBAPP_URL = ""
 
 DEFAULT_FROM_EMAIL = "SprayValetSupport"
+
+# configs for onesignal
+REST_API_KEY = [
+    'OWJlNzVmNjItMWQwNC00Y2MxLWE3NWYtYTFjYjQyNTM2MTIy',
+    'M2M5MGU3M2EtM2QyYy00Y2UzLWFhNGEtNGY1NzZmZjJjYmI5'
+]
+USER_AUTH_KEY = 'ZDUxMDg2MWItODM2OC00NTFlLTk4NjQtMDNmMGI0N2FiZWVl'
+ANDROID_APP_ID = '133914c9-70eb-45d4-ae2d-d8ec30d9a884'
+WEB_APP_ID = '90f78919-4a0e-488e-a7fe-54be9b2b924a'

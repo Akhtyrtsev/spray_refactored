@@ -333,3 +333,15 @@ class Valet(User):
     class Meta:
         verbose_name = 'Valet'
         verbose_name_plural = 'Users: Valets'
+
+
+class Device(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='devices',
+        null=True,
+    )
+    onesignal_id = models.CharField(
+        max_length=100,
+    )
