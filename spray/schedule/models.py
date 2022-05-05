@@ -12,7 +12,7 @@ from spray.utils.base_func import default_working_hours, default_break_hours
 class ValetScheduleDay(models.Model):
     valet = models.ForeignKey(
         Valet,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name="working_days",
         null=True,
     )
