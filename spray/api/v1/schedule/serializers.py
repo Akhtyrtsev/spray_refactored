@@ -9,6 +9,8 @@ from spray.users.models import Valet
 
 
 class ValetScheduleGetSerializer(serializers.ModelSerializer):
+    valet = serializers.EmailField(read_only=True)
+
     class Meta:
         model = ValetScheduleDay
         fields = (
@@ -22,9 +24,6 @@ class ValetScheduleGetSerializer(serializers.ModelSerializer):
 
 class ValetSchedulePostSerializer(serializers.ModelSerializer):
     valet = serializers.EmailField(write_only=True, required=True)
-    weekday = serializers.CharField(write_only=True, required=True)
-    working_hours = serializers.JSONField(write_only=True, required=True)
-    break_hours = serializers.JSONField(write_only=True, required=True)
 
     class Meta:
         model = ValetScheduleDay
