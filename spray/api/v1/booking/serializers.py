@@ -30,4 +30,5 @@ class BookingSecondStepSerializer(serializers.ModelSerializer):
             'subscription_id',
             'timezone',
             'initial_price',
+            'gift_card'
         )

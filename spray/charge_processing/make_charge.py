@@ -11,10 +11,11 @@ class ChargeProcessing:
     Class for stripe charge processing.
     Takes amount to pay, payment and client-subscription objects.
     """
-    def __init__(self, amount, payment, subscription):
+    def __init__(self, amount, payment, subscription=None, appointment=None):
         self.amount = amount
         self.subscription = subscription
         self.payment = payment
+        self.appointment = appointment
 
     def single_charge(self):
         stripe_id = self.payment['stripe_id']
@@ -47,3 +48,5 @@ class ChargeProcessing:
         log.info('Retrieved charge object from stripe')
         return charge
 
+    def pay_appointment(self):
+        pass

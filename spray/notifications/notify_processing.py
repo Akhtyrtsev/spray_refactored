@@ -5,7 +5,7 @@ from spray.notifications.send_notifications import Notifier
 from spray.users.models import Valet
 
 
-class NotifyProcessing(ABC):
+class NotifyProcessing:
     def __init__(self, user, appointment=None, notification_type='info', text=None,
                  context=None, data=None, mail=None, template=None, title=None):
         self.appointment = appointment
