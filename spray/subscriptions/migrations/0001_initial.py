@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=False)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
                 ('date_updated', models.DateTimeField(auto_now_add=True)),
-                ('cancellation_date', models.DateTimeField(blank=True, help_text='Once user cancels they have 2 months to use appointments', null=True)),
+                ('cancellation_date', models.DateTimeField(blank=True, help_text='Once user cancels they have 2 months to use booking', null=True)),
                 ('appointments_left', models.IntegerField(default=0)),
                 ('unused_appointments', models.IntegerField(default=0)),
                 ('date_reminded', models.DateTimeField(auto_now_add=True)),

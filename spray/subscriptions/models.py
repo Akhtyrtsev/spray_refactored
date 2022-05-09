@@ -74,7 +74,7 @@ class ClientSubscription(models.Model):
     cancellation_date = models.DateTimeField(
         blank=True,
         null=True,
-        help_text='Once user cancels they have 2 months to use appointments',
+        help_text='Once user cancels they have 2 months to use booking',
     )
     appointments_left = models.IntegerField(
         default=0,

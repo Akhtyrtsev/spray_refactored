@@ -5,6 +5,5 @@ from spray.users.models import Device
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
-
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
