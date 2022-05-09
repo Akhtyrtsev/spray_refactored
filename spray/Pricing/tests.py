@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 
 from spray.Pricing.get_price import Pricing
 
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Client
 from spray.appointments.models import Price
 from spray.membership.models import Promocode
 from spray.subscriptions.models import Subscription
