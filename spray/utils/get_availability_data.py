@@ -73,7 +73,6 @@ def get_available_valet(valet, date, city=None):
             available = list(set(available) - set(times))
     except Exception:
         print('Some error happens with valetdayof')
-
     if not valet.is_confirmed or now.date() > date.date():
         available = []
     if city:
@@ -89,5 +88,5 @@ def get_available_times(date, city=None):
     if len(valets) < 1:
         raise ValidationError(detail="No valets available")
     for valet in valets:
-        available_time = set(get_available_valet(valet, date, city=city))
+        available_time = set(list(available_time) + get_available_valet(valet, date, city=city))
     return available_time
