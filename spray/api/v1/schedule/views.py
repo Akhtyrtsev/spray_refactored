@@ -1,18 +1,16 @@
 import datetime
 
-from rest_framework import viewsets, mixins, status, generics
+from rest_framework import viewsets, mixins, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from spray.api.v1.schedule.serializers import ValetScheduleAdditionalTimeSerializer, ValetScheduleGetSerializer, \
     ValetSchedulePostSerializer, GetAvailableValetSerializer
 from spray.api.v1.users.valet.serializers import ValetGetSerializer
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime
 from spray.users.models import Valet
-from spray.utils.get_availability_data import get_available_times, valet_filter
-from spray.utils.parse_schedule import sort_time
+from spray.utils.get_availability_data import ValetSchedule, AvailableTime
 
 
 # ----------------------------------------------------------------------- #
@@ -30,8 +28,7 @@ class AvailableTimesViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixi
         if not date:
             raise ValidationError(detail={'detail': 'No date selected'})
         date = datetime.datetime.strptime(date, '%Y-%m-%d')
-        times = get_available_times(date=date, city=city)
-        times = sort_time(times)
+        times = AvailableTime.get_available_times(date=date, city=city)
         return Response({'available_times': times}, status=status.HTTP_200_OK
                         )
 
@@ -52,7 +49,7 @@ class AvailableValetView(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.
         if not time:
             raise ValidationError(detail='No time selected')
         date = datetime.datetime.strptime(date, '%Y-%m-%d')
-        valet = valet_filter(city=city, date=date, time=time)
+        valet = ValetSchedule.valet_filter(city=city, date=date, time=time)
         return Response({'valet': valet}, status=status.HTTP_200_OK)
 
 
