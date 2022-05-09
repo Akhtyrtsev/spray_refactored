@@ -1,16 +1,17 @@
 import datetime
 
-from rest_framework import viewsets, mixins, status
+from rest_framework import viewsets, mixins, status, generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from spray.api.v1.schedule.serializers import ValetScheduleAdditionalTimeSerializer, ValetScheduleGetSerializer, \
-    ValetSchedulePostSerializer
+    ValetSchedulePostSerializer, GetAvailableValetSerializer
 from spray.api.v1.users.valet.serializers import ValetGetSerializer
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime
 from spray.users.models import Valet
-from spray.utils.get_availability_data import get_available_times
+from spray.utils.get_availability_data import get_available_times, valet_filter
 from spray.utils.parse_schedule import sort_time
 
 
@@ -33,6 +34,26 @@ class AvailableTimesViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixi
         times = sort_time(times)
         return Response({'available_times': times}, status=status.HTTP_200_OK
                         )
+
+
+class AvailableValetView(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
+    queryset = Valet.objects.all()
+    serializer_class = GetAvailableValetSerializer
+    permission_classes = [AllowAny]
+
+    def list(self, request, *args, **kwargs):
+        city = request.query_params.get('city', None)
+        date = request.query_params.get("date", None)
+        time = request.query_params.get("time", None)
+        if not city:
+            raise ValidationError(detail='No city selected')
+        if not date:
+            raise ValidationError(detail='No date selected')
+        if not time:
+            raise ValidationError(detail='No time selected')
+        date = datetime.datetime.strptime(date, '%Y-%m-%d')
+        valet = valet_filter(city=city, date=date, time=time)
+        return Response({'valet': valet}, status=status.HTTP_200_OK)
 
 
 class ValetScheduleViewSet(viewsets.ModelViewSet):

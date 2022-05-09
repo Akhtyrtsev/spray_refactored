@@ -53,6 +53,7 @@ class ValetScheduleDay(models.Model):
         return f"{self.valet} {self.weekday} schedule"
 
     class Meta:
+        ordering = ('valet', )
         verbose_name_plural = 'Valets: Working hours'
 
 

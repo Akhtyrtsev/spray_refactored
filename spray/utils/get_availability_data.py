@@ -1,5 +1,6 @@
 import datetime
 import logging
+import random
 
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
@@ -12,6 +13,26 @@ from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime,
 logger = logging.getLogger('django')
 
 WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+
+def valet_filter(city, date, time):
+    weekday = WEEKDAYS[date.weekday()]
+    get_city_valet = Valet.objects.filter(city=city).all().order_by('?')
+    available_valet = None
+    for valet in get_city_valet:
+        try:
+            valet_working_day = valet.working_days.get(weekday=weekday)
+            is_working = valet_working_day.is_working
+            if is_working:
+                available = get_time_range(valet_working_day.working_hours)
+                breaking = get_time_range(valet_working_day.break_hours)
+                available = list(set(available) - set(breaking))
+                if time in available:
+                    available_valet = valet.email
+                    break
+        except Exception:
+            pass
+    return available_valet
 
 
 def get_available_valet(valet, date, city=None):
@@ -40,7 +61,7 @@ def get_available_valet(valet, date, city=None):
     try:
         additional_time = ValetScheduleAdditionalTime.objects.filter(valet=valet, date=date.date(), is_confirmed=True)
         for _ in additional_time:
-            times = get_time_range(_.break_hours)
+            times = get_time_range(_.additional_hours)
             available = list(set(available + times))
     except Exception:
         print('Some error happens with valet day on')
