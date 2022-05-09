@@ -13,7 +13,9 @@ import spray.subscriptions.models as sub_models
 from spray.membership.models import MembershipEvent
 from spray.payment.managers import log
 from spray.subscriptions.subscription_processing import SubscriptionProcessing
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Client
+
+
 
 
 class ClientSubscriptionCreateManager(models.Manager):

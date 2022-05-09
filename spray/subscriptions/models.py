@@ -7,7 +7,7 @@ from spray.payment.models import Payments
 from spray.contrib.choices.appointments import CITY_CHOICES
 from spray.contrib.choices.subscriptions import SUBSCRIPTION_TYPES
 from spray.subscriptions.subscription_processing import SubscriptionProcessing
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Client
 import spray.subscriptions.managers as sub_managers
 
 

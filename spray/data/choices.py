@@ -16,4 +16,9 @@ ADDRESS_TYPES = [
     ('For Valet', 'For Valet'),
 ]
 
-
+USER_TYPE_CHOICES = [
+    (1, 'superuser'),
+    (2, 'staff'),
+    (3, 'client'),
+    (4, 'valet'),
+]

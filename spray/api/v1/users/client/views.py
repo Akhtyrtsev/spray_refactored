@@ -6,17 +6,16 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import viewsets, status
 
-from spray.users.models import Address
+from spray.users.models import Address, Client
 from spray.api.v1.users.client.serializers import ClientAddressSerializer, ClientGetSerializer
-from spray.api.v1.users.client.models import Client
 from spray.api.v1.users.client.permissions import IsClient
+
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
 
 class HelloView(APIView):
-
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
@@ -25,7 +24,6 @@ class HelloView(APIView):
 
 
 class AddressViewSet(viewsets.ModelViewSet):
-
     queryset = Address.objects.filter(is_deleted=False)
     serializer_class = ClientAddressSerializer
 

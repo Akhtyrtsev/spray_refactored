@@ -9,7 +9,7 @@ from stripe.error import StripeError
 from spray.payment.models import Payments
 from spray.subscriptions.models import Subscription, ClientSubscription
 from spray.subscriptions.subscription_processing import SubscriptionProcessing
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Client
 
 
 class SubscriptionProcessingTestCase(TestCase):

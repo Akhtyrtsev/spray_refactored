@@ -94,6 +94,7 @@ CELERY_TASK_EAGER_PROPAGATES = True
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = [
     "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+    'rest_framework.authentication.TokenAuthentication',
     "rest_framework.authentication.SessionAuthentication",
     "rest_framework.authentication.BasicAuthentication",
 ]
@@ -196,6 +197,16 @@ LOGGING = {
         },
     },
 }
-
+# stripe keys
 STRIPE_PUBLIC_KEY = 'pk_test_51KnOKuJIsScGKPaNVXM3xuicCIa98Y3m73b1WMwngvj3L0WSP1WALFUz219xrvkO2V1SfdoSYrt6JlyAtKtUWznA00gR277axx'
 STRIPE_SECRET_KEY = 'sk_test_51KnOKuJIsScGKPaNtwvJrsnekggV9qz5amBYnM7bnN1d4A9Dn1myTq3RKdODWi9obQ0wDXBH4qBdTyBrncbUt6FT00JMkpjZTr'
+
+# onesignal config
+ONE_SIGNAL_API_KEY = [
+    'OWJlNzVmNjItMWQwNC00Y2MxLWE3NWYtYTFjYjQyNTM2MTIy',
+    'M2M5MGU3M2EtM2QyYy00Y2UzLWFhNGEtNGY1NzZmZjJjYmI5'
+]
+USER_AUTH_KEY = 'ZDUxMDg2MWItODM2OC00NTFlLTk4NjQtMDNmMGI0N2FiZWVl'
+ANDROID_APP_ID = '133914c9-70eb-45d4-ae2d-d8ec30d9a884'
+WEB_APP_ID = '90f78919-4a0e-488e-a7fe-54be9b2b924a'
+

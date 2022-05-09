@@ -2,11 +2,13 @@
 Models used by the users app
 """
 import logging
+
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES
+
+from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES, USER_TYPE_CHOICES
 from spray.users.managers import UserManager
 from spray.contrib.choices.users import ADDRESS_TYPES
 
@@ -16,7 +18,19 @@ log = logging.getLogger("django")
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
-class Group(models.Model):
+class UserType(models.Model):
+    type = models.PositiveSmallIntegerField(
+        null=True,
+    )
+
+    def __str__(self):
+        return f'{self.type}'
+
+    def __int__(self):
+        return self.type
+
+
+class Groups(models.Model):
     name = models.CharField(
         max_length=255,
     )
@@ -30,7 +44,7 @@ class Group(models.Model):
         return f'{self.name}'
 
     class Meta:
-        db_table = 'group'
+        db_table = 'groups'
 
 
 class User(AbstractUser):
@@ -65,6 +79,10 @@ class User(AbstractUser):
         max_length=30,
         blank=True,
     )
+    user_type = models.PositiveSmallIntegerField(
+        null=True,
+        choices=USER_TYPE_CHOICES
+    )
     date_joined = models.DateTimeField(
         _('date joined'),
         auto_now_add=True,
@@ -79,8 +97,7 @@ class User(AbstractUser):
     is_confirmed = models.BooleanField(
         default=False,
     )
-    avatar_url = models.CharField(
-        max_length=4096,
+    avatar_url = models.URLField(
         null=True,
         blank=True,
     )
@@ -135,10 +152,31 @@ class User(AbstractUser):
         self.initial_phone = self.phone
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}, {self.email}'
+        return f'{self.first_name} {self.last_name} {self.email}'
 
     def fullname(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class Client(User):
+    customer_status = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        choices=CUSTOMER_STATUSES,
+    )
+    referal_code = models.CharField(
+        null=True,
+        blank=True,
+        max_length=32,
+    )
+    notification_text_magic = models.BooleanField(
+        default=True,
+    )
+
+    class Meta:
+        verbose_name = 'Client'
+        verbose_name_plural = 'Users: Clients'
 
 
 # ----------------------------------------------------------------------- #
@@ -292,3 +330,18 @@ class Valet(User):
         help_text="valets field"
     )
 
+    class Meta:
+        verbose_name = 'Valet'
+        verbose_name_plural = 'Users: Valets'
+
+
+class Device(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='devices',
+        null=True,
+    )
+    onesignal_id = models.CharField(
+        max_length=100,
+    )
