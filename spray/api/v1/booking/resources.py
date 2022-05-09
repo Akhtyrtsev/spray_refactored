@@ -89,6 +89,7 @@ class BookingViewSet(viewsets.ModelViewSet):
                         payment=payment,
                         appointment=appointment,
                     )
+                    charge_obj.pay_appointment()
                 except StripeError as e:
                     raise ValidationError(
                         detail={
@@ -112,25 +113,3 @@ class BookingViewSet(viewsets.ModelViewSet):
                 )
                 new_notify.appointment_notification()
                 return Response({'detail': 'Appointment booked'}, status=status.HTTP_200_OK)
-            else:
-                date = serializer.validated_data['date']
-                number_of_people = serializer.validated_data['number_of_people']
-                duration = serializer.validated_data['duration']
-                if appointment.objects.exists(date=date):
-                    raise ValidationError(detail={
-                        'detail': 'Sorry, this time has already booked'
-                    })
-                if number_of_people > 2:
-                    duration *= (number_of_people - 1)
-                    duration = datetime.timedelta(minutes=duration)
-                    serializer.validated_data['duration'] = duration
-                valet = get_valet()
-                serializer.validated_data['valet'] = valet
-                serializer.save()
-                return Response({'detail': 'Valet added'}, status=status.HTTP_200_OK)
-
-
-
-
-
-
