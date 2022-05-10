@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 
 from spray.data.timezones import TIMEZONE_OFFSET
-from spray.schedule.models import ValetScheduleDay
+from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime, ValetScheduleOccupiedTime
 from spray.users.models import Valet
 from spray.utils.get_availability_data import ValetSchedule
 from spray.utils.parse_schedule import sort_time, format_time, get_time_range
@@ -35,28 +35,47 @@ CORRECT_HOURS5 = [
 
 class ValetAvailableTimesTestCase(TestCase):
     def setUp(self):
+        """
+        Creating Los Angeles valet's instances
+        """
         valet_quantity = 10
-        """
-        Creating Valet's instances
-        """
         for i in range(valet_quantity):
             user = Valet(
-                email=f"valet{i}@test.com",
+                email=f"los_angeles{i}@valet.com",
                 password=make_password("12345"),
                 is_active=True,
                 user_type=4,
                 is_confirmed=True,
-                city=f'{random.choice(CITY)}'
+                city='Los Angeles'
             )
             user.save()
-            valet = Valet.objects.get(email=f"valet{i}@test.com")
+            valet = Valet.objects.get(email=f"los_angeles{i}@valet.com")
             for day in WEEKDAYS:
                 ValetScheduleDay.objects.create(
                     valet=valet,
                     weekday=day,
                 )
+        """
+        Creating Miami valet instance
+        """
+        Valet.objects.create(
+            email='miami@valet.com',
+            password=make_password("12345"),
+            is_active=True,
+            user_type=4,
+            is_confirmed=True,
+            city='Miami'
+        )
+        for day in WEEKDAYS:
+            ValetScheduleDay.objects.create(
+                valet=Valet.objects.get(email='miami@valet.com'),
+                weekday=day,
+            )
 
     def test_working_days_creation(self):
+        """
+        check count working days
+        """
         self.assertEqual(Valet.objects.last().working_days.count(), 7)
 
     def test_available_times_valet_1(self):
@@ -85,6 +104,107 @@ class ValetAvailableTimesTestCase(TestCase):
         hours = set(get_working_hours)
         correct_hours_1 = set(CORRECT_HOURS1)
         self.assertEqual(hours, correct_hours_1)
+
+    def test_available_times_valet_3(self):
+        """
+        check when working_hours from 09:00 AM to 12:00 PM &
+        additional_time from 12:00 PM to 05:00 PM
+        """
+        valet = Valet.objects.order_by("?").first()
+        now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[valet.city])
+        date = now + datetime.timedelta(days=1)
+        for day in valet.working_days.all():
+            day.working_hours = {
+                "data": [{"start": "09:00 AM", "to": "12:00 PM"}]}
+            day.is_working = True
+            day.save()
+        ValetScheduleAdditionalTime.objects.create(
+            valet=valet,
+            date=date,
+            additional_hours={
+                "data": [{"start": "12:00 PM", "to": "05:00 PM"}]},
+            is_confirmed=True
+        )
+        get_working_hours = ValetSchedule.get_available_valet(valet, date)
+        hours = set(get_working_hours)
+        correct_hours_1 = set(CORRECT_HOURS1)
+        self.assertEqual(hours, correct_hours_1)
+
+    def test_available_times_valet_4(self):
+        """
+        check when working_hours from 09:00 AM to 05:00 PM &
+        break_time from 12:00 PM to 05:00 PM
+        """
+        valet = Valet.objects.order_by("?").first()
+        now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[valet.city])
+        date = now + datetime.timedelta(days=1)
+        for day in valet.working_days.all():
+            day.working_hours = {
+                "data": [{"start": "09:00 AM", "to": "05:00 PM"}]}
+            day.is_working = True
+            day.save()
+        ValetScheduleOccupiedTime.objects.create(
+            valet=valet,
+            date=date,
+            break_hours={
+                "data": [{"start": "12:30 PM", "to": "05:00 PM"}]},
+            is_confirmed=True
+        )
+        get_working_hours = ValetSchedule.get_available_valet(valet, date)
+        hours = set(get_working_hours)
+        correct_hours_2 = set(CORRECT_HOURS2)
+        self.assertEqual(hours, correct_hours_2)
+
+    def test_available_times_valet_5(self):
+        """
+        check when working_hours from 09:00 AM to 05:00 PM &
+        city - Miami
+        """
+        valet = Valet.objects.get(email='miami@valet.com')
+        now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[valet.city])
+        date = now + datetime.timedelta(days=1)
+        for day in valet.working_days.all():
+            day.working_hours = {
+                "data": [{"start": "09:00 AM", "to": "05:00 PM"}]}
+            day.is_working = True
+            day.save()
+        get_working_hours_miami = ValetSchedule.get_available_valet(valet, date, city='Miami')
+        get_working_hours_las_vegas = ValetSchedule.get_available_valet(valet, date, city='Las Vegas')
+        hours_miami = set(get_working_hours_miami)
+        correct_hours_1 = set(CORRECT_HOURS1)
+        self.assertEqual(hours_miami, correct_hours_1)
+        self.assertEqual(get_working_hours_las_vegas, [])
+
+    def test_available_valet_1(self):
+        """
+        check when need valet working time 12:00 PM & city - Miami
+        """
+        valet = Valet.objects.get(email='miami@valet.com')
+        now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[valet.city])
+        date = now + datetime.timedelta(days=1)
+        for day in valet.working_days.all():
+            day.working_hours = {
+                "data": [{"start": "09:00 AM", "to": "05:00 PM"}]}
+            day.is_working = True
+            day.save()
+        get_miami_valet = ValetSchedule.valet_filter(city='Miami', date=date, time='12:00 PM')
+        valet = valet.email
+        self.assertEqual(get_miami_valet, valet)
+
+    def test_available_valet_2(self):
+        """
+        check when need valet is None
+        """
+        valet = Valet.objects.get(email='miami@valet.com')
+        now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[valet.city])
+        date = now + datetime.timedelta(days=1)
+        for day in valet.working_days.all():
+            day.working_hours = {
+                "data": [{"start": "09:00 AM", "to": "05:00 PM"}]}
+            day.is_working = True
+            day.save()
+        get_las_vegas_valet = ValetSchedule.valet_filter(city='Las Vegas', date=date, time='12:00 PM')
+        self.assertEqual(get_las_vegas_valet, None)
 
 
 class TimesFunctionsTestCase(TestCase):
