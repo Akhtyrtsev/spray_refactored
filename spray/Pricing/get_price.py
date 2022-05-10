@@ -30,6 +30,7 @@ class Pricing:
                 'hotel_night_price',
                 'hotel_base_price',
                 'promo_value',
+                'initial_price',
             ]
         )
 
@@ -38,24 +39,28 @@ class Pricing:
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['hotel_night_price'] = price_list.hotel_night_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.hotel_night_price
 
     def _get_base_hotel_price(self, price_list):
         self.pay_as_you_go_price += price_list.hotel_price
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['hotel_base_price'] = price_list.hotel_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.hotel_price
 
     def _get_night_city_pricing_without_sub(self, price_list):
         self.pay_as_you_go_price += price_list.night_price
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['city_night_price'] = price_list.night_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.night_price
 
     def _get_base_city_pricing_without_sub(self, price_list):
         self.pay_as_you_go_price += price_list.basic_price
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['city_base_price'] = price_list.basic_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.basic_price
 
     def _get_base_city_pricing_with_sub(self, is_night, price_list):
         if self.promo_code:

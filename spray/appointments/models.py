@@ -9,6 +9,7 @@ from spray.membership.models import Promocode
 from spray.payment.models import Payments
 from spray.subscriptions.models import Subscription
 from spray.users.models import Address, Valet, Client, TwillioNumber
+import spray.appointments.managers as appointment_manager
 
 
 class Price(models.Model):
@@ -128,7 +129,7 @@ class Appointment(models.Model):
         default=1,
     )
     duration = models.DurationField(
-        default=datetime.timedelta(minutes=30),
+        default=datetime.timedelta(hours=1),
         null=True,
         blank=True,
     )
@@ -233,6 +234,9 @@ class Appointment(models.Model):
         max_length=32,
         choices=CITY_CHOICES,
     )
+
+    objects = models.Manager()
+    setup_manager = appointment_manager.AppointmentManager()
 
     def __str__(self):
         return f"{self.pk} -> {self.client} -> {self.valet} -> {self.date}"
