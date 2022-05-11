@@ -120,3 +120,11 @@ class ValetScheduleAdditionalTime(models.Model):
 
     class Meta:
         verbose_name_plural = 'Valets: Additional working days'
+
+
+class ValetForSchedule(Valet):
+
+    class Meta:
+        proxy = True
+        verbose_name = 'Valet Schedule'
+        verbose_name_plural = 'Valets: Schedule'
