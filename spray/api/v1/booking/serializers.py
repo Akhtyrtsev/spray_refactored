@@ -11,7 +11,8 @@ class BookingFirstStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = (
-            'id'
+            'id',
+            'idempotency_key',
         )
 
 
@@ -19,18 +20,19 @@ class BookingSetClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = (
-            'client',
             'address',
         )
 
     def validate(self, attrs):
-        client = attrs['client']
+        user = self.context['request'].user
+        client = Client.objects.get(pk=user.pk)
         if client.is_blocked:
             raise ValidationError(
                 detail={
                     'detail': 'You are blocked. Please contact support for details'
                 }
             )
+        return attrs
 
 
 class BookingSetDateSerializer(serializers.ModelSerializer):
@@ -46,7 +48,7 @@ class BookingSetDateSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         date = attrs['date']
         number_of_people = attrs['number_of_people']
-        if Appointment.objects.exists(date=date):
+        if Appointment.objects.filter(date=date).exists():
             raise ValidationError(
                 detail={
                     'detail': 'Sorry, this time has already booked'
@@ -58,6 +60,7 @@ class BookingSetDateSerializer(serializers.ModelSerializer):
                     'detail': 'Something wrong with people count'
                 }
             )
+        return attrs
 
 
 class BookingSetValetSerializer(serializers.ModelSerializer):
@@ -68,14 +71,10 @@ class BookingSetValetSerializer(serializers.ModelSerializer):
             'date',
         )
 
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super().__init__(*args, **kwargs)
-
     def validate(self, attrs):
         valet = attrs['valet']
         date = attrs['date']
-        user = self.request.user
+        user = self.context['request'].user
         client = Client.objects.get(pk=user.pk)
         appointment = Appointment.objects.get(client=client, date=date)
         if valet:
@@ -92,26 +91,21 @@ class BookingSetValetSerializer(serializers.ModelSerializer):
                             'detail': 'Please take an another slot because this is booked for that valet'
                         }
                     )
+        return attrs
 
 
-class BookingSetPaymentSerializer(serializers.ModelSerializer):
+class BookingSetPriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = (
-            'payments',
-            'purchase_method',
+            'subscription_id',
             'promocode',
             'gift_card',
-            'subscription_id',
         )
 
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super().__init__(*args, **kwargs)
-
     def validate(self, attrs):
-        subscription = attrs.get('subscription')
-        user = self.request.user
+        subscription = attrs.get('subscription_id')
+        user = self.context['request'].user
         client = Client.objects.get(pk=user.pk)
         if subscription:
             cs = ClientSubscription.objects.filter(
@@ -124,3 +118,16 @@ class BookingSetPaymentSerializer(serializers.ModelSerializer):
                 raise ValidationError(detail={
                     'detail': 'You have not subscription'
                 })
+        return attrs
+
+
+class BookingSetPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appointment
+        fields = (
+            'payments',
+            'purchase_method',
+            'promocode',
+            'gift_card',
+            'subscription_id',
+        )

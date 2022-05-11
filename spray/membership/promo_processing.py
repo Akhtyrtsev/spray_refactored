@@ -1,7 +1,7 @@
-from spray.api.v1.users.client.models import Client
+from spray.users.models import Client
 from spray.membership.models import Promocode, MemberReferral
 import random
-from spray.subscriptions.models import ClientSubscription
+from spray.subscriptions import models as sub_models
 
 
 class PromoProcessing:
@@ -23,8 +23,8 @@ class PromoProcessing:
             own_client = Client.objects.get(referal_code=promo.code)
             chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
             code = "".join([random.choice(chars) for x in range(6)])
-            subscriptions = ClientSubscription.objects.filter(client=client, is_deleted=False,
-                                                              cancellation_date__isnull=True)
+            subscriptions = sub_models.ClientSubscription.objects.filter(client=client, is_deleted=False,
+                                                                         cancellation_date__isnull=True)
             if not subscriptions:
                 # common_notifications(user, f'Your referral code was used! Here is your code to get 20% discount {
                 # code}')

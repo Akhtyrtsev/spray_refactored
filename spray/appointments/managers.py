@@ -1,3 +1,4 @@
+import datetime
 from uuid import uuid4
 
 from django.db import models, transaction
@@ -12,19 +13,20 @@ from spray.notifications.notify_processing import NotifyProcessing
 
 class AppointmentManager(models.Manager):
     def set_client_and_address(self, *args, **kwargs):
-        client = kwargs.get('client')
         address = kwargs.get('address')
+        client = kwargs.get('client')
         updated_appointment = self.update(client=client, address=address)
         return updated_appointment
 
     def set_date(self, *args, **kwargs):
-        serializer = kwargs.get('serializer')
-        date = serializer.validated_data['date']
-        notes = serializer.validated_data['notes']
-        duration = serializer.validated_data['duration']
-        number_of_people = serializer.validated_data['number_of_people']
+        date = kwargs.get('date')
+        notes = kwargs.get('notes')
+        duration = kwargs.get('duration')
+        one_man_duration = 60
+        number_of_people = kwargs.get('number_of_people')
         if number_of_people > 2:
-            duration *= (number_of_people - 1)
+            one_man_duration *= (number_of_people - 1)
+        duration = datetime.timedelta(minutes=one_man_duration)
         updated_appointment = self.update(
             duration=duration,
             number_of_people=number_of_people,
@@ -34,26 +36,45 @@ class AppointmentManager(models.Manager):
         return updated_appointment
 
     def set_valet(self, *args, **kwargs):
-        serializer = kwargs.get('serializer')
-        valet = serializer.validated_data.get('valet')
+        valet = kwargs.get('valet')
         if valet:
-            updated_appointment = self.update(valet=valet)
+            self.update(valet=valet)
         else:
             valet = get_valet()
-            updated_appointment = self.update(valet=valet)
+            self.update(valet=valet)
+        return valet
+
+    def set_price(self, *args, **kwargs):
+        appointment = kwargs.get('instance')
+        subscription = kwargs.get('subscription')
+        promo = kwargs.get('promo')
+        gift_card = kwargs.get('gift_card')
+        pricing = Pricing(
+            date=appointment.date,
+            address=appointment.address,
+            number_of_people=appointment.number_of_people,
+            subscription=subscription,
+            promo_code=promo,
+        )
+        price = pricing.get_price()
+        updated_appointment = self.update(
+            price=price,
+            promocode=promo,
+            subscription_id=subscription,
+            gift_card=gift_card,
+        )
         return updated_appointment
 
     def set_payment(self, *args, **kwargs):
-        serializer = kwargs.get('serializer')
-        payment = serializer.validated_data.get('payments')
-        purchase_method = serializer.validated_data.get('purchase_method')
-        promo = serializer.validated_data.get('promocode')
-        gift_card = serializer.validated_data.get('gift_card')
-        subscription = serializer.validated_data.get('subscription_id')
+        appointment = kwargs.get('instance')
+        payment = kwargs.get('payment')
+        purchase_method = kwargs.get('purchase_method')
+        promo = kwargs.get('promo')
+        subscription = kwargs.get('subscription_id')
         pricing = Pricing(
-            date=self.date,
-            address=self.address,
-            number_of_people=self.number_of_people,
+            date=appointment.date,
+            address=appointment.address,
+            number_of_people=appointment.number_of_people,
             subscription=subscription,
             promo_code=promo,
         )
@@ -62,43 +83,35 @@ class AppointmentManager(models.Manager):
             initial_price = dict_price['subscription_price']
         else:
             dict_price = pricing.get_result_dict()
+            pricing.get_price()
             initial_price = dict_price['initial_price']
-        price = pricing.get_price()
-        idempotency_key = str(uuid4())
-        updated_appointment = self.update(
-            payment=payment,
-            purchase_method=purchase_method,
-            promocode=promo,
-            gift_card=gift_card,
-            subscription_id=subscription,
-            price=price,
-            initial_price=initial_price,
-            idempotency_key=idempotency_key,
-        )
         charge_obj = ChargeProcessing(
-            amount=price,
+            amount=appointment.price,
             payment=payment,
             subscription=subscription,
-            appointment=updated_appointment,
+            appointment=appointment,
+            idempotency_key=appointment.idempotency_key,
         )
         try:
             charge_obj.pay_appointment()
-        except StripeError as e:
+        except StripeError:
             raise ValidationError(
                 detail={
-                    'detail': e.error.message
+                    'detail': 'double click'
                 }
             )
-        updated_appointment.payment_status = True
-        updated_appointment.client.is_new = False
-        with transaction.atomic():
-            updated_appointment.client.save()
-            updated_appointment.save()
+        updated_appointment = self.update(
+            payments=payment,
+            purchase_method=purchase_method,
+            initial_price=initial_price,
+            payment_status=True,
+        )
         text = 'You booked the new appointment'
         new_notify = NotifyProcessing(
-            appointment=updated_appointment,
+            appointment=appointment,
             text=text,
-            user=updated_appointment.client,
+            user=appointment.valet,
         )
         new_notify.appointment_notification()
+        return updated_appointment
 

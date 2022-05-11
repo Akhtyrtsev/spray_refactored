@@ -107,7 +107,9 @@ class Appointment(models.Model):
         choices=APPOINTMENT_MICRO_STATUSES,
         help_text='Notes about appointment`s process (such as "valet is on the way", etc)',
     )
-    date = models.DateTimeField()
+    date = models.DateTimeField(
+        null=True,
+    )
     confirmed_by_client = models.BooleanField(
         default=False,
     )
@@ -164,6 +166,7 @@ class Appointment(models.Model):
     )
     initial_price = models.FloatField(
         default=0,
+        null=True,
     )
     changed_valet = models.BooleanField(
         default=False,
@@ -187,13 +190,13 @@ class Appointment(models.Model):
     date_created = models.DateTimeField(
         auto_now_add=True,
     )
-    payout_ref = models.ForeignKey(
-        "Payout",
-        on_delete=models.SET_NULL,
-        related_name='booking',
-        null=True,
-        blank=True,
-    )
+    # payout_ref = models.ForeignKey(
+    #     "Payout",
+    #     on_delete=models.SET_NULL,
+    #     related_name='booking',
+    #     null=True,
+    #     blank=True,
+    # )
     noshow_timestamp = models.DateTimeField(
         null=True,
         blank=True,

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from spray.appointments.models import Price
+from spray.appointments.models import Price, Appointment
 
 
 @admin.register(Price)
@@ -22,3 +22,9 @@ class PriceAdmin(admin.ModelAdmin):
     search_fields = (
         'zip_code',
     )
+
+
+@admin.register(Appointment)
+class BookingAdmin(admin.ModelAdmin):
+    pass
+

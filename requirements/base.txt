@@ -62,3 +62,6 @@ drf-social-oauth2
 
 # Payments
 stripe==2.71.0
+
+# OneSignal
+onesignal_sdk==2.0.0
