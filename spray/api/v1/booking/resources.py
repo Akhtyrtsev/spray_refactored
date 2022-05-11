@@ -33,12 +33,13 @@ class BookingViewSet(viewsets.ModelViewSet):
         """
         Second step. Set address and client to appointment
         """
+        instance = self.get_object()
         serializer = BookingSetClientSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         address = serializer.validated_data['address']
         user = request.user
         client = Client.objects.get(pk=user.pk)
-        Appointment.setup_manager.set_client_and_address(address=address, client=client)
+        Appointment.setup_manager.set_client_and_address(address=address, client=client, instance=instance)
         address = ClientAddressSerializer(address)
         return Response({
             'detail': 'Client and address are set',
@@ -53,13 +54,13 @@ class BookingViewSet(viewsets.ModelViewSet):
         """
         Third step. Set date, number of people, duration and notes for appointment.
         """
+        instance = self.get_object()
         serializer = BookingSetDateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         date = serializer.validated_data['date']
         notes = serializer.validated_data['notes']
-        duration = serializer.validated_data['duration']
         number_of_people = serializer.validated_data['number_of_people']
-        Appointment.setup_manager.set_date(date=date, notes=notes, duration=duration, number_of_people=number_of_people)
+        Appointment.setup_manager.set_date(instance=instance, date=date, notes=notes, number_of_people=number_of_people)
         return Response(
             {
                 'detail': 'Date was set',
@@ -75,10 +76,11 @@ class BookingViewSet(viewsets.ModelViewSet):
         Fourth step. Set the valet if this one was transferred.
         Otherwise, set a new valet for appointment.
         """
+        instance = self.get_object()
         serializer = BookingSetValetSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         valet = serializer.validated_data.get('valet')
-        new_valet = Appointment.setup_manager.set_valet(valet=valet)
+        new_valet = Appointment.setup_manager.set_valet(valet=valet, instance=instance)
         serialize_valet = ValetGetSerializer(new_valet)
         return Response({'detail': 'Valet was set', 'valet': serialize_valet.data}, status=status.HTTP_200_OK)
 
@@ -90,7 +92,7 @@ class BookingViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         serializer = BookingSetPriceSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
-        subscription = serializer.validated_data.get('subscription')
+        subscription = serializer.validated_data.get('subscription_id')
         promo = serializer.validated_data.get('promocode')
         gift_card = serializer.validated_data.get('gift_card')
         updated_appointment = Appointment.setup_manager.set_price(

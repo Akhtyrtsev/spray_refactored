@@ -42,7 +42,6 @@ class BookingSetDateSerializer(serializers.ModelSerializer):
             'date',
             'number_of_people',
             'notes',
-            'duration',
         )
 
     def validate(self, attrs):
