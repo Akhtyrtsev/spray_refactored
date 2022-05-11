@@ -19,24 +19,29 @@ class WorkingDayForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(WorkingDayForm, self).save(commit=False)
-        start_working_hours = self.cleaned_data['start_working_hours']
-        format_start_working_hours = format_time(date=dt.strptime(f'{start_working_hours}', '%H:%M:%S'))
-        end_working_hours = self.cleaned_data['end_working_hours']
-        format_end_working_hours = format_time(date=dt.strptime(f'{end_working_hours}', '%H:%M:%S'))
-        start_break_hours = self.cleaned_data['start_break_hours']
-        format_start_break_hours = format_time(date=dt.strptime(f'{start_break_hours}', '%H:%M:%S'))
-        end_break_hours = self.cleaned_data['end_break_hours']
-        format_end_break_hours = format_time(date=dt.strptime(f'{end_break_hours}', '%H:%M:%S'))
-        working_hours = {
-            "data": [{
-                "start": f'{format_start_working_hours}',
-                "to": f'{format_end_working_hours}'}]
-        }
-        break_hours = {
-            "data": [{
-                "start": f'{format_start_break_hours}',
-                "to": f'{format_end_break_hours}'}]
-        }
+        working_hours = ''
+        break_hours = ''
+        try:
+            start_working_hours = self.cleaned_data['start_working_hours']
+            format_start_working_hours = format_time(date=dt.strptime(f'{start_working_hours}', '%H:%M:%S'))
+            end_working_hours = self.cleaned_data['end_working_hours']
+            format_end_working_hours = format_time(date=dt.strptime(f'{end_working_hours}', '%H:%M:%S'))
+            start_break_hours = self.cleaned_data['start_break_hours']
+            format_start_break_hours = format_time(date=dt.strptime(f'{start_break_hours}', '%H:%M:%S'))
+            end_break_hours = self.cleaned_data['end_break_hours']
+            format_end_break_hours = format_time(date=dt.strptime(f'{end_break_hours}', '%H:%M:%S'))
+            working_hours = {
+                "data": [{
+                    "start": f'{format_start_working_hours}',
+                    "to": f'{format_end_working_hours}'}]
+            }
+            break_hours = {
+                "data": [{
+                    "start": f'{format_start_break_hours}',
+                    "to": f'{format_end_break_hours}'}]
+            }
+        except Exception:
+            pass
         instance.working_hours = working_hours
         instance.break_hours = break_hours
         if commit:
@@ -51,15 +56,19 @@ class AdditionalTimeForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(AdditionalTimeForm, self).save(commit=False)
-        start_time = self.cleaned_data['start_time']
-        format_start_time = format_time(date=dt.strptime(f'{start_time}', '%H:%M:%S'))
-        end_time = self.cleaned_data['end_time']
-        format_end_time = format_time(date=dt.strptime(f'{end_time}', '%H:%M:%S'))
-        additional_hours = {
-            "data": [{
-                "start": f'{format_start_time}',
-                "to": f'{format_end_time}'}]
-        }
+        additional_hours = ''
+        try:
+            start_time = self.cleaned_data['start_time']
+            format_start_time = format_time(date=dt.strptime(f'{start_time}', '%H:%M:%S'))
+            end_time = self.cleaned_data['end_time']
+            format_end_time = format_time(date=dt.strptime(f'{end_time}', '%H:%M:%S'))
+            additional_hours = {
+                "data": [{
+                    "start": f'{format_start_time}',
+                    "to": f'{format_end_time}'}]
+            }
+        except Exception:
+            pass
         instance.additional_hours = additional_hours
         if commit:
             instance.save()
@@ -73,15 +82,19 @@ class OccupiedTimeForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(OccupiedTimeForm, self).save(commit=False)
-        start_time = self.cleaned_data['start_time']
-        format_start_time = format_time(date=dt.strptime(f'{start_time}', '%H:%M:%S'))
-        end_time = self.cleaned_data['end_time']
-        format_end_time = format_time(date=dt.strptime(f'{end_time}', '%H:%M:%S'))
-        break_hours = {
-            "data": [{
-                "start": f'{format_start_time}',
-                "to": f'{format_end_time}'}]
-        }
+        break_hours = ''
+        try:
+            start_time = self.cleaned_data['start_time']
+            format_start_time = format_time(date=dt.strptime(f'{start_time}', '%H:%M:%S'))
+            end_time = self.cleaned_data['end_time']
+            format_end_time = format_time(date=dt.strptime(f'{end_time}', '%H:%M:%S'))
+            break_hours = {
+                "data": [{
+                    "start": f'{format_start_time}',
+                    "to": f'{format_end_time}'}]
+            }
+        except Exception:
+            pass
         instance.break_hours = break_hours
         if commit:
             instance.save()
