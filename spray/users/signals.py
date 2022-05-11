@@ -2,7 +2,8 @@ import random
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from spray.api.v1.users.client.models import Client
+
+from spray.users.models import Client
 from spray.membership.models import Promocode, MemberReferral
 
 CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
