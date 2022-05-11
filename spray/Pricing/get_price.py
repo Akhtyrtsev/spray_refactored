@@ -2,7 +2,7 @@ import datetime
 
 from rest_framework.exceptions import ValidationError
 
-from spray.appointments.models import Price
+from spray.appointments import models as appointment_models
 from spray.payment.managers import log
 
 
@@ -30,6 +30,7 @@ class Pricing:
                 'hotel_night_price',
                 'hotel_base_price',
                 'promo_value',
+                'initial_price',
             ]
         )
 
@@ -38,24 +39,28 @@ class Pricing:
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['hotel_night_price'] = price_list.hotel_night_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.hotel_night_price
 
     def _get_base_hotel_price(self, price_list):
         self.pay_as_you_go_price += price_list.hotel_price
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['hotel_base_price'] = price_list.hotel_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.hotel_price
 
     def _get_night_city_pricing_without_sub(self, price_list):
         self.pay_as_you_go_price += price_list.night_price
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['city_night_price'] = price_list.night_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.night_price
 
     def _get_base_city_pricing_without_sub(self, price_list):
         self.pay_as_you_go_price += price_list.basic_price
         self.pay_as_you_go_price += price_list.service_area_fee
         self.result_dict['city_base_price'] = price_list.basic_price
         self.result_dict['service_area_fee'] = price_list.service_area_fee
+        self.result_dict['initial_price'] = price_list.basic_price
 
     def _get_base_city_pricing_with_sub(self, is_night, price_list):
         if self.promo_code:
@@ -100,40 +105,41 @@ class Pricing:
         self.pay_as_you_go_price *= value
         self.pay_as_you_go_price -= value_for_service_area * price_list.service_area_fee
         self.result_dict['group_price'] = self.pay_as_you_go_price
+        self.result_dict['initial_price'] *= value
 
     def get_price(self):
-        time = self.date
+        time = self.date.time()
         address = self.address
         is_night = not (time < datetime.time(hour=21) and time >= datetime.time(hour=9))
         subscription = self.subscription
         try:
-            price_list = Price.objects.filter(zip_code=address.zip_code).first()
+            price_list = appointment_models.Price.objects.filter(zip_code=address.zip_code).first()
         except Exception:
             raise ValidationError(detail={'detail': 'Address not allowed'})
         if subscription:
             self._get_base_city_pricing_with_sub(is_night=is_night, price_list=price_list)
-            log.info('Price with subscription: ', self.pay_as_you_go_price)
+            log.info('Price with subscription: ', str(self.pay_as_you_go_price))
         else:
             if is_night:
                 if address.is_hotel or address.hotel_name:
                     self._get_night_hotel_price(price_list=price_list)
                 else:
                     self._get_night_city_pricing_without_sub(price_list=price_list)
-                log.info('Night price: ', self.pay_as_you_go_price)
+                log.info('Night price: ', str(self.pay_as_you_go_price))
             else:
                 if address.is_hotel or address.hotel_name:
                     self._get_base_hotel_price(price_list=price_list)
                 else:
                     self._get_base_city_pricing_without_sub(price_list=price_list)
-                log.info('Base price: ', self.pay_as_you_go_price)
+                log.info('Base price: ', str(self.pay_as_you_go_price))
         if self.number_of_people > 1:
             self._get_group_pricing(price_list=price_list)
-            log.info('Price for group', self.pay_as_you_go_price)
+            log.info('Price for group', str(self.pay_as_you_go_price))
         if self.promo_code and not subscription:
             self._get_price_with_promo()
-            log.info('Price with promo', self.pay_as_you_go_price)
+            log.info('Price with promo', str(self.pay_as_you_go_price))
         self._get_tips()
-        log.info('result price with tips', self.pay_as_you_go_price)
+        log.info('result price with tips', str(self.pay_as_you_go_price))
         result_sum = self.pay_as_you_go_price
         return result_sum
 

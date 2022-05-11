@@ -1,12 +1,7 @@
 from django.db import models
-from rest_framework.exceptions import ValidationError
-from stripe.error import StripeError
-
-from spray.charge_processing.make_charge import ChargeProcessing
 from spray.payment.models import Payments
 from spray.contrib.choices.appointments import CITY_CHOICES
 from spray.contrib.choices.subscriptions import SUBSCRIPTION_TYPES
-from spray.subscriptions.subscription_processing import SubscriptionProcessing
 from spray.users.models import Client
 import spray.subscriptions.managers as sub_managers
 
@@ -74,7 +69,7 @@ class ClientSubscription(models.Model):
     cancellation_date = models.DateTimeField(
         blank=True,
         null=True,
-        help_text='Once user cancels they have 2 months to use appointments',
+        help_text='Once user cancels they have 2 months to use booking',
     )
     appointments_left = models.IntegerField(
         default=0,

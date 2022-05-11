@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from celery.utils.log import get_task_logger
-from spray.notifications.send_notifications import Notifications
+from spray.notifications.send_notifications import Notifier
 from config.celery_app import app as celery_app
 from spray.payment.managers import log
 from spray.subscriptions.models import ClientSubscription
@@ -39,7 +39,7 @@ def re_new_subscription():  # refresh client subscription
             context = {}
             title = '[SprayValet] Manage Your Membership'
             to = [client.email]
-            sm = Notifications(
+            sm = Notifier(
                 context=context,
                 template=email_template_name,
                 title=title,

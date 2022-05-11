@@ -87,8 +87,9 @@ class Notifier:
             now = timezone.now()
             log.info(e)
         date = now
-        if Valet.objects.exists(pk=user.pk):
-            if user.notification_only_working_hours:
+        valet = Valet.objects.filter(pk=user.pk).first()
+        if Valet.objects.filter(pk=user.pk).exists():
+            if valet.notification_only_working_hours:
                 return is_working_hours(valet=user, date=date)
         return True
 

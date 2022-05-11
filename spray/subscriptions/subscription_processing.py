@@ -21,9 +21,9 @@ class SubscriptionProcessing:
         """
         Updating client subscription by client side.
         Class takes client-subscription, new subscription and payment instances.
-        Calculate paid sum of current subscription appointments then subtracts it from
-        sum of new subscription and current subscription appointments and calls pay_subscription method.
-        Returns result dict with already paid appointments , updated subscription and result amount.
+        Calculate paid sum of current subscription booking then subtracts it from
+        sum of new subscription and current subscription booking and calls pay_subscription method.
+        Returns result dict with already paid booking , updated subscription and result amount.
         """
         now = timezone.now()
         current_subscription = self.current_subscription
@@ -74,7 +74,7 @@ class SubscriptionProcessing:
         Renews client-subscription by celery.
         Takes current client-subscription instance.
         Tries to call ChargeProcessing pay_subscription method.
-        Current appointments added to unused appointments.
+        Current booking added to unused booking.
         Returns result dict with current client subscription and paid sum.
         """
         now = timezone.now()

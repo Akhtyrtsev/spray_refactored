@@ -345,3 +345,12 @@ class Device(models.Model):
     onesignal_id = models.CharField(
         max_length=100,
     )
+
+
+class TwillioNumber(models.Model):
+    number = models.CharField(
+        max_length=31,
+    )
+
+    def __str__(self):
+        return f"{self.number}"
