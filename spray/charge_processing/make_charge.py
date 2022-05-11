@@ -51,7 +51,6 @@ class ChargeProcessing:
         return charge
 
     def _pay_by_subscription(self, client):
-        print(self.subscription.subscription_type)
         cs = sub_models.ClientSubscription.objects.get(client=client, subscription=self.subscription)
         if cs.unused_appointments:
             cs.unused_appointments -= 1
@@ -84,7 +83,6 @@ class ChargeProcessing:
                 }
             )
         customer_id = client.stripe_id
-        print(self.idempotency_key, 'ghjkljhgfds')
         stripe_id = self.payment.stripe_id
         charge = stripe.Charge.create(
             amount=round(to_pay),
