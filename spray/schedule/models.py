@@ -1,9 +1,7 @@
-from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from spray.data.choices import WEEKDAYS
 from spray.users.models import Valet
-from spray.utils.base_func import default_working_hours, default_break_hours
 
 
 # ----------------------------------------------------------------------- #
@@ -20,9 +18,6 @@ class ValetScheduleDay(models.Model):
         max_length=32,
         choices=WEEKDAYS,
     )
-    working_hours = JSONField(
-        default=default_working_hours,
-    )
     start_working_hours = models.TimeField(
         blank=True,
         null=True,
@@ -38,9 +33,6 @@ class ValetScheduleDay(models.Model):
     end_break_hours = models.TimeField(
         blank=True,
         null=True,
-    )
-    break_hours = JSONField(
-        default=default_break_hours,
     )
     is_working = models.BooleanField(
         default=True,
@@ -65,10 +57,6 @@ class ValetScheduleOccupiedTime(models.Model):
         null=True,
     )
     date = models.DateField()
-    break_hours = JSONField(
-        blank=True,
-        null=True,
-    )
     is_confirmed = models.BooleanField(
         default=False,
     )
@@ -99,10 +87,6 @@ class ValetScheduleAdditionalTime(models.Model):
         null=True,
     )
     date = models.DateField()
-    additional_hours = JSONField(
-        blank=True,
-        null=True,
-    )
     is_confirmed = models.BooleanField(
         default=False,
     )

@@ -24,8 +24,10 @@ class ValetScheduleGetSerializer(serializers.ModelSerializer):
         fields = (
             'valet',
             'weekday',
-            'working_hours',
-            'break_hours',
+            'start_working_hours',
+            'end_working_hours',
+            'start_break_hours',
+            'end_break_hours',
             'is_working',
         )
 
@@ -38,8 +40,10 @@ class ValetSchedulePostSerializer(serializers.ModelSerializer):
         fields = (
             # 'valet',
             'weekday',
-            'working_hours',
-            'break_hours',
+            'start_working_hours',
+            'end_working_hours',
+            'start_break_hours',
+            'end_break_hours',
         )
 
     def save(self, **kwargs):
@@ -48,8 +52,10 @@ class ValetSchedulePostSerializer(serializers.ModelSerializer):
         fields = {
             'valet': valet,
             'weekday': weekday,
-            'working_hours': self.validated_data['working_hours'],
-            'break_hours': self.validated_data['break_hours']
+            'start_working_hours': self.validated_data['start_working_hours'],
+            'end_working_hours': self.validated_data['end_working_hours'],
+            'start_break_hours': self.validated_data['start_break_hours'],
+            'end_break_hours': self.validated_data['end_break_hours']
         }
         day_exist = None
         try:

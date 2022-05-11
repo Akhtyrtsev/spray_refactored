@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 
 from spray.data.timezones import TIMEZONE_OFFSET
 from spray.users.models import Valet
-from spray.utils.parse_schedule import get_time_range, sort_time
+from spray.utils.parse_schedule import get_time_range
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime, ValetScheduleOccupiedTime
 
 logger = logging.getLogger('django')
@@ -27,8 +27,12 @@ class ValetSchedule:
                 valet_working_day = valet.working_days.get(weekday=weekday)
                 is_working = valet_working_day.is_working
                 if is_working:
-                    available = get_time_range(valet_working_day.working_hours)
-                    breaking = get_time_range(valet_working_day.break_hours)
+                    start_working_time = valet_working_day.start_working_hours
+                    end_working_time = valet_working_day.end_working_hours
+                    start_break_time = valet_working_day.start_break_hours
+                    end_break_time = valet_working_day.end_break_hours
+                    available = get_time_range(start_working_time, end_working_time)
+                    breaking = get_time_range(start_break_time, end_break_time)
                     available = list(set(available) - set(breaking))
             except Exception:
                 pass
@@ -36,11 +40,19 @@ class ValetSchedule:
                 additional_time = ValetScheduleAdditionalTime.objects.filter(valet=valet, date=date.date(),
                                                                              is_confirmed=True)
                 for _ in additional_time:
-                    times = get_time_range(_.additional_hours)
+                    times = get_time_range(_.start_time, _.end_time)
                     available = list(set(available + times))
             except Exception:
                 pass
-            if time in available:
+            try:
+                occupied_time = ValetScheduleOccupiedTime.objects.filter(valet=valet, date=date.date(),
+                                                                         is_confirmed=True)
+                for _ in occupied_time:
+                    times = get_time_range(_.start_time, _.end_time)
+                    available = list(set(available) - set(times))
+            except Exception:
+                print('Some error happens with valet day off')
+            if time.strip() in available:
                 available_valet = valet.email
                 break
         return available_valet
@@ -51,15 +63,17 @@ class ValetSchedule:
             now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[valet.city])
         except Exception:
             now = timezone.now()
-
         weekday = WEEKDAYS[date.weekday()]
-
         try:
             valet_working_day = valet.working_days.get(weekday=weekday)
             is_working = valet_working_day.is_working
             if is_working:
-                available = get_time_range(valet_working_day.working_hours)
-                breaking = get_time_range(valet_working_day.break_hours)
+                start_working_time = valet_working_day.start_working_hours
+                end_working_time = valet_working_day.end_working_hours
+                start_break_time = valet_working_day.start_break_hours
+                end_break_time = valet_working_day.end_break_hours
+                available = get_time_range(start_working_time, end_working_time)
+                breaking = get_time_range(start_break_time, end_break_time)
                 available = list(set(available) - set(breaking))
             else:
                 available = []
@@ -71,14 +85,14 @@ class ValetSchedule:
             additional_time = ValetScheduleAdditionalTime.objects.filter(valet=valet, date=date.date(),
                                                                          is_confirmed=True)
             for _ in additional_time:
-                times = get_time_range(_.additional_hours)
+                times = get_time_range(_.start_time, _.end_time)
                 available = list(set(available + times))
         except Exception:
             print('Some error happens with valet day on')
         try:
             occupied_time = ValetScheduleOccupiedTime.objects.filter(valet=valet, date=date.date(), is_confirmed=True)
             for _ in occupied_time:
-                times = get_time_range(_.break_hours)
+                times = get_time_range(_.start_time, _.end_time)
                 available = list(set(available) - set(times))
         except Exception:
             print('Some error happens with valet day off')
@@ -93,10 +107,10 @@ class ValetSchedule:
 class AvailableTime:
     @staticmethod
     def get_available_times(date, city=None):
-        available_time = set()
+        available_time = []
         valets = Valet.objects.all()
         if len(valets) < 1:
             raise ValidationError(detail="No valets available")
         for valet in valets:
-            available_time = set(list(available_time) + ValetSchedule.get_available_valet(valet, date, city=city))
-        return sort_time(available_time)
+            available_time = set(available_time + ValetSchedule.get_available_valet(valet, date, city=city))
+        return sorted(available_time)
