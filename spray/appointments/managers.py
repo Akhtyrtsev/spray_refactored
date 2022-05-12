@@ -109,6 +109,8 @@ class AppointmentManager(models.Manager):
         appointment.purchase_method = purchase_method
         appointment.initial_price = initial_price
         appointment.payment_status = True
+        appointment.confirmed_by_valet = True
+        appointment.confirmed_by_client = True
         client.is_new = False
         with transaction.atomic():
             appointment.save()
