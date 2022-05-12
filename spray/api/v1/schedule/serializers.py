@@ -38,7 +38,7 @@ class ValetSchedulePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = ValetScheduleDay
         fields = (
-            # 'valet',
+            'valet',
             'weekday',
             'start_working_hours',
             'end_working_hours',
