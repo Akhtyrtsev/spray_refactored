@@ -27,7 +27,7 @@ class AvailableTimesViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixi
         city = request.query_params.get('city', None)
         if not date:
             raise ValidationError(detail={'detail': 'No date selected'})
-        date = datetime.datetime.strptime(date, '%Y-%m-%d')
+        date = datetime.datetime.strptime(date, '%d-%m-%Y')
         times = AvailableTime.get_available_times(date=date, city=city)
         return Response({'available_times': times}, status=status.HTTP_200_OK
                         )
@@ -48,7 +48,7 @@ class AvailableValetView(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.
             raise ValidationError(detail='No date selected')
         if not time:
             raise ValidationError(detail='No time selected')
-        date = datetime.datetime.strptime(date, '%Y-%m-%d')
+        date = datetime.datetime.strptime(date, '%d-%m-%Y')
         valet = ValetSchedule.valet_filter(city=city, date=date, time=time)
         return Response({'valet': valet}, status=status.HTTP_200_OK)
 

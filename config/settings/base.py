@@ -20,6 +20,7 @@ ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 APPS_DIR = ROOT_DIR / "spray"
 TMP_DIR = Path("/tmp")
 
+FORMAT_MODULE_PATH = 'config.formats'
 # urls
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = "config.urls"
