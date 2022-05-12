@@ -70,10 +70,14 @@ class ValetSchedule:
             if is_working:
                 start_working_time = valet_working_day.start_working_hours
                 end_working_time = valet_working_day.end_working_hours
-                start_break_time = valet_working_day.start_break_hours
-                end_break_time = valet_working_day.end_break_hours
                 available = get_time_range(start_working_time, end_working_time)
-                breaking = get_time_range(start_break_time, end_break_time)
+                breaking = []
+                try:
+                    start_break_time = valet_working_day.start_break_hours
+                    end_break_time = valet_working_day.end_break_hours
+                    breaking = get_time_range(start_break_time, end_break_time)
+                except Exception:
+                    pass
                 available = list(set(available) - set(breaking))
             else:
                 available = []
