@@ -1,44 +1,25 @@
 import datetime
 
-from django.test import TestCase
-
 from django.contrib.auth.hashers import make_password
+from django.test import TestCase
 from django.utils import timezone
 
 from spray.data.timezones import TIMEZONE_OFFSET
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime, ValetScheduleOccupiedTime
+from spray.schedule.tests.tests_data import *
 from spray.users.models import Valet
 from spray.utils.get_availability_data import ValetSchedule
 from spray.utils.parse_schedule import get_time_range
 
-WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-CITY = ('Los Angeles', 'Las Vegas', 'Miami')
-
-CORRECT_HOURS1 = [
-    '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00',
-    '14:30', '15:00', '15:30', '16:00', '16:30'
-]
-CORRECT_HOURS2 = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30']
-CORRECT_HOURS3 = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00']
-CORRECT_HOURS4 = ['13:00']
-CORRECT_HOURS5 = [
-    '00:00', '00:30', '01:00', '01:30', '02:00', '02:30', '03:00', '03:30', '04:00', '04:30', '05:00',
-    '05:30', '06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
-    '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00',
-    '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30',
-    '22:00', '22:30', '23:00', '23:30'
-]
-
-
-class ValetAvailableTimesTestCase(TestCase):
+class ScheduleTestCase(TestCase):
     def setUp(self):
         """
         Creating Los Angeles valet's instances
         """
         valet_quantity = 10
         for i in range(valet_quantity):
-            user = Valet(
+            Valet.objects.create(
                 email=f"los_angeles{i}@valet.com",
                 password=make_password("12345"),
                 is_active=True,
@@ -46,11 +27,9 @@ class ValetAvailableTimesTestCase(TestCase):
                 is_confirmed=True,
                 city='Los Angeles'
             )
-            user.save()
-            valet = Valet.objects.get(email=f"los_angeles{i}@valet.com")
             for day in WEEKDAYS:
                 ValetScheduleDay.objects.create(
-                    valet=valet,
+                    valet=Valet.objects.get(email=f"los_angeles{i}@valet.com"),
                     weekday=day,
                 )
         """
@@ -70,11 +49,17 @@ class ValetAvailableTimesTestCase(TestCase):
                 weekday=day,
             )
 
+
+class CheckWorkingDaysCreationTestCase(ScheduleTestCase):
+
     def test_working_days_creation(self):
         """
         check count working days
         """
         self.assertEqual(Valet.objects.last().working_days.count(), 7)
+
+
+class GetAvailableTimeTestCase(ScheduleTestCase):
 
     def test_available_times_valet_1(self):
         """
@@ -170,6 +155,9 @@ class ValetAvailableTimesTestCase(TestCase):
         self.assertEqual(hours_miami, CORRECT_HOURS1)
         self.assertEqual(hours_hours_las_vegas, [])
 
+
+class GetAvailableValetTestCase(ScheduleTestCase):
+
     def test_available_valet_1(self):
         """
         check when need valet working time 12:00 PM & city - Miami
@@ -200,6 +188,9 @@ class ValetAvailableTimesTestCase(TestCase):
             day.save()
         get_las_vegas_valet = ValetSchedule.valet_filter(city='Las Vegas', date=date, time='12:00')
         self.assertEqual(get_las_vegas_valet, None)
+
+
+class ScheduleFunctionTestCase(TestCase):
 
     def test_get_time_range(self):
         time_range1 = get_time_range("09:00", datetime.datetime.strptime('17:00', '%H:%M').time())
