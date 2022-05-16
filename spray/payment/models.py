@@ -1,8 +1,6 @@
-from datetime import datetime
-import stripe
 from django.db import models
 import spray.payment.managers as payment_manager
-from spray.appointments.models import Appointment
+# from spray.appointments.models import Appointment
 from spray.contrib.choices.appointments import CANCELLED_BY_CHOICES
 from spray.contrib.choices.refunds import REFUND_TYPES_CHOICES
 from spray.users.models import Valet, Client
@@ -49,7 +47,7 @@ class Payments(models.Model):
 
 class Refund(models.Model):
     appointment = models.ForeignKey(
-        Appointment,
+        'appointments.Appointment',
         on_delete=models.SET_NULL,
         related_name='refunds',
         null=True,
@@ -83,7 +81,7 @@ class Refund(models.Model):
 
 class Charges(models.Model):
     appointment = models.ForeignKey(
-        Appointment,
+        'appointments.Appointment',
         on_delete=models.SET_NULL,
         related_name='charges',
         null=True,

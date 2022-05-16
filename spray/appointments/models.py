@@ -7,7 +7,7 @@ from spray.contrib.choices.appointments import CITY_CHOICES, APPOINTMENT_STATUSE
     REFUND_CHOICES, CANCELLED_BY_CHOICES
 from spray.contrib.choices.refunds import REFUND_TYPES_CHOICES
 from spray.membership.models import Promocode
-from spray.payment.models import Payments
+# from spray.payment import models as payment_model
 from spray.subscriptions.models import Subscription
 from spray.users.models import Address, Valet, Client, TwillioNumber
 import spray.appointments.managers as appointment_manager
@@ -86,7 +86,7 @@ class Appointment(models.Model):
         blank=True,
     )
     payments = models.ForeignKey(
-        Payments,
+        'payment.Payments',
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

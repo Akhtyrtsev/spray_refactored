@@ -107,7 +107,9 @@ class AppointmentManager(models.Manager):
             idempotency_key=appointment.idempotency_key,
             purchase_method=purchase_method,
         )
+        print('bla bla im here')
         try:
+            print('im trying to pay')
             charge_obj.pay_appointment()
         except StripeError:
             raise ValidationError(
@@ -115,12 +117,12 @@ class AppointmentManager(models.Manager):
                     'detail': 'double click'
                 }
             )
-
-        appointment.payment = payment
+        appointment.payments = payment
         appointment.purchase_method = purchase_method
         appointment.initial_price = initial_price
         appointment.payment_status = True
         appointment.confirmed_by_valet = True
+        appointment.confirmed_by_client = True
         client.is_new = False
         with transaction.atomic():
             appointment.save()
@@ -154,6 +156,8 @@ class AppointmentManager(models.Manager):
             )
         appointment.confirmed_by_valet = False
         appointment.confirmed_by_client = True
+        appointment.date = date
+        appointment.notes = notes
         appointment.save()
         return appointment
 
@@ -245,7 +249,7 @@ class AppointmentManager(models.Manager):
         appointment.initial_price = initial_price
         appointment.additional_price = 0
         appointment.purchase_method = purchase_method
-        appointment.payment = payment
+        appointment.payments = payment
         appointment.save()
         return appointment
 
@@ -262,7 +266,25 @@ class AppointmentManager(models.Manager):
         old_price = appointment.price
         new_price = pricing.get_price()
         appointment.additional_price = new_price - old_price
+        if appointment.additional_price > 0:
+            text = f'The time of your appointment was changed on night,' \
+                   f'new price: {new_price}, old_price: {old_price}. ' \
+                   f'You need to pay difference: {appointment.additional_price}.'
+        elif appointment.additional_price < 0:
+            text = f'The time of your appointment was changed on day time,' \
+                   f'new price: {new_price}, old_price: {old_price}. ' \
+                   f'You will get refund: {appointment.additional_price}.'
+        elif appointment.additional_price == 0:
+            text = 'Time of your appointment was changed'
+        new_notify = NotifyProcessing(
+            appointment=appointment,
+            text=text,
+            user=appointment.client,
+        )
+        new_notify.appointment_notification()
+        appointment.price = new_price
         appointment.date = date
+        appointment.confirmed_by_client = False
         appointment.confirmed_by_valet = True
         appointment.save()
         return appointment
@@ -312,6 +334,7 @@ class AppointmentManager(models.Manager):
                 user=appointment.client,
             )
             new_notify.appointment_notification()
+            appointment.confirm_by_valet = True
         appointment.additional_price = 0
         appointment.save()
         return appointment

@@ -32,7 +32,7 @@ class RescheduleClientViewSet(viewsets.ModelViewSet):
         )
         return Response(status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=['patch'], url_path='client_confirm', url_name='client-confirm')
+    @action(detail=True, methods=['patch'], url_path='client-confirm', url_name='client-confirm')
     def client_confirm(self, request, pk=None):
         serializer = RescheduleClientConfirmSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

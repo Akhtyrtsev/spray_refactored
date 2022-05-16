@@ -26,6 +26,6 @@ class RescheduleClientConfirmSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = (
-            'payment',
+            'payments',
             'is_confirmed'
         )

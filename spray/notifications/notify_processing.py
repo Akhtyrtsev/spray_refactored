@@ -85,34 +85,36 @@ class NotifyProcessing:
             n.notify()
 
     def appointment_notification(self):
-        rn = Notifier(user_id=self.user.id)
-        check_valet_notify_rest = rn.is_notification_on_rest()
-        if self.user.notification_appointment and check_valet_notify_rest:
-            if self.mail:
-                if self.user.notification_email:
-                    sm = Notifier(
-                        context=self.context,
-                        template=self.template,
-                        title=self.title
-                    )
-                    sm.notify()
-            n = Notifications.objects.create(
-                user=self.user,
-                text=self.text,
-                type=self.notification_type,
-                appointment_id=self.appointment.pk)
+        if Valet.objects.filter(pk=self.user.pk).exists():
+            rn = Notifier(user_id=self.user.id)
+            check_valet_notify_rest = rn.is_notification_on_rest()
+            if not self.user.notification_appointment and check_valet_notify_rest:
+                pass
+        if self.mail:
+            if self.user.notification_email:
+                sm = Notifier(
+                    context=self.context,
+                    template=self.template,
+                    title=self.title
+                )
+                sm.notify()
+        n = Notifications.objects.create(
+            user=self.user,
+            text=self.text,
+            type=self.notification_type,
+            appointment_id=self.appointment.pk)
 
-            data = {'type': self.notification_type,
-                    'appointment_id': self.appointment.pk,
-                    'notification_id': n.pk
-                    }
-            push_notify = Notifier(
-                notification_type='push',
-                user_id=self.user.id,
-                context=self.text,
-                data=data,
-            )
-            push_notify.notify()
+        data = {'type': self.notification_type,
+                'appointment_id': self.appointment.pk,
+                'notification_id': n.pk
+                }
+        push_notify = Notifier(
+            notification_type='push',
+            user_id=self.user.id,
+            context=self.text,
+            data=data,
+        )
+        push_notify.notify()
 
     def feed_notification(self):
         rn = Notifier(user_id=self.user.id)

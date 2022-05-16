@@ -104,7 +104,6 @@ class ChargeProcessing:
             charge = self._pay_by_subscription(client=client)
         else:
             charge = self._pay_by_card(client=client)
-        appointment_models.Appointment.objects.filter(pk=appointment.pk).update(confirmed_by_client=True)
         return charge
 
 
