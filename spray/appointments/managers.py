@@ -107,9 +107,7 @@ class AppointmentManager(models.Manager):
             idempotency_key=appointment.idempotency_key,
             purchase_method=purchase_method,
         )
-        print('bla bla im here')
         try:
-            print('im trying to pay')
             charge_obj.pay_appointment()
         except StripeError:
             raise ValidationError(
