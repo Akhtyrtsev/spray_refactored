@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from celery.utils.log import get_task_logger
-
+from spray.notifications.send_notifications import Notifier
 from config.celery_app import app as celery_app
 from spray.payment.managers import log
 from spray.subscriptions.models import ClientSubscription
@@ -13,31 +13,6 @@ from spray.users.models import Client
 from spray.subscriptions.subscription_processing import SubscriptionProcessing
 
 logger = get_task_logger(__name__)
-
-
-@celery_app.task
-def send_mail(**kwargs):
-    context = kwargs['context']
-    template = kwargs['template']
-    to = kwargs['to']
-    title = kwargs['title']
-    email_html_message = render_to_string(
-        template_name=template,
-        context=context,
-    )
-    from_email = settings.DEFAULT_FROM_EMAIL
-    msg = EmailMultiAlternatives(
-        title,
-        '',
-        from_email,
-        # to:
-        to
-    )
-    msg.attach_alternative(
-        email_html_message,
-        "text/html",
-    )
-    msg.send()
 
 
 @celery_app.task
@@ -61,11 +36,16 @@ def re_new_subscription():  # refresh client subscription
 
         if current.days_to_update == 2 and current.subscription.is_deprecated:
             email_template_name = 'email/current_membership.html'
-            send_mail(
-                context={},
+            context = {}
+            title = '[SprayValet] Manage Your Membership'
+            to = [client.email]
+            sm = Notifier(
+                context=context,
                 template=email_template_name,
-                title='[SprayValet] Manage Your Membership',
-                to=[client.email])
+                title=title,
+                to=to,
+            )
+            sm.notify()
             log.info('Sent mail about deprecated subscription')
         if not current.days_to_update:
             log.info('Days to update equal to zero')
