@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from drf_social_oauth2.views import ConvertTokenView
 from rest_framework.views import APIView
 
-from spray.users.models import UserType
-from spray.api.v1.users.serializers import UserTokenSerializer, RegistrationSerializer
+from spray.users.models import UserType, ResetPasswordToken
+from spray.api.v1.users.serializers import UserTokenSerializer, RegistrationSerializer, ResetPasswordTokenSerializer
 
 
 class UserGetTokenView(RetrieveAPIView):
@@ -41,3 +41,14 @@ class UserRegistrationView(APIView):
         user_data = serializer.data
         return Response(user_data, status=status.HTTP_201_CREATED)
 
+
+class ResetPasswordRequestToken(APIView):
+    permission_classes = [AllowAny]
+    serializer_class = ResetPasswordTokenSerializer
+    queryset = ResetPasswordToken.objects.all()
+
+    def get(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.data
+        return Response(data, status=status.HTTP_200_OK)

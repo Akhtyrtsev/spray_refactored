@@ -2,6 +2,9 @@
 Models used by the users app
 """
 import logging
+import random
+import string
+import uuid
 
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
@@ -355,3 +358,39 @@ class TwillioNumber(models.Model):
     def __str__(self):
         return f"{self.number}"
 
+
+class ResetPasswordToken(models.Model):
+    user = models.ForeignKey(
+        User,
+        related_name='password_reset_tokens',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        null=True,
+        blank=True
+    )
+    key = models.CharField(
+        max_length=64,
+        db_index=True,
+        unique=True,
+        null=True,
+        blank=True
+    )
+
+    @staticmethod
+    def generate_key():
+        s = string.ascii_lowercase + string.digits
+        generated = "".join(random.sample(s, 10))
+        key = f"{uuid.uuid4()}-{generated}"
+        return key
+
+    def save(self, *args, **kwargs):
+        if not self.key:
+            self.key = self.generate_key()
+        return super(ResetPasswordToken, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Password reset token for user {self.user}"
