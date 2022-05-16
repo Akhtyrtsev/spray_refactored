@@ -20,6 +20,7 @@ ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 APPS_DIR = ROOT_DIR / "spray"
 TMP_DIR = Path("/tmp")
 
+FORMAT_MODULE_PATH = 'config.formats'
 # urls
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = "config.urls"
@@ -36,6 +37,8 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.forms",
+    "django_json_widget",
+
 ]
 
 THIRD_PARTY_APPS = [
@@ -55,6 +58,7 @@ LOCAL_APPS = [
     "spray.appointments.apps.AppointmentsConfig",
     "spray.payment.apps.PaymentConfig",
     "spray.subscriptions.apps.SubscriptionsConfig",
+    "spray.schedule.apps.ScheduleConfig",
     "spray.membership.apps.MembershipConfig",
     "spray.notifications.apps.NotificationsConfig",
 
@@ -270,7 +274,10 @@ REST_FRAMEWORK = {
         "get_request": "50/min",
     },
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
-    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ),
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
         "rest_framework.parsers.MultiPartParser",
@@ -327,9 +334,8 @@ MAIN_QUEUES = [
     "queue_main",
 ]
 
-SCHEDULE_QUEUES = [
-    "queue_schedule",
-]
+SCHEDULE_QUEUES = ["queue_schedule"]
+
 # other
 # ------------------------------------------------------------------------------
 USER_AGENT = (

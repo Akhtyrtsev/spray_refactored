@@ -8,7 +8,7 @@ from spray.users.models import Client
 class MembershipEvent(models.Model):
     client = models.ForeignKey(
         Client,
-        models.CASCADE,
+        on_delete=models.CASCADE,
     )
     date_created = models.DateTimeField(
         auto_now_add=True,
