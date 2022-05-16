@@ -70,6 +70,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # email
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = "sparkpost.django.email_backend.SparkPostEmailBackend"
+EMAIL_FILE_PATH = str(ROOT_DIR / "sent_emails")
 
 # auth
 # ------------------------------------------------------------------------------
