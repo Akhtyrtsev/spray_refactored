@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from spray.contrib.choices.appointments import CITY_CHOICES, APPOINTMENT_STATUSES, APPOINTMENT_MICRO_STATUSES, \
     REFUND_CHOICES, CANCELLED_BY_CHOICES
+from spray.contrib.choices.refunds import REFUND_TYPES_CHOICES
 from spray.membership.models import Promocode
 from spray.payment.models import Payments
 from spray.subscriptions.models import Subscription
