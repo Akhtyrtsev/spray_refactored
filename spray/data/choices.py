@@ -22,3 +22,13 @@ USER_TYPE_CHOICES = [
     (3, 'client'),
     (4, 'valet'),
 ]
+
+WEEKDAYS = [
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday'),
+    ('Sunday', 'Sunday'),
+]

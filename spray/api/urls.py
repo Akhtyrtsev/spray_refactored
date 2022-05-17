@@ -3,6 +3,8 @@ from spray.api.v1.authentication import urls as authentication_urls
 from spray.api.v1.users import urls as users_urls
 from spray.api.v1.stripe_system import urls as payment_urls
 from spray.api.v1.subscriptions import urls as subscriptions_urls
+from spray.api.v1.schedule import urls as schedule_urls
+
 from spray.api.v1.device import urls as device_urls
 from spray.api.v1.notifications import urls as notification_urls
 from spray.api.v1.booking import urls as booking_urls
@@ -24,6 +26,9 @@ urlpatterns = [
     # -------------------------- subscriptions -------------------------- #
     # ------------------------------------------------------------- #
     path("", include(subscriptions_urls)),
+    # -------------------------- schedule -------------------------- #
+    # ------------------------------------------------------------- #
+    path("", include(schedule_urls)),
     # -------------------------- devices -------------------------- #
     # ------------------------------------------------------------- #
     path("", include(device_urls)),
@@ -33,7 +38,7 @@ urlpatterns = [
     # -------------------------- booking -------------------------- #
     # ------------------------------------------------------------- #
     path("", include(booking_urls)),
-    # -------------------------- reschedule -------------------------- #
+    # -------------------------- reports -------------------------- #
     # ------------------------------------------------------------- #
     path("reschedule/", include(reschedule_urls)),
 
