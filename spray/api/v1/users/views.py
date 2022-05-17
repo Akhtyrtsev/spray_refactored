@@ -63,5 +63,4 @@ class SetNewPasswordView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        data = serializer.data
-        return Response(data, status=status.HTTP_201_CREATED)
+        return Response({'detail': 'Password changed successfully'}, status=status.HTTP_200_OK)
