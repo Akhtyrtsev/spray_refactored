@@ -337,3 +337,10 @@ class AppointmentManager(models.Manager):
         appointment.save()
         return appointment
 
+    def client_appointment_cancel(self, *args, **kwargs):
+        appointment = kwargs.get('instance')
+        to_cancel = kwargs.get('to_cancel')
+        allowed_statuses = ['Pending', 'Upcoming']
+        if appointment.status in allowed_statuses:
+            ...
+
