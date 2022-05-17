@@ -1,12 +1,9 @@
 import datetime
 
 from django.conf import settings
-from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.utils.timezone import now
 from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
 
 from config.settings.base import EMAIL_BACKEND
 from spray.users.models import ResetPasswordToken, User
