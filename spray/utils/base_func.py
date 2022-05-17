@@ -2,7 +2,6 @@ import logging
 
 from kombu import Exchange, Queue
 
-
 log = logging.getLogger("django")
 
 
@@ -17,7 +16,3 @@ def create_queue(queue_name: str) -> Queue:
         routing_key=queue_name,
         queue_arguments={"x-max-priority": 10},
     )
-
-
-# ----------------------------------------------------------------------- #
-# ----------------------------------------------------------------------- #
