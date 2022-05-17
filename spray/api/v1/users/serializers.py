@@ -96,25 +96,3 @@ class ResetPasswordTokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResetPasswordToken
         fields = '__all__'
-
-    def get_or_create_reset_password_token(self, request, *args, **kwargs):
-        email = request.query_params.get("email", None)
-        password_reset_token_validation_time = get_password_reset_token_expiry_time()
-        now_minus_expiry_time = datetime.now() - timedelta(hours=password_reset_token_validation_time)
-        clear_expired(now_minus_expiry_time)
-
-        user = get_object_or_404(User, email=email)
-        if user.password_reset_tokens.all().count() > 0:
-            token = user.password_reset_tokens.all()[0]
-        else:
-            token = ResetPasswordToken.objects.create(user=user)
-        context = {
-            'reset_password_url': f"https://{Site.objects.get_current().domain}{reverse('password-confirm')}?token={token.key}",
-        }
-        send_mail(
-            context=context,
-            template='',
-            title='Password Reset',
-            to=[user.email]
-        )
-        return Response({"detail": f"An Email has been sent to: {user.email}. Please check your email."})
