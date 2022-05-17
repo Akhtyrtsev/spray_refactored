@@ -96,3 +96,22 @@ class ResetPasswordTokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResetPasswordToken
         fields = '__all__'
+
+
+class SetNewPasswordSerializer(serializers.Serializer):
+    token = serializers.CharField(max_length=255, required=True)
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({'password': 'Passwords must match.'})
+        return attrs
+
+    def save(self):
+        user_token = get_object_or_404(ResetPasswordToken, key=self.validated_data['token'])
+        if user_token:
+            user = user_token.user
+            user.set_password(self.validated_data['password'])
+            user.save()
+            return user

@@ -6,7 +6,8 @@ from drf_social_oauth2.views import ConvertTokenView
 from rest_framework.views import APIView
 
 from spray.users.models import UserType, ResetPasswordToken
-from spray.api.v1.users.serializers import UserTokenSerializer, RegistrationSerializer, ResetPasswordTokenSerializer
+from spray.api.v1.users.serializers import UserTokenSerializer, RegistrationSerializer, ResetPasswordTokenSerializer, \
+    SetNewPasswordSerializer
 from spray.users.utils.reset_password_utils import SendResetPasswordToken
 
 
@@ -52,3 +53,15 @@ class ResetPasswordRequestToken(APIView):
         email = request.query_params.get("email", None)
         data = SendResetPasswordToken.get_or_create_reset_password_token(email)
         return Response(data, status=status.HTTP_200_OK)
+
+
+class SetNewPasswordView(APIView):
+    permission_classes = [AllowAny]
+    serializer_class = SetNewPasswordSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        data = serializer.data
+        return Response(data, status=status.HTTP_201_CREATED)
