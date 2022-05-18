@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import make_password
 from django.test import TestCase
 from django.utils import timezone
 
-from spray.data.timezones import TIMEZONE_OFFSET
+from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime, ValetScheduleOccupiedTime
 from spray.schedule.tests.tests_data import *
 from spray.users.models import Valet

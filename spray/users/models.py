@@ -8,9 +8,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
-from spray.data.choices import CUSTOMER_STATUSES, CITY_CHOICES, USER_TYPE_CHOICES
 from spray.users.managers import UserManager
-from spray.contrib.choices.users import ADDRESS_TYPES
+from spray.contrib.choices.users import ADDRESS_TYPES, USER_TYPE_CHOICES, CUSTOMER_STATUSES, CITY_CHOICES
 
 log = logging.getLogger("django")
 

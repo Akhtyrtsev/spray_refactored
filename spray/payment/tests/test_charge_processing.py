@@ -1,9 +1,8 @@
 from unittest.mock import patch
 
 from django.test import TestCase
-import stripe
 
-from spray.charge_processing.make_charge import ChargeProcessing
+from spray.payment.make_charge import ChargeProcessing
 from spray.users.models import Client
 from spray.subscriptions.models import ClientSubscription, Subscription
 from spray.payment.models import Payments

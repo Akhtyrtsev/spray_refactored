@@ -8,7 +8,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from stripe.error import StripeError
 
-from spray.charge_processing.make_charge import ChargeProcessing
+from spray.payment.make_charge import ChargeProcessing
 import spray.subscriptions.models as sub_models
 from spray.membership.models import MembershipEvent
 from spray.payment.managers import log

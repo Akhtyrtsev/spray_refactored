@@ -1,5 +1,5 @@
 TIMEZONE_OFFSET = {
-    'Miami': 3,
-    'Los Angeles': 0,
-    'Las Vegas': 0
+    'Miami': -4,
+    'Los Angeles': -7,
+    'Las Vegas': -7
 }

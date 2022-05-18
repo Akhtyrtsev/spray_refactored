@@ -1,6 +1,6 @@
 from django.db import models
 
-from spray.data.choices import WEEKDAYS
+from spray.contrib.choices.schedule import WEEKDAYS
 from spray.users.models import Valet
 
 

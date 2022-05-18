@@ -8,7 +8,7 @@ from stripe.error import StripeError
 from spray.Pricing.get_price import Pricing
 from spray.appointments.booking import get_valet
 from spray.appointments.refund_helper import AutomaticRefund
-from spray.charge_processing.make_charge import ChargeProcessing
+from spray.payment.make_charge import ChargeProcessing
 from spray.notifications.notify_processing import NotifyProcessing
 from spray.appointments import models as appointment_models
 

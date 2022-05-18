@@ -1,9 +1,8 @@
 from django.db import models
 import spray.payment.managers as payment_manager
-# from spray.appointments.models import Appointment
 from spray.contrib.choices.appointments import CANCELLED_BY_CHOICES
 from spray.contrib.choices.refunds import REFUND_TYPES_CHOICES
-from spray.users.models import Valet, Client
+from spray.users.models import Client
 
 
 class Payments(models.Model):

@@ -1,7 +1,6 @@
 import datetime
 
 from django.template.loader import render_to_string
-from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.utils import timezone
 
