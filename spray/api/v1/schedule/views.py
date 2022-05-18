@@ -10,7 +10,7 @@ from spray.api.v1.schedule.serializers import ValetScheduleAdditionalTimeSeriali
 from spray.api.v1.users.valet.serializers import ValetGetSerializer
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime
 from spray.users.models import Valet
-from spray.utils.get_availability_data import ValetSchedule, AvailableTime
+from spray.schedule.get_availability_data import ValetSchedule, AvailableTime
 
 
 # ----------------------------------------------------------------------- #

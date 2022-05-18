@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.users.models import Valet
-from spray.utils.parse_schedule import get_time_range
+from spray.schedule.parse_schedule import get_time_range
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime, ValetScheduleOccupiedTime
 
 logger = logging.getLogger('django')
