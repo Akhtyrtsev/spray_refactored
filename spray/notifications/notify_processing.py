@@ -1,5 +1,3 @@
-from abc import ABC
-
 from spray.notifications.models import Notifications
 from spray.notifications.send_notifications import Notifier
 from spray.users.models import Valet

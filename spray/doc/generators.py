@@ -17,6 +17,5 @@ class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
         schema.host = settings.DOCS_BASE_URL
         return schema
 
-
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
