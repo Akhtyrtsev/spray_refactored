@@ -1,10 +1,8 @@
 import datetime
-from unittest.mock import patch, MagicMock, PropertyMock
+from unittest.mock import patch
 from uuid import uuid4
 
 from django.contrib.auth.hashers import make_password
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.test import TestCase
 
 from spray.appointments.models import Appointment
@@ -171,13 +169,3 @@ class RescheduleManagerTestCase(TestCase):
         self.assertEqual(appointment.confirmed_by_client, False)
         self.assertEqual(appointment.confirmed_by_valet, False)
         self.assertEqual(appointment.cancelled_by, 'Valet')
-
-
-
-
-
-
-
-
-
-
