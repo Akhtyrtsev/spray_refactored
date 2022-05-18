@@ -1,8 +1,10 @@
 import stripe
 from rest_framework.exceptions import ValidationError
 
+from spray.appointments import models as appointment_models
 from spray.membership.promo_processing import PromoProcessing
 from spray.payment.managers import log
+from spray.payment.models import Charges
 from spray.subscriptions import models as sub_models
 
 
@@ -12,12 +14,13 @@ class ChargeProcessing:
     Takes amount to pay, payment and client-subscription objects.
     """
 
-    def __init__(self, amount, payment, subscription=None, appointment=None, idempotency_key=None):
+    def __init__(self, amount, payment, subscription=None, appointment=None, idempotency_key=None, purchase_method=None):
         self.amount = amount
         self.subscription = subscription
         self.payment = payment
         self.appointment = appointment
         self.idempotency_key = idempotency_key
+        self.purchase_method = purchase_method
 
     def single_charge(self):
         stripe_id = self.payment['stripe_id']
@@ -91,16 +94,17 @@ class ChargeProcessing:
             customer=customer_id,
             idempotency_key=self.idempotency_key,
         )
-
+        Charges.objects.get_or_create(appointment=self.appointment, charge_id=charge['id'], amount=round(to_pay))
         return charge
 
     def pay_appointment(self):
         appointment = self.appointment
         client = appointment.client
-        if appointment.purchase_method == 'Subscription':
-            p_b_s = self._pay_by_subscription(client=client)
-            return p_b_s
+        if self.purchase_method == 'Subscription':
+            charge = self._pay_by_subscription(client=client)
         else:
-            p_b_c = self._pay_by_card(client=client)
-            return p_b_c
+            charge = self._pay_by_card(client=client)
+        return charge
+
+
 

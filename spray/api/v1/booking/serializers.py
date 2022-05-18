@@ -45,14 +45,7 @@ class BookingSetDateSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, attrs):
-        date = attrs['date']
         number_of_people = attrs['number_of_people']
-        if Appointment.objects.filter(date=date).exists():
-            raise ValidationError(
-                detail={
-                    'detail': 'Sorry, this time has already booked'
-                }
-            )
         if number_of_people < 1:
             raise ValidationError(
                 detail={
