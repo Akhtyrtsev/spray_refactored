@@ -2,13 +2,13 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from spray.api.v1.Appointments.cancel.valet.serializers import ValetCancelSerializer
-from spray.api.v1.Appointments.serializers import AppointmentGetSerializer
+from spray.api.v1.appointments.cancel.valet.serializers import ValetCancelSerializer
+from spray.api.v1.appointments.serializers import AppointmentGetSerializer
 from spray.appointments.models import Appointment
 
 
 class ValetAppointmentCancelViewSet(viewsets.ModelViewSet):
-    model = Appointment.objects.all()
+    queryset = Appointment.objects.all()
     serializer_class = AppointmentGetSerializer
 
     @action(methods=['patch'], detail=True, url_path='cancel', url_name='cancel')

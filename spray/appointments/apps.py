@@ -3,7 +3,7 @@ from django.apps import AppConfig
 
 class AppointmentsConfig(AppConfig):
     name = "spray.appointments"
-    verbose_name = "Appointments"
+    verbose_name = "appointments"
 
     def ready(self):
         try:

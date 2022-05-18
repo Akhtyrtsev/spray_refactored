@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from spray.api.v1.Appointments.serializers import AppointmentGetSerializer, AppointmentCancelSerializer
+from spray.api.v1.appointments.serializers import AppointmentGetSerializer, AppointmentCancelSerializer
 from spray.appointments.models import Appointment
 
 

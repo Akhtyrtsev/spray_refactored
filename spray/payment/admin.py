@@ -47,7 +47,7 @@ class AdminRefunds(admin.ModelAdmin):
                 elif charge_amount < refund_sum:
                     stripe.Refund.create(
                         charge=charge.charge_id,
-                        amount=round(refund_sum)
+                        amount=round(charge_amount)
                     )
                     refund_sum -= charge_amount
             else:
