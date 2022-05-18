@@ -43,7 +43,7 @@ class PromoProcessing:
             referrals.save()
         if promo.only_base_discount:
             referrals = MemberReferral.objects.get(client=client)
-            c_s = ClientSubscription.objects.filter(client=client, is_deleted=False)
+            c_s = sub_models.ClientSubscription.objects.filter(client=client, is_deleted=False)
             if c_s:
                 referrals.used_promo = True
                 referrals.save()
