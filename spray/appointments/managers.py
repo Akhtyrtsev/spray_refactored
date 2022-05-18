@@ -2,15 +2,17 @@ import datetime
 
 from django.db import models, transaction
 from django.utils import timezone
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, PermissionDenied
 from stripe.error import StripeError
 
 from spray.Pricing.get_price import Pricing
 from spray.appointments.booking import get_valet
 from spray.appointments.refund_helper import AutomaticRefund
 from spray.charge_processing.make_charge import ChargeProcessing
+from spray.data.timezones import TIMEZONE_OFFSET
 from spray.notifications.notify_processing import NotifyProcessing
 from spray.appointments import models as appointment_models
+from spray.payment.managers import log
 
 
 class AppointmentManager(models.Manager):
@@ -340,7 +342,46 @@ class AppointmentManager(models.Manager):
     def client_appointment_cancel(self, *args, **kwargs):
         appointment = kwargs.get('instance')
         to_cancel = kwargs.get('to_cancel')
+        try:
+            now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[appointment.timezone])
+        except Exception as e:
+            log.error(e)
+            now = timezone.now()
         allowed_statuses = ['Pending', 'Upcoming']
-        if appointment.status in allowed_statuses:
+        if appointment.status in allowed_statuses and to_cancel:
+            if (now + datetime.timedelta(days=1)) > appointment.date:
+                if appointment.micro_status in ('Valet on my way', 'Check In'):
+                    appointment.refund = 'no'
+                else:
+                    appointment.refund = '1/2'
+            else:
+                appointment.refund = 'full'
+        else:
+            PermissionDenied(
+                detail=
+                {
+                    'detail': 'Clients are able to cancel only Pending or Upcoming appointments'
+                }
+            )
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.confirmed_by_client = False
+        appointment.confirmed_by_valet = False
+        appointment.save()
+        valet_text = 'Appointment was cancelled by client'
+        new_notify_to_valet = NotifyProcessing(
+            appointment=appointment,
+            text=valet_text,
+            user=appointment.valet,
+        )
+        new_notify_to_valet.appointment_notification()
+        return appointment
+
+    def valet_appointment_cancel(self, *args, **kwargs):
+        appointment = kwargs.get('instance')
+        to_cancel = kwargs.get('to_cancel')
+        no_show = kwargs.get('no_show')
+        if to_cancel and no_show:
             ...
+
 

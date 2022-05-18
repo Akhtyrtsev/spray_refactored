@@ -94,7 +94,7 @@ class ChargeProcessing:
             customer=customer_id,
             idempotency_key=self.idempotency_key,
         )
-        Charges.objects.get_or_create(appointment=self.appointment, charge_id=charge['id'], amount=round(to_pay))
+        Charges.objects.create(appointment=self.appointment, charge_id=charge['id'], amount=round(to_pay))
         return charge
 
     def pay_appointment(self):
