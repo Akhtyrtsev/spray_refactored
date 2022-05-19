@@ -1,11 +1,10 @@
 from django.urls import include, path
-from spray.api.v1.reschedule.reschedule_client.views import RescheduleClientViewSet
+from spray.api.v1.appointments.valet.views import ValetAppointmentViewSet
 from rest_framework import routers
 
 router = routers.SimpleRouter()
-router.register('client', RescheduleClientViewSet)
+router.register('appointment', ValetAppointmentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-
 ]
