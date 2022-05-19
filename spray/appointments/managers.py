@@ -1,5 +1,6 @@
 import datetime
 
+import pytz
 from django.db import models, transaction
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError, PermissionDenied
@@ -261,10 +262,10 @@ class AppointmentManager(models.Manager):
             address=appointment.address,
             number_of_people=appointment.number_of_people,
         )
-        result_dict = pricing.get_result_dict()['initial_price']
-        appointment.initial_price = result_dict
         old_price = appointment.price
         new_price = pricing.get_price()
+        result_dict = pricing.get_result_dict()['initial_price']
+        appointment.initial_price = result_dict
         appointment.additional_price = new_price - old_price
         if appointment.additional_price > 0:
             text = f'The time of your appointment was changed on night,' \
@@ -385,16 +386,16 @@ class AppointmentManager(models.Manager):
             now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[appointment.timezone])
         except Exception:
             now = timezone.now()
-        delta = (now - appointment.date).seconds
-        waiting_rule = 900
+        delta = appointment.date + datetime.timedelta(minutes=15)
         if to_cancel:
-            if no_show and delta > waiting_rule:
+            if no_show and now > delta:
                 appointment.status = 'Cancelled'
                 appointment.cancelled_by = 'Valet'
                 appointment.refund = 'no'
                 appointment.confirmed_by_client = False
                 appointment.confirmed_by_valet = True
                 appointment.micro_status = 'No show'
+                appointment.noshow_timestamp = no_show
                 appointment.save()
                 text_for_client = 'Valet was waiting for 15 minutes' \
                                   ', your appointment was cancelled. You wont get refund.'
@@ -412,7 +413,7 @@ class AppointmentManager(models.Manager):
                 )
                 new_notify_to_client.appointment_notification()
                 return appointment
-            elif no_show and delta < waiting_rule:
+            elif no_show and delta > now:
                 raise ValidationError(
                     detail={
                         'detail': 'You need to wait for 15 minutes'

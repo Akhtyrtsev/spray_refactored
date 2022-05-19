@@ -24,7 +24,6 @@ class AdminRefunds(admin.ModelAdmin):
     actions = ['send_refund']
 
     def send_refund(self, request, queryset):
-        failed_refunds = []
         now = timezone.now()
         for refund in queryset:
             appointment = refund.appointment
