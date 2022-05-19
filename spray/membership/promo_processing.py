@@ -1,3 +1,4 @@
+from spray.notifications.notify_processing import NotifyProcessing
 from spray.users.models import Client
 from spray.membership.models import Promocode, MemberReferral
 import random
@@ -26,9 +27,10 @@ class PromoProcessing:
             subscriptions = sub_models.ClientSubscription.objects.filter(client=client, is_deleted=False,
                                                                          cancellation_date__isnull=True)
             if not subscriptions:
-                # common_notifications(user, f'Your referral code was used! Here is your code to get 20% discount {
-                # code}')
-                new_promo = Promocode.objects.create(
+                text = f'Your referral code was used! Here is your code to get 20% discount {code}'
+                cn = NotifyProcessing(user=client, text=text, notification_type='info')
+                cn.common_notification()
+                Promocode.objects.create(
                     code=code,
                     value=20,
                     code_type='percent',
@@ -36,8 +38,9 @@ class PromoProcessing:
                     only_base_discount=True
                 )
             else:
-                ...
-                # common_notifications(user, f'Your referral code was used!')
+                text = 'Your referral was used'
+                cn = NotifyProcessing(user=client, text=text, notification_type='info')
+                cn.common_notification()
             referrals = MemberReferral.objects.get(client=own_client)
             referrals.count += 1
             referrals.save()
