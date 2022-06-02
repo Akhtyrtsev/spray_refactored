@@ -8,6 +8,7 @@ from spray.contrib.choices.appointments import CITY_CHOICES, APPOINTMENT_STATUSE
 from spray.contrib.choices.refunds import REFUND_TYPES_CHOICES
 from spray.membership.models import Promocode
 # from spray.payment import models as payment_model
+from spray.payment.models import Payout
 from spray.subscriptions.models import Subscription
 from spray.users.models import Address, Valet, Client, TwillioNumber
 import spray.appointments.managers as appointment_manager
@@ -191,13 +192,13 @@ class Appointment(models.Model):
     date_created = models.DateTimeField(
         auto_now_add=True,
     )
-    # payout_ref = models.ForeignKey(
-    #     "Payout",
-    #     on_delete=models.SET_NULL,
-    #     related_name='booking',
-    #     null=True,
-    #     blank=True,
-    # )
+    payout_ref = models.ForeignKey(
+        Payout,
+        on_delete=models.SET_NULL,
+        related_name='appointments',
+        null=True,
+        blank=True,
+    )
     noshow_timestamp = models.DateTimeField(
         null=True,
         blank=True,

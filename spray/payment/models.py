@@ -184,3 +184,18 @@ class BillingDetails(models.Model):
     class Meta:
         verbose_name_plural = 'Valets: Wages'
 
+
+class Billing(models.Model):
+    valet = models.ForeignKey(
+        Valet,
+        on_delete=models.SET_NULL,
+        related_name='billing_details',
+        null=True,
+    )
+    last_send = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name_plural = 'Valets: Current earnings'
