@@ -1,16 +1,20 @@
 import datetime
 
+import pytz
 from django.db import models, transaction
 from django.utils import timezone
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError, PermissionDenied
 from stripe.error import StripeError
 
 from spray.Pricing.get_price import Pricing
 from spray.appointments.booking import get_valet
 from spray.appointments.refund_helper import AutomaticRefund
 from spray.payment.make_charge import ChargeProcessing
+from spray.charge_processing.make_charge import ChargeProcessing
+from spray.data.timezones import TIMEZONE_OFFSET
 from spray.notifications.notify_processing import NotifyProcessing
 from spray.appointments import models as appointment_models
+from spray.payment.managers import log
 
 
 class AppointmentManager(models.Manager):
@@ -340,7 +344,104 @@ class AppointmentManager(models.Manager):
     def client_appointment_cancel(self, *args, **kwargs):
         appointment = kwargs.get('instance')
         to_cancel = kwargs.get('to_cancel')
+        try:
+            now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[appointment.timezone])
+        except Exception as e:
+            log.error(e)
+            now = timezone.now()
         allowed_statuses = ['Pending', 'Upcoming']
-        if appointment.status in allowed_statuses:
-            ...
+        if appointment.status in allowed_statuses and to_cancel:
+            if (now + datetime.timedelta(days=1)) > appointment.date:
+                if appointment.micro_status in ('Valet on my way', 'Check In'):
+                    appointment.refund = 'no'
+                else:
+                    appointment.refund = '1/2'
+            else:
+                appointment.refund = 'full'
+        else:
+            PermissionDenied(
+                detail=
+                {
+                    'detail': 'Clients are able to cancel only Pending or Upcoming appointments'
+                }
+            )
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.confirmed_by_client = False
+        appointment.confirmed_by_valet = False
+        appointment.save()
+        valet_text = 'Appointment was cancelled by client'
+        new_notify_to_valet = NotifyProcessing(
+            appointment=appointment,
+            text=valet_text,
+            user=appointment.valet,
+        )
+        new_notify_to_valet.appointment_notification()
+        return appointment
+
+    def valet_appointment_cancel(self, *args, **kwargs):
+        appointment = kwargs.get('instance')
+        to_cancel = kwargs.get('to_cancel')
+        no_show = kwargs.get('no_show')
+        try:
+            now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[appointment.timezone])
+        except Exception:
+            now = timezone.now()
+        delta = appointment.date + datetime.timedelta(minutes=15)
+        if to_cancel:
+            if no_show and now > delta:
+                appointment.status = 'Cancelled'
+                appointment.cancelled_by = 'Valet'
+                appointment.refund = 'no'
+                appointment.confirmed_by_client = False
+                appointment.confirmed_by_valet = True
+                appointment.micro_status = 'No show'
+                appointment.noshow_timestamp = no_show
+                appointment.save()
+                text_for_client = 'Valet was waiting for 15 minutes' \
+                                  ', your appointment was cancelled. You wont get refund.'
+                new_notify_to_client = NotifyProcessing(
+                    appointment=appointment,
+                    text=text_for_client,
+                    user=appointment.client,
+                )
+                new_notify_to_client.appointment_notification()
+                text_for_valet = 'Appointment was cancelled. Client no show'
+                new_notify_to_client = NotifyProcessing(
+                    appointment=appointment,
+                    text=text_for_valet,
+                    user=appointment.valet,
+                )
+                new_notify_to_client.appointment_notification()
+                return appointment
+            elif no_show and delta > now:
+                raise ValidationError(
+                    detail={
+                        'detail': 'You need to wait for 15 minutes'
+                    }
+                )
+            appointment.status = 'Cancelled'
+            appointment.cancelled_by = 'Valet'
+            appointment.refund = 'full'
+            appointment.confirmed_by_client = False
+            appointment.confirmed_by_valet = True
+            appointment.save()
+            text_for_client = 'Your appointment was cancelled by valet. You will get full refund'
+            new_notify_to_client = NotifyProcessing(
+                appointment=appointment,
+                text=text_for_client,
+                user=appointment.client,
+            )
+            new_notify_to_client.appointment_notification()
+            text_for_valet = 'Appointment was cancelled'
+            new_notify_to_valet = NotifyProcessing(
+                appointment=appointment,
+                text=text_for_valet,
+                user=appointment.valet,
+            )
+            new_notify_to_valet.appointment_notification()
+            return appointment
+
+
+
 

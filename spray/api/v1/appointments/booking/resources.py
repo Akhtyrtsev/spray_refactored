@@ -3,7 +3,7 @@ from uuid import uuid4
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from spray.api.v1.booking.serializers import BookingFirstStepSerializer, \
+from spray.api.v1.appointments.booking.serializers import BookingFirstStepSerializer, \
     BookingSetClientSerializer, BookingSetDateSerializer, BookingSetValetSerializer, BookingSetPaymentSerializer, \
     BookingSetPriceSerializer
 from spray.api.v1.stripe_system.serializers import PaymentGetSerializer

@@ -1,10 +1,9 @@
 from django.urls import include, path
+from spray.api.v1.appointments.client.views import ClientAppointmentViewSet
 from rest_framework import routers
 
-from spray.api.v1.booking.resources import BookingViewSet
-
 router = routers.SimpleRouter()
-router.register('booking', BookingViewSet)
+router.register('appointment', ClientAppointmentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
