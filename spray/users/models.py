@@ -8,8 +8,11 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
+from spray.appointments.models import Appointment
+from spray.schedule.models import ValetScheduleOccupiedTime
 from spray.users.managers import UserManager
-from spray.contrib.choices.users import ADDRESS_TYPES, USER_TYPE_CHOICES, CUSTOMER_STATUSES, CITY_CHOICES
+from spray.contrib.choices.users import ADDRESS_TYPES, USER_TYPE_CHOICES, CUSTOMER_STATUSES, CITY_CHOICES, \
+    TYPES_OF_REQUESTS
 
 log = logging.getLogger("django")
 
@@ -353,3 +356,76 @@ class TwillioNumber(models.Model):
 
     def __str__(self):
         return f"{self.number}"
+
+
+class ValetFeed(models.Model):
+    author = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='feeds',
+        null=True,
+        blank=True
+    )
+    accepted_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='accepted_feeds',
+        null=True,
+        blank=True
+    )
+    appointment = models.ForeignKey(
+        Appointment,
+        on_delete=models.SET_NULL,
+        related_name='feeds',
+        null=True,
+        blank=True
+    )
+    date_created = models.DateTimeField(
+        auto_now_add=True
+    )
+    date_changed = models.DateTimeField(
+        auto_now=True
+    )
+    date_accepted = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+    shift = models.ForeignKey(
+        ValetScheduleOccupiedTime,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    notes = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True
+    )
+    visible = models.BooleanField(
+        default=True
+    )
+    assigned_to = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='assigned_feeds',
+        null=True,
+        blank=True
+    )
+    type_of_request = models.CharField(
+        max_length=255,
+        choices=TYPES_OF_REQUESTS,
+        default='FeedPost'
+    )
+    deleted = models.BooleanField(
+        default=False
+    )
+    timezone = models.CharField(
+        null=True,
+        blank=True,
+        max_length=32,
+        choices=CITY_CHOICES
+    )
+    additional_time_id = models.IntegerField(
+        null=True,
+        blank=True
+    )
