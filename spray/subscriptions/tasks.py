@@ -1,9 +1,6 @@
 import datetime
 import os
 
-from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
 from celery.utils.log import get_task_logger
 from spray.notifications.send_notifications import Notifier
 from config.celery_app import app as celery_app
