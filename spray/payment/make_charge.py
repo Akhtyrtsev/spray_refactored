@@ -1,7 +1,6 @@
 import stripe
 from rest_framework.exceptions import ValidationError
 
-from spray.appointments import models as appointment_models
 from spray.membership.promo_processing import PromoProcessing
 from spray.payment.managers import log
 from spray.payment.models import Charges
@@ -14,7 +13,8 @@ class ChargeProcessing:
     Takes amount to pay, payment and client-subscription objects.
     """
 
-    def __init__(self, amount, payment, subscription=None, appointment=None, idempotency_key=None, purchase_method=None):
+    def __init__(self, amount, payment, subscription=None, appointment=None, idempotency_key=None,
+                 purchase_method=None):
         self.amount = amount
         self.subscription = subscription
         self.payment = payment
@@ -94,7 +94,7 @@ class ChargeProcessing:
             customer=customer_id,
             idempotency_key=self.idempotency_key,
         )
-        Charges.objects.get_or_create(appointment=self.appointment, charge_id=charge['id'], amount=round(to_pay))
+        Charges.objects.create(appointment=self.appointment, charge_id=charge['id'], amount=round(to_pay))
         return charge
 
     def pay_appointment(self):
@@ -105,6 +105,3 @@ class ChargeProcessing:
         else:
             charge = self._pay_by_card(client=client)
         return charge
-
-
-

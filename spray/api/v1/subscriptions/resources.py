@@ -1,16 +1,12 @@
-import stripe
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import MethodNotAllowed, ValidationError
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from stripe.error import StripeError
 
 from spray.api.v1.subscriptions.serializers import SubscriptionSerializer, \
     ClientSubscriptionGetSerializer, ClientSubscriptionPostSerializer, PaymentClientSubscriptionSerializer
-from spray.charge_processing.make_charge import ChargeProcessing
 from spray.subscriptions.models import Subscription, ClientSubscription
-from spray.subscriptions.subscription_processing import SubscriptionProcessing
 from spray.users.models import Client
 
 

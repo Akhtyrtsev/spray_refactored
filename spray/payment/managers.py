@@ -13,6 +13,7 @@ class PaymentsManager(models.Manager):
     """
     Payment model manager for overriding logic for get_queryset and create methods.
     """
+
     def get_queryset(self, *args, **kwargs):
         """
         Filter payment queryset by request user instance.

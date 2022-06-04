@@ -4,7 +4,6 @@ from spray.users.models import User, Valet, Client
 
 
 class UserModelForm(forms.ModelForm):
-
     class Meta:
         model = User
         fields = '__all__'
@@ -18,7 +17,6 @@ class UserModelForm(forms.ModelForm):
 
 
 class ClientModelForm(UserModelForm):
-
     class Meta:
         model = Client
         fields = '__all__'

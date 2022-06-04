@@ -2,7 +2,7 @@ from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from stripe.error import StripeError
 
-from spray.charge_processing.make_charge import ChargeProcessing
+from spray.payment.make_charge import ChargeProcessing
 from spray.membership.models import MembershipEvent
 from spray.payment.managers import log
 
