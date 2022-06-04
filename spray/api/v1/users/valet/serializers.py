@@ -1,13 +1,14 @@
 from rest_framework import serializers, status
 
+from spray.api.v1.feedback.serializers import FeedbackSerializer
 from spray.users.models import Address, Valet
+
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
 
 class ValetAddressSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Address
         fields = '__all__'
@@ -19,6 +20,7 @@ class ValetAddressSerializer(serializers.ModelSerializer):
 
 
 class ValetGetSerializer(serializers.ModelSerializer):
+    feedback = FeedbackSerializer(many=True, required=False)
 
     class Meta:
         model = Valet
@@ -41,6 +43,7 @@ class ValetGetSerializer(serializers.ModelSerializer):
                   'valet_reaction_time',
                   'valet_available_not_on_call',
                   'city',
+                  'feedback',
                   'feedback_popup_show_date',
                   'emergency_name',
                   'license',
