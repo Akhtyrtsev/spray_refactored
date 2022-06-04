@@ -262,10 +262,10 @@ class AppointmentManager(models.Manager):
             address=appointment.address,
             number_of_people=appointment.number_of_people,
         )
-        old_price = appointment.price
-        new_price = pricing.get_price()
         result_dict = pricing.get_result_dict()['initial_price']
         appointment.initial_price = result_dict
+        old_price = appointment.price
+        new_price = pricing.get_price()
         appointment.additional_price = new_price - old_price
         if appointment.additional_price > 0:
             text = f'The time of your appointment was changed on night,' \
