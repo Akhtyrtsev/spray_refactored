@@ -4,10 +4,11 @@ from django.contrib.auth.hashers import make_password
 from django.test import TestCase
 from rest_framework.exceptions import ValidationError
 
+from spray.Pricing.get_payout import GetPayout
 from spray.Pricing.get_price import Pricing
+from spray.appointments.models import Appointment
 
 from spray.users.models import Client
-from spray.appointments.models import Price
 from spray.membership.models import Promocode
 from spray.subscriptions.models import Subscription
 from spray.users.models import Address
@@ -208,4 +209,108 @@ class TestPricing(TestCase):
         self.assertEqual(res_dict['tips'], 34)
         self.assertEqual(res_dict['group_price'], 170)
         self.assertEqual(res_dict['service_area_fee'], 20)
+
+
+class TestPayout(TestCase):
+    fixtures = ['fixtures/Prices.json', 'fixtures/BillingDetails.json']
+
+    def setUp(self):
+        date_time_str = '22/06/20 18:30:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
+        client = Client.objects.create(
+            email='test@gmail.com',
+            password=make_password('test'),
+        )
+        address = Address.objects.create(
+            user=client,
+            city='Los Angeles',
+            zip_code='90027',
+        )
+        Appointment.objects.create(
+            client=client,
+            date=date,
+            address=address,
+            number_of_people=1,
+            status='Completed',
+            initial_price=75,
+        )
+
+    def test_get_payout_base_completed(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.status = 'Completed'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 35)
+        self.assertEqual(result_dict['base_fee'], 20)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_night_completed(self):
+        appointment = Appointment.objects.filter().first()
+        date_time_str = '22/06/20 21:30:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
+        appointment.date = date
+        appointment.initial_price = 135
+        appointment.status = 'Completed'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 87)
+        self.assertEqual(result_dict['night_fee'], 60)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_hotel_completed(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.address.is_hotel = True
+        appointment.address.save()
+        appointment.status = 'Completed'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 55)
+        self.assertEqual(result_dict['base_fee'], 20)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+        self.assertEqual(result_dict['parking_fee'], 20)
+
+    def test_get_payout_cancel_no_refund_base(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.refund = 'no'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 20)
+        self.assertEqual(result_dict['cancelled_fee'], 20)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_cancel_no_refund_night(self):
+        appointment = Appointment.objects.filter().first()
+        date_time_str = '22/06/20 21:30:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
+        appointment.date = date
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.refund = 'no'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 60)
+        self.assertEqual(result_dict['cancelled_fee'], 60)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_cancel_half_refund(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.refund = '1/2'
+        appointment.price = 1000
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 10)
+        self.assertEqual(result_dict['cancelled_fee'], 10)
+
+
+
 

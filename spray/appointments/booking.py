@@ -2,7 +2,7 @@ from spray.users.models import Valet
 
 
 def get_valet():
-    valet = Valet.objects.get(email='valet@gmail.com')
+    valet = Valet.objects.get(email='payout-valet@gmail.com')
     return valet
 
 
