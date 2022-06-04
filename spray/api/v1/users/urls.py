@@ -12,6 +12,7 @@ router.register('client/address', client_views.AddressViewSet, basename='client_
 router.register('client/profile', client_views.ClientModelViewSet, basename='client_profile')
 router.register('valet/address', valet_views.AddressViewSet, basename='valet_address')
 router.register('valet/profile', valet_views.ValetModelViewSet, basename='valet_profile')
+router.register('favorite-valet', valet_views.FavoriteValetViewSet, basename='favorite_valet')
 
 urlpatterns = [
     path('', include(router.urls)),
