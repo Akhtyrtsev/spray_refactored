@@ -1,13 +1,13 @@
 from rest_framework import serializers, status
 
-from spray.users.models import Address, Valet
+from spray.users.models import Address, Valet, FavoriteValets
+
 
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
 
 class ValetAddressSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Address
         fields = '__all__'
@@ -19,7 +19,6 @@ class ValetAddressSerializer(serializers.ModelSerializer):
 
 
 class ValetGetSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Valet
         fields = ('first_name',
@@ -45,3 +44,17 @@ class ValetGetSerializer(serializers.ModelSerializer):
                   'emergency_name',
                   'license',
                   )
+
+
+class FavoriteValetsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FavoriteValets
+        exclude = ('id', 'client')
+
+
+class ListFavoriteValetsSerializer(serializers.ModelSerializer):
+    valet = ValetGetSerializer(many=False)
+
+    class Meta:
+        model = FavoriteValets
+        exclude = ('id', 'client')
