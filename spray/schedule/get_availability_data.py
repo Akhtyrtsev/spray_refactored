@@ -60,21 +60,21 @@ class ValetSchedule:
                 else:
                     raise ValidationError(
                         detail={'detail': 'Sorry, pick another slot - there is not enough time to spray you!'})
-            preferred = FavoriteValets.objects.filter(preferred=True)
+            preferred = FavoriteValets.objects.filter(client=client, preferred=True).order_by('?')
             if preferred:
                 for valet in preferred:
                     if ValetSchedule.valet_is_free(valet.valet, date, time):
                         return valet.valet
-            favorite = FavoriteValets.objects.filter(favorite=True)
+            favorite = FavoriteValets.objects.filter(client=client, favorite=True).order_by('?')
             if favorite:
                 for valet in favorite:
                     if ValetSchedule.valet_is_free(valet.valet, date, time):
                         return valet.valet
-        else:
-            get_city_valet = Valet.objects.filter(city=city).all().order_by('?')
-            for valet in get_city_valet:
-                if ValetSchedule.valet_is_free(valet, date, time):
-                    return valet
+
+        get_city_valet = Valet.objects.filter(city=city).all().order_by('?')
+        for valet in get_city_valet:
+            if ValetSchedule.valet_is_free(valet, date, time):
+                return valet
 
     @staticmethod
     def get_available_valet(valet, date, city=None):
