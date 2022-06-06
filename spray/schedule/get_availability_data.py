@@ -52,7 +52,6 @@ class ValetSchedule:
     @staticmethod
     def valet_filter(city, date, time, client=None):
         if client:
-            pass
             only = FavoriteValets.objects.filter(client=client, only=True).first()
             if only:
                 if ValetSchedule.valet_is_free(only.valet, date, time):
