@@ -1,8 +1,9 @@
 from django.contrib import admin
 
+from spray.schedule.admin import WorkingDaysInline, ValetScheduleAdditionalTimeInline, ValetScheduleOccupiedTimeInline
 from spray.users.forms import UserModelForm, ClientModelForm, ValetModelForm
 
-from spray.users.models import Address, User, Valet, Client, Device
+from spray.users.models import Address, User, Valet, Client, Device, ValetForSchedule
 
 
 @admin.register(Address)
@@ -62,3 +63,13 @@ class ValetAdmin(admin.ModelAdmin):
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(ValetForSchedule)
+class ValetScheduleTimeAdmin(admin.ModelAdmin):
+    fields = ('email', 'city', 'is_confirmed',)
+    inlines = [
+        WorkingDaysInline,
+        ValetScheduleAdditionalTimeInline,
+        ValetScheduleOccupiedTimeInline,
+    ]

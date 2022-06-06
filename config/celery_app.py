@@ -55,8 +55,15 @@ app.conf.beat_schedule = {
         'schedule': crontab(),
         'options': {
             'queue': 'queue_schedule',
-        }
-    }
+        },
+    },
+    'send_payout': {
+        'task': 'spray.payment.tasks.send_payout',
+        'schedule': crontab(),
+        'options': {
+            'queue': 'queue_schedule',
+        },
+    },
 }
 
 

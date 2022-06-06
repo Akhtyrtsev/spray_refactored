@@ -5,9 +5,7 @@ from django.utils import timezone
 
 from spray.contrib.choices.appointments import CITY_CHOICES, APPOINTMENT_STATUSES, APPOINTMENT_MICRO_STATUSES, \
     REFUND_CHOICES, CANCELLED_BY_CHOICES
-from spray.membership.models import Promocode
-from spray.subscriptions.models import Subscription
-from spray.users.models import Address, Valet, Client, TwillioNumber
+from spray.membership import models as membership_models
 import spray.appointments.managers as appointment_manager
 
 
@@ -60,13 +58,13 @@ class Price(models.Model):
 
 class Appointment(models.Model):
     client = models.ForeignKey(
-        Client,
+        'users.Client',
         on_delete=models.SET_NULL,
         related_name='client_appointments',
         null=True,
     )
     valet = models.ForeignKey(
-        Valet,
+        'users.Valet',
         on_delete=models.SET_NULL,
         related_name='valet_appointments',
         null=True,
@@ -77,7 +75,7 @@ class Appointment(models.Model):
         blank=True,
     )
     address = models.ForeignKey(
-        Address,
+        'users.Address',
         on_delete=models.SET_NULL,
         related_name='booking',
         null=True,
@@ -138,7 +136,7 @@ class Appointment(models.Model):
         default=False,
     )
     promocode = models.ForeignKey(
-        Promocode,
+        membership_models.Promocode,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -150,7 +148,7 @@ class Appointment(models.Model):
         blank=True,
     )
     subscription_id = models.ForeignKey(
-        Subscription,
+        'subscriptions.Subscription',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -189,13 +187,13 @@ class Appointment(models.Model):
     date_created = models.DateTimeField(
         auto_now_add=True,
     )
-    # payout_ref = models.ForeignKey(
-    #     "Payout",
-    #     on_delete=models.SET_NULL,
-    #     related_name='booking',
-    #     null=True,
-    #     blank=True,
-    # )
+    payout_ref = models.ForeignKey(
+        'payment.Payout',
+        on_delete=models.SET_NULL,
+        related_name='appointments',
+        null=True,
+        blank=True,
+    )
     noshow_timestamp = models.DateTimeField(
         null=True,
         blank=True,
@@ -216,7 +214,7 @@ class Appointment(models.Model):
         auto_now_add=True,
     )
     phone = models.ForeignKey(
-        TwillioNumber,
+        'users.TwillioNumber',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

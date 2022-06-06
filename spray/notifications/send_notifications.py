@@ -7,7 +7,7 @@ from django.utils import timezone
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.payment.managers import log
 from spray.schedule.check_working_hours import is_working_hours
-from spray.users.models import User, Device, Valet
+from spray.users import models as users_models
 from onesignal_sdk.client import Client
 from django.conf import settings
 
@@ -29,8 +29,8 @@ class Notifier:
             rest_api_key=settings.ONE_SIGNAL_API_KEY[0],
             user_auth_key=settings.USER_AUTH_KEY,
         )
-        user = User.objects.get(pk=self.user_id)
-        devices = Device.objects.filter(user=user)
+        user = users_models.User.objects.get(pk=self.user_id)
+        devices = users_models.Device.objects.filter(user=user)
         player_ids = [device.onesignal_id for device in devices]
         web_notification_body = {
             "include_player_ids": player_ids,
@@ -79,15 +79,15 @@ class Notifier:
         msg.send()
 
     def is_notification_on_rest(self):
-        user = User.objects.get(pk=self.user_id)
+        user = users_models.User.objects.get(pk=self.user_id)
         try:
             now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[user.city])
         except Exception as e:
             now = timezone.now()
             log.info(e)
         date = now
-        valet = Valet.objects.filter(pk=user.pk).first()
-        if Valet.objects.filter(pk=user.pk).exists():
+        valet = users_models.Valet.objects.filter(pk=user.pk).first()
+        if users_models.Valet.objects.filter(pk=user.pk).exists():
             if valet.notification_only_working_hours:
                 return is_working_hours(valet=user, date=date)
         return True

@@ -4,10 +4,11 @@ from django.contrib.auth.hashers import make_password
 from django.test import TestCase
 from rest_framework.exceptions import ValidationError
 
+from spray.Pricing.get_payout import GetPayout
 from spray.Pricing.get_price import Pricing
+from spray.appointments.models import Appointment
 
 from spray.users.models import Client
-from spray.appointments.models import Price
 from spray.membership.models import Promocode
 from spray.subscriptions.models import Subscription
 from spray.users.models import Address
@@ -61,9 +62,10 @@ class TestPricing(TestCase):
 
     def test_get_price_base_without_sub(self):
         address = Address.objects.get(city='Los Angeles', zip_code='90001', is_hotel=False)
-        time = datetime.time(hour=18)
+        date_time_str = '22/05/20 18:00:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         number_of_people = 1
-        test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
+        test_gp = Pricing(date=date, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
         res_dict = test_gp.get_result_dict()
         self.assertEqual(result, 114)
@@ -73,9 +75,10 @@ class TestPricing(TestCase):
 
     def test_get_price_night_without_sub(self):
         address = Address.objects.get(city='Los Angeles', zip_code='90001')
-        time = datetime.time(hour=22)
+        date_time_str = '22/05/20 22:00:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         number_of_people = 1
-        test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
+        test_gp = Pricing(date=date, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
         res_dict = test_gp.get_result_dict()
         self.assertEqual(result, 186)
@@ -85,9 +88,10 @@ class TestPricing(TestCase):
 
     def test_get_price_base_hotel(self):
         address = Address.objects.get(zip_code='89146')
-        time = datetime.time(hour=16)
+        date_time_str = '22/05/20 16:00:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         number_of_people = 1
-        test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
+        test_gp = Pricing(date=date, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
         res_dict = test_gp.get_result_dict()
         self.assertEqual(result, 108)
@@ -97,9 +101,10 @@ class TestPricing(TestCase):
 
     def test_get_price_night_hotel(self):
         address = Address.objects.get(zip_code='89146')
-        time = datetime.time(hour=23)
+        date_time_str = '22/05/20 23:00:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         number_of_people = 1
-        test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
+        test_gp = Pricing(date=date, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
         res_dict = test_gp.get_result_dict()
         self.assertEqual(result, 198)
@@ -109,11 +114,12 @@ class TestPricing(TestCase):
 
     def test_get_price_with_sub(self):
         address = Address.objects.get(city='Los Angeles', zip_code='90001')
-        time = datetime.time(hour=18)
+        date_time_str = '22/05/20 18:00:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         number_of_people = 1
         subscription = Subscription.objects.get(city='Los Angeles')
         test_gp = Pricing(
-            date=time,
+            date=date,
             address=address,
             number_of_people=number_of_people,
             subscription=subscription,
@@ -125,9 +131,10 @@ class TestPricing(TestCase):
         self.assertEqual(res_dict['subscription_price'], 50)
         self.assertEqual(res_dict['service_area_fee'], 20)
         with self.assertRaises(ValidationError) as context:
-            time_test = datetime.time(hour=22)
+            date_time_str_test = '22/05/20 22:00:00'
+            date_test = datetime.datetime.strptime(date_time_str_test, '%y/%m/%d %H:%M:%S')
             test_gp = Pricing(
-                date=time_test,
+                date=date_test,
                 address=address,
                 number_of_people=number_of_people,
                 subscription=subscription,
@@ -137,7 +144,7 @@ class TestPricing(TestCase):
         with self.assertRaises(ValidationError) as context:
             number_of_people_test = 2
             test_gp = Pricing(
-                date=time,
+                date=date,
                 address=address,
                 number_of_people=number_of_people_test,
                 subscription=subscription,
@@ -147,7 +154,7 @@ class TestPricing(TestCase):
         with self.assertRaises(ValidationError) as context:
             address_test = Address.objects.get(city='Los Angeles', zip_code='89146')
             test_gp = Pricing(
-                date=time,
+                date=date,
                 address=address_test,
                 number_of_people=number_of_people,
                 subscription=subscription,
@@ -157,7 +164,7 @@ class TestPricing(TestCase):
         with self.assertRaises(ValidationError) as context:
             promo = Promocode.objects.get(code='ASDF1234')
             test_gp = Pricing(
-                date=time,
+                date=date,
                 address=address,
                 number_of_people=number_of_people,
                 subscription=subscription,
@@ -168,7 +175,7 @@ class TestPricing(TestCase):
         with self.assertRaises(ValidationError) as context:
             address_test = Address.objects.get(city='Las Vegas')
             test_gp = Pricing(
-                date=time,
+                date=date,
                 address=address_test,
                 number_of_people=number_of_people,
                 subscription=subscription,
@@ -179,9 +186,10 @@ class TestPricing(TestCase):
     def test_get_price_with_promo(self):
         promo = Promocode.objects.get(code='ASDF1234')
         address = Address.objects.get(city='Los Angeles', zip_code='90001')
-        time = datetime.time(hour=18)
+        date_time_str = '22/05/20 18:00:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         number_of_people = 1
-        test_gp = Pricing(date=time, address=address, number_of_people=number_of_people, promo_code=promo)
+        test_gp = Pricing(date=date, address=address, number_of_people=number_of_people, promo_code=promo)
         result = test_gp.get_price()
         res_dict = test_gp.get_result_dict()
         self.assertEqual(result, 91.2)
@@ -191,13 +199,118 @@ class TestPricing(TestCase):
 
     def test_get_price_with_group(self):
         address = Address.objects.get(city='Los Angeles', zip_code='90001')
-        time = datetime.time(hour=18)
+        date_time_str = '22/05/20 18:00:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         number_of_people = 3
-        test_gp = Pricing(date=time, address=address, number_of_people=number_of_people)
+        test_gp = Pricing(date=date, address=address, number_of_people=number_of_people)
         result = test_gp.get_price()
         res_dict = test_gp.get_result_dict()
         self.assertEqual(result, 204)
         self.assertEqual(res_dict['tips'], 34)
         self.assertEqual(res_dict['group_price'], 170)
         self.assertEqual(res_dict['service_area_fee'], 20)
+
+
+class TestPayout(TestCase):
+    fixtures = ['fixtures/Prices.json', 'fixtures/BillingDetails.json']
+
+    def setUp(self):
+        date_time_str = '22/06/20 18:30:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
+        client = Client.objects.create(
+            email='test@gmail.com',
+            password=make_password('test'),
+        )
+        address = Address.objects.create(
+            user=client,
+            city='Los Angeles',
+            zip_code='90027',
+        )
+        Appointment.objects.create(
+            client=client,
+            date=date,
+            address=address,
+            number_of_people=1,
+            status='Completed',
+            initial_price=75,
+        )
+
+    def test_get_payout_base_completed(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.status = 'Completed'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 35)
+        self.assertEqual(result_dict['base_fee'], 20)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_night_completed(self):
+        appointment = Appointment.objects.filter().first()
+        date_time_str = '22/06/20 21:30:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
+        appointment.date = date
+        appointment.initial_price = 135
+        appointment.status = 'Completed'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 87)
+        self.assertEqual(result_dict['night_fee'], 60)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_hotel_completed(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.address.is_hotel = True
+        appointment.address.save()
+        appointment.status = 'Completed'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 55)
+        self.assertEqual(result_dict['base_fee'], 20)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+        self.assertEqual(result_dict['parking_fee'], 20)
+
+    def test_get_payout_cancel_no_refund_base(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.refund = 'no'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 20)
+        self.assertEqual(result_dict['cancelled_fee'], 20)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_cancel_no_refund_night(self):
+        appointment = Appointment.objects.filter().first()
+        date_time_str = '22/06/20 21:30:00'
+        date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
+        appointment.date = date
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.refund = 'no'
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 60)
+        self.assertEqual(result_dict['cancelled_fee'], 60)
+        self.assertEqual(result_dict['service_area_fee'], 0)
+
+    def test_get_payout_cancel_half_refund(self):
+        appointment = Appointment.objects.filter().first()
+        appointment.status = 'Cancelled'
+        appointment.cancelled_by = 'Client'
+        appointment.refund = '1/2'
+        appointment.price = 1000
+        appointment.save()
+        payout_obj = GetPayout(appointment=appointment)
+        sum_, result_dict = payout_obj.get_payout()
+        self.assertEqual(sum_, 10)
+        self.assertEqual(result_dict['cancelled_fee'], 10)
+
+
+
 

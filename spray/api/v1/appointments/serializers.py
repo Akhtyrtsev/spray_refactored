@@ -18,12 +18,6 @@ class AppointmentCancelSerializer(serializers.Serializer):
     to_cancel = serializers.BooleanField()
 
 
-class AppointmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Appointment
-        fields = '__all__'
-
-
 class AppointmentForValetSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField('get_name')
     address = ValetAddressSerializer(many=False)

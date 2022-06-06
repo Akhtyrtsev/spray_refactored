@@ -7,8 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-
-from spray.appointments.models import Appointment
 from spray.schedule.models import ValetScheduleOccupiedTime
 from spray.users.managers import UserManager
 from spray.contrib.choices.users import ADDRESS_TYPES, USER_TYPE_CHOICES, CUSTOMER_STATUSES, CITY_CHOICES, \
@@ -374,7 +372,7 @@ class ValetFeed(models.Model):
         blank=True
     )
     appointment = models.ForeignKey(
-        Appointment,
+        'appointments.Appointment',
         on_delete=models.SET_NULL,
         related_name='feeds',
         null=True,
@@ -429,3 +427,10 @@ class ValetFeed(models.Model):
         null=True,
         blank=True
     )
+
+
+class ValetForSchedule(Valet):
+    class Meta:
+        proxy = True
+        verbose_name = 'Valet Schedule'
+        verbose_name_plural = 'Valets: Schedule'
