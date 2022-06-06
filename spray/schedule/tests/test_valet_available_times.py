@@ -171,7 +171,6 @@ class GetAvailableValetTestCase(ScheduleTestCase):
             day.is_working = True
             day.save()
         get_miami_valet = ValetSchedule.valet_filter(city='Miami', date=date, time='12:00')
-        valet = valet.email
         self.assertEqual(get_miami_valet, valet)
 
     def test_available_valet_2(self):
