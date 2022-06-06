@@ -7,4 +7,4 @@ def get_valet():
 
 
 def is_free(valet, date, duration):
-    pass
+    return True
