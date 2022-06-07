@@ -3,8 +3,9 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 
+from spray.api.v1.appointments.serializers import ValetAddressSerializer
 from spray.users.models import Address
-from spray.api.v1.users.valet.serializers import ValetAddressSerializer, ValetGetSerializer
+from spray.api.v1.users.valet.serializers import ValetGetSerializer
 from spray.api.v1.users.client.permissions import IsValet
 from spray.users.models import Valet
 

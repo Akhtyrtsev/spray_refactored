@@ -3,9 +3,29 @@ import datetime
 from django.utils import timezone
 from rest_framework import serializers
 
-from spray.api.v1.users.valet.serializers import ValetAddressSerializer
 from spray.appointments.models import Appointment
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
+from spray.users.models import Address
+
+
+class ValetAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = '__all__'
+        extra_kwargs = {
+            'zip_code': {
+                'required': True,
+            },
+        }
+
+    def create(self, validated_data):
+        user = validated_data.get('user')
+        try:
+            user.city = validated_data.get('city')
+            user.save()
+        except Exception:
+            pass
+        return super(ValetAddressSerializer, self).create(validated_data)
 
 
 class AppointmentGetSerializer(serializers.ModelSerializer):

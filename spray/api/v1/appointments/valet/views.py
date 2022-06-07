@@ -17,9 +17,10 @@ from spray.api.v1.users.valet.serializers import ReAssignValetSerializer
 from spray.appointments.models import Appointment
 from spray.appointments.refund_helper import AutomaticRefund
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
+from spray.feedback.models import ValetFeed
 from spray.notifications.notify_processing import NotifyProcessing
 from spray.schedule.models import ValetScheduleOccupiedTime
-from spray.users.models import Valet, ValetFeed
+from spray.users.models import Valet
 
 
 class ValetAppointmentViewSet(viewsets.ModelViewSet):
