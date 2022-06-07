@@ -8,12 +8,12 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from stripe.error import StripeError
 
-from spray.payment.make_charge import ChargeProcessing
+from spray.payment import make_charge as charging
 import spray.subscriptions.models as sub_models
 from spray.membership.models import MembershipEvent
 from spray.payment.managers import log
-from spray.subscriptions.subscription_processing import SubscriptionProcessing
-from spray.users.models import Client
+from spray.subscriptions import subscription_processing
+from spray.users import models as users_models
 
 
 class ClientSubscriptionCreateManager(models.Manager):
@@ -36,7 +36,7 @@ class ClientSubscriptionCreateManager(models.Manager):
                                      days_to_update=subscription.days)
         to_pay = price * appointments_left
         try:
-            payment_obj = ChargeProcessing(amount=to_pay, payment=payment, subscription=new_client_sub)
+            payment_obj = charging.ChargeProcessing(amount=to_pay, payment=payment, subscription=new_client_sub)
             payment_obj.pay_subscription()
             log.info('Subscription is payed')
         except StripeError as e:
@@ -90,7 +90,7 @@ class ClientSubscriptionCreateManager(models.Manager):
             )
             to_pay = subscription.subscription.price * subscription.appointments_left
             try:
-                payment_obj = ChargeProcessing(
+                payment_obj = charging.ChargeProcessing(
                     amount=to_pay,
                     payment=payment,
                     subscription=subscription,
@@ -101,7 +101,7 @@ class ClientSubscriptionCreateManager(models.Manager):
                 subscription.delete()
                 log.error('Charge failed', e.error.message)
         else:
-            sp = SubscriptionProcessing(
+            sp = subscription_processing.SubscriptionProcessing(
                 current_subscription=instance,
                 new_subscription=subscription,
                 payment=payment,
@@ -155,7 +155,7 @@ class ClientSubscriptionCreateManager(models.Manager):
             instance.save()
             log.info('Subscription is deleted')
         if not instance.client.client_subscriptions.filter(is_deleted=False).count():
-            Client.objects.filter(pk=instance.client.pk).update(
+            users_models.Client.objects.filter(pk=instance.client.pk).update(
                 customer_status=None,
             )
         MembershipEvent.objects.create(

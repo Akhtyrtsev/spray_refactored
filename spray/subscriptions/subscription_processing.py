@@ -2,7 +2,7 @@ from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from stripe.error import StripeError
 
-from spray.payment.make_charge import ChargeProcessing
+from spray.payment import make_charge
 from spray.membership.models import MembershipEvent
 from spray.payment.managers import log
 
@@ -45,7 +45,7 @@ class SubscriptionProcessing:
         payment = self.current_subscription.payment
         try:
             current_subscription.is_active = True
-            payment_obj = ChargeProcessing(
+            payment_obj = make_charge.ChargeProcessing(
                 amount=to_pay,
                 payment=payment,
                 subscription=current_subscription,
@@ -83,7 +83,7 @@ class SubscriptionProcessing:
         current_subscription.unused_appointments += current_subscription.appointments_left
         to_pay = current_subscription.subscription.price * number_of_appointments
         try:
-            payment_obj = ChargeProcessing(
+            payment_obj = make_charge.ChargeProcessing(
                 amount=to_pay,
                 payment=current_subscription.payment,
                 subscription=current_subscription

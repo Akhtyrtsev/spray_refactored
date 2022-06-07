@@ -2,17 +2,14 @@ from django.db import models
 from django.db.models import JSONField
 from django.utils import timezone
 
-import spray.payment.managers as payment_manager
-from spray.contrib.choices.appointments import CANCELLED_BY_CHOICES
-# from spray.appointments.models import Appointment
+import spray.payment.managers as p_manager
 from spray.contrib.choices.appointments import CANCELLED_BY_CHOICES, CITY_CHOICES
 from spray.contrib.choices.refunds import REFUND_TYPES_CHOICES
-from spray.users.models import Client, Valet
 
 
 class Payments(models.Model):
     user = models.ForeignKey(
-        Client,
+        'users.Client',
         on_delete=models.SET_NULL,
         related_name='payments',
         null=True,
@@ -43,7 +40,7 @@ class Payments(models.Model):
     )
 
     objects = models.Manager()
-    payment_objects = payment_manager.PaymentsManager()
+    payment_objects = p_manager.PaymentsManager()
 
     def __str__(self):
         return f'Stripe Payment by {self.user}, {self.date_created}'
@@ -106,7 +103,7 @@ class Charges(models.Model):
 
 class Payout(models.Model):
     valet = models.ForeignKey(
-        Valet,
+        'users.Valet',
         on_delete=models.SET_NULL,
         related_name='payouts',
         null=True,
@@ -188,7 +185,7 @@ class BillingDetails(models.Model):
 
 class Billing(models.Model):
     valet = models.ForeignKey(
-        Valet,
+        'users.Valet',
         on_delete=models.SET_NULL,
         related_name='billing_details',
         null=True,
