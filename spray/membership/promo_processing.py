@@ -1,4 +1,4 @@
-from spray.users.models import Client
+from spray.users import models as users_models
 from spray.membership.models import Promocode, MemberReferral
 import random
 from spray.subscriptions import models as sub_models
@@ -20,7 +20,7 @@ class PromoProcessing:
                 promo.is_active = False
         promo.save()
         if promo.is_referral:
-            own_client = Client.objects.get(referal_code=promo.code)
+            own_client = users_models.Client.objects.get(referal_code=promo.code)
             chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
             code = "".join([random.choice(chars) for x in range(6)])
             subscriptions = sub_models.ClientSubscription.objects.filter(client=client, is_deleted=False,

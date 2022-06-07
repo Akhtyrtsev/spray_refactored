@@ -18,9 +18,10 @@ def create_payout(sender, instance, **kwargs):
         payout = Payout.objects.filter(appointment=instance).first()
         if not payout:
             Payout.objects.create(valet=instance.valet, amount=amount, appointment=instance, details=details)
-#
-#
-# @receiver(post_save, sender=Valet)
-# def create_billing(sender, instance, created, **kwargs):
-#     if created and instance.user_type_id == 3:
-#         Billing.objects.create(valet=instance)
+
+
+@receiver(post_save, sender=Valet)
+def create_billing(sender, instance, created, **kwargs):
+    if created:
+        Billing.objects.create(valet=instance)
+
