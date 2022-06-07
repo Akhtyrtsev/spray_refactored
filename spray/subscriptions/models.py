@@ -2,7 +2,7 @@ from django.db import models
 from spray.payment.models import Payments
 from spray.contrib.choices.appointments import CITY_CHOICES
 from spray.contrib.choices.subscriptions import SUBSCRIPTION_TYPES
-from spray.users.models import Client
+from spray.users import models as users_models
 import spray.subscriptions.managers as sub_managers
 
 
@@ -46,7 +46,7 @@ class Subscription(models.Model):
 
 class ClientSubscription(models.Model):
     client = models.ForeignKey(
-        Client,
+        'users.Client',
         on_delete=models.SET_NULL,
         related_name='client_subscriptions',
         null=True,

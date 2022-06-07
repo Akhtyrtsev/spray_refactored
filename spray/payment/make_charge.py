@@ -1,7 +1,7 @@
 import stripe
 from rest_framework.exceptions import ValidationError
 
-from spray.membership.promo_processing import PromoProcessing
+from spray.membership import promo_processing as promo_proc
 from spray.payment.managers import log
 from spray.payment.models import Charges
 from spray.subscriptions import models as sub_models
@@ -76,7 +76,7 @@ class ChargeProcessing:
     def _pay_by_card(self, client):
         promo = self.appointment.promocode
         if promo:
-            pp = PromoProcessing(client=client, promo=promo)
+            pp = promo_proc.PromoProcessing(client=client, promo=promo)
             pp.apply_promo()
         to_pay = self.amount * 100
         if not client.stripe_id:

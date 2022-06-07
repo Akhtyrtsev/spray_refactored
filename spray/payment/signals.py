@@ -22,5 +22,5 @@ def create_payout(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Valet)
 def create_billing(sender, instance, created, **kwargs):
-    if created and instance.user_type_id == 3:
+    if created:
         Billing.objects.create(valet=instance)
