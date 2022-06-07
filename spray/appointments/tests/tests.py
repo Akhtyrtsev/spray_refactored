@@ -297,4 +297,3 @@ class AppointmentCancelTestCase(TestCase):
         self.assertEqual(appointment.cancelled_by, 'Valet')
         self.assertEqual(appointment.status, 'Cancelled')
         self.assertEqual(appointment.noshow_timestamp, no_show)
-

@@ -1,6 +1,6 @@
 from spray.notifications.models import Notifications
 from spray.notifications.send_notifications import Notifier
-from spray.users.models import Valet
+from spray.users import models as users_models
 
 
 class NotifyProcessing:
@@ -48,7 +48,7 @@ class NotifyProcessing:
         return notification
 
     def change_time_notification(self):
-        is_valet = Valet.objects.exists(pk=self.user.pk)
+        is_valet = users_models.Valet.objects.exists(pk=self.user.pk)
         rn = Notifier(user_id=self.user.id)
         check_valet_notify_rest = rn.is_notification_on_rest()
         if self.user.notification_appointment and check_valet_notify_rest:
@@ -83,7 +83,7 @@ class NotifyProcessing:
             n.notify()
 
     def appointment_notification(self):
-        if Valet.objects.filter(pk=self.user.pk).exists():
+        if users_models.Valet.objects.filter(pk=self.user.pk).exists():
             rn = Notifier(user_id=self.user.id)
             check_valet_notify_rest = rn.is_notification_on_rest()
             if not self.user.notification_appointment and check_valet_notify_rest:

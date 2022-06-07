@@ -2,12 +2,11 @@ from django.db import models
 from django.db.models import JSONField
 
 from spray.contrib.choices.notifications import NOTIFICATION_TYPES
-from spray.users.models import User
 
 
 class Notifications(models.Model):
     user = models.ForeignKey(
-        User,
+        'users.User',
         on_delete=models.SET_NULL,
         blank=True, null=True,
         related_name='notifications',

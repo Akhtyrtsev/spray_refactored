@@ -1,9 +1,11 @@
 import datetime
+import logging
 
 from rest_framework.exceptions import ValidationError
 
 from spray.appointments import models as appointment_models
-from spray.payment.managers import log
+
+log = logging.getLogger('django')
 
 
 class Pricing:

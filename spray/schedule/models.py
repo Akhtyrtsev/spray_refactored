@@ -1,7 +1,6 @@
 from django.db import models
 
 from spray.contrib.choices.schedule import WEEKDAYS
-from spray.users.models import Valet
 
 
 # ----------------------------------------------------------------------- #
@@ -9,7 +8,7 @@ from spray.users.models import Valet
 
 class ValetScheduleDay(models.Model):
     valet = models.ForeignKey(
-        Valet,
+        'users.Valet',
         on_delete=models.CASCADE,
         related_name="working_days",
         null=True,
@@ -51,7 +50,7 @@ class ValetScheduleDay(models.Model):
 
 class ValetScheduleOccupiedTime(models.Model):
     valet = models.ForeignKey(
-        Valet,
+        'users.Valet',
         on_delete=models.SET_NULL,
         related_name='day_offs',
         null=True,
@@ -81,7 +80,7 @@ class ValetScheduleOccupiedTime(models.Model):
 
 class ValetScheduleAdditionalTime(models.Model):
     valet = models.ForeignKey(
-        Valet,
+        'users.Valet',
         on_delete=models.SET_NULL,
         related_name='additional_days',
         null=True,
@@ -104,11 +103,3 @@ class ValetScheduleAdditionalTime(models.Model):
 
     class Meta:
         verbose_name_plural = 'Valets: Additional working days'
-
-
-class ValetForSchedule(Valet):
-
-    class Meta:
-        proxy = True
-        verbose_name = 'Valet Schedule'
-        verbose_name_plural = 'Valets: Schedule'

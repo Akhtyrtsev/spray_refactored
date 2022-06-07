@@ -1,12 +1,11 @@
 import datetime
 
-import pytz
 from django.db import models, transaction
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError, PermissionDenied
 from stripe.error import StripeError
 
-from spray.Pricing.get_price import Pricing
+from spray.Pricing import get_price as pricing_class
 from spray.appointments.booking import get_valet
 from spray.appointments.refund_helper import AutomaticRefund
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
@@ -14,6 +13,7 @@ from spray.payment.make_charge import ChargeProcessing
 from spray.notifications.notify_processing import NotifyProcessing
 from spray.appointments import models as appointment_models
 from spray.payment.managers import log
+from spray.users import models as users_models
 
 
 class AppointmentManager(models.Manager):
@@ -65,7 +65,7 @@ class AppointmentManager(models.Manager):
         subscription = kwargs.get('subscription')
         promo = kwargs.get('promo')
         gift_card = kwargs.get('gift_card')
-        pricing = Pricing(
+        pricing = pricing_class.Pricing(
             date=appointment.date,
             address=appointment.address,
             number_of_people=appointment.number_of_people,
@@ -87,7 +87,7 @@ class AppointmentManager(models.Manager):
         promo = kwargs.get('promo')
         subscription = kwargs.get('subscription')
         client = appointment.client
-        pricing = Pricing(
+        pricing = pricing_class.Pricing(
             date=appointment.date,
             address=appointment.address,
             number_of_people=appointment.number_of_people,
@@ -164,7 +164,7 @@ class AppointmentManager(models.Manager):
 
     def set_reschedule_price(self, *args, **kwargs):
         appointment = kwargs.get('instance')
-        pricing = Pricing(
+        pricing = pricing_class.Pricing(
             date=appointment.date,
             address=appointment.address,
             number_of_people=appointment.number_of_people,
@@ -180,7 +180,7 @@ class AppointmentManager(models.Manager):
         payment = kwargs.get('payment')
         is_confirmed = kwargs.get('is_confirmed')
         purchase_method = 'Pay as you go'
-        pricing = Pricing(
+        pricing = pricing_class.Pricing(
             date=appointment.date,
             address=appointment.address,
             number_of_people=appointment.number_of_people,
@@ -257,7 +257,7 @@ class AppointmentManager(models.Manager):
     def reschedule_valet_set_price_and_date(self, *args, **kwargs):
         appointment = kwargs.get('instance')
         date = kwargs.get('date')
-        pricing = Pricing(
+        pricing = pricing_class.Pricing(
             date=date,
             address=appointment.address,
             number_of_people=appointment.number_of_people,
@@ -294,6 +294,27 @@ class AppointmentManager(models.Manager):
         appointment = kwargs.get('instance')
         is_confirmed = kwargs.get('is_confirmed')
         if not is_confirmed:
+            if not appointment.initial_confirm_by_valet:
+                valet = appointment.valet
+                feed = users_models.ValetFeed.objects.filter(appointment=appointment, deleted=False).first()
+                if not feed:
+                    users_models.ValetFeed.objects.create(
+                        appointment=appointment,
+                        type_of_request='Automatic',
+                        author=valet
+                    )
+                    appointment.valet = None
+                    appointment.time_valet_set = timezone.now()
+                    text = f'{valet.email} is unable to do this appointment,' \
+                           f' but we are seeing if another valet is available'
+                    notify = NotifyProcessing(
+                        appointment=appointment,
+                        text=text,
+                        user=appointment.client,
+                    )
+                    notify.appointment_notification()
+                    appointment.confirmed_by_client = False
+                    appointment.initial_confirm_by_valet = True
             appointment.status = 'Cancelled'
             appointment.refund = 'full'
             appointment.confirmed_by_valet = False
@@ -440,6 +461,21 @@ class AppointmentManager(models.Manager):
             )
             new_notify_to_valet.appointment_notification()
             return appointment
+
+    def setup_micro_status(self, *args, **kwargs):
+        appointment = kwargs.get('instance')
+        micro_status = kwargs.get('micro_status')
+        if micro_status == 'Valet on my way':
+            sms_body = 'Spray Valet here! Valet is on the way to your place'
+            notify = NotifyProcessing(
+                user=appointment.client,
+                text=sms_body,
+                appointment=appointment
+            )
+            notify.appointment_notification()
+        appointment.micro_status = micro_status
+        appointment.save()
+        return appointment
 
 
 

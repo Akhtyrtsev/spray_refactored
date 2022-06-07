@@ -2,12 +2,11 @@ from django.db import models
 
 from spray.contrib.choices.membership import MEMBERSHIP_ACTION
 from spray.contrib.choices.promocodes import TYPES
-from spray.users.models import Client
 
 
 class MembershipEvent(models.Model):
     client = models.ForeignKey(
-        Client,
+        'users.Client',
         on_delete=models.CASCADE,
     )
     date_created = models.DateTimeField(
@@ -40,7 +39,7 @@ class Promocode(models.Model):
         default=1,
     )
     users = models.ManyToManyField(
-        Client,
+        'users.Client',
     )
     is_agency = models.BooleanField(
         default=False,
@@ -65,7 +64,7 @@ class Promocode(models.Model):
 
 class MemberReferral(models.Model):
     client = models.ForeignKey(
-        Client,
+        'users.Client',
         models.CASCADE,
     )
     count = models.IntegerField(
