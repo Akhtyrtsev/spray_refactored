@@ -50,7 +50,7 @@ class ValetSchedule:
             return valet
 
     @staticmethod
-    def valet_filter(city, date, time, client=None):
+    def valet_filter(date, time, city=None, client=None):
         if client:
             only = FavoriteValets.objects.filter(client=client, only=True).first()
             if only:

@@ -7,17 +7,18 @@ from django.utils import timezone
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime, ValetScheduleOccupiedTime
 from spray.schedule.tests.tests_data import *
-from spray.users.models import Valet
+from spray.users.models import Valet, Client, FavoriteValets
 from spray.schedule.get_availability_data import ValetSchedule
 from spray.schedule.parse_schedule import get_time_range
 
 
 class ScheduleTestCase(TestCase):
     def setUp(self):
-        """
-        Creating Los Angeles valet's instances
-        """
+        client_quantity = 10
         valet_quantity = 10
+        """
+        Creating Los Angeles valets instances
+        """
         for i in range(valet_quantity):
             Valet.objects.create(
                 email=f"los_angeles{i}@valet.com",
@@ -48,6 +49,16 @@ class ScheduleTestCase(TestCase):
                 valet=Valet.objects.get(email='miami@valet.com'),
                 weekday=day,
             )
+        """
+        Creating client instances
+        """
+        Client.objects.create(
+            email=f"miami@client.com",
+            password=make_password("12345"),
+            is_active=True,
+            user_type=3,
+            is_confirmed=True,
+        )
 
 
 class CheckWorkingDaysCreationTestCase(ScheduleTestCase):
@@ -187,6 +198,30 @@ class GetAvailableValetTestCase(ScheduleTestCase):
             day.save()
         get_las_vegas_valet = ValetSchedule.valet_filter(city='Las Vegas', date=date, time='12:00')
         self.assertEqual(get_las_vegas_valet, None)
+
+    def test_available_fav_valet_1(self):
+        """
+        check when favorite valet working time 12:00 PM
+        """
+        valet = Valet.objects.get(email='miami@valet.com')
+        now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[valet.city])
+        date = now + datetime.timedelta(days=1)
+        for day in valet.working_days.all():
+            day.start_working_hours = datetime.datetime.strptime('09:00 AM', '%I:%M %p')
+            day.end_working_hours = datetime.datetime.strptime('05:00 PM', '%I:%M %p')
+            day.is_working = True
+            day.save()
+        FavoriteValets.objects.create(
+            client=Client.objects.get(email='miami@client.com'),
+            valet=Valet.objects.get(email='miami@valet.com'),
+            only=True,
+        )
+        get_fav_valet = ValetSchedule.valet_filter(
+            date=date,
+            time='12:00',
+            client=Client.objects.get(email='miami@client.com')
+        )
+        self.assertEqual(get_fav_valet, valet)
 
 
 class ScheduleFunctionTestCase(TestCase):
