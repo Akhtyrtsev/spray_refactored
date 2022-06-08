@@ -1,6 +1,7 @@
 from rest_framework import serializers, status
 
-from spray.users.models import Address, Valet
+from spray.users.models import Address, Valet, FavoriteValets
+
 
 
 # ----------------------------------------------------------------------- #
@@ -65,3 +66,17 @@ class ValetGetSerializer(serializers.ModelSerializer):
 class ReAssignValetSerializer(serializers.Serializer):
     valet = serializers.IntegerField(required=False)
     notes = serializers.CharField(required=False, allow_blank=True)
+
+
+class FavoriteValetsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FavoriteValets
+        exclude = ('id', 'client')
+
+
+class ListFavoriteValetsSerializer(serializers.ModelSerializer):
+    valet = ValetGetSerializer(many=False)
+
+    class Meta:
+        model = FavoriteValets
+        exclude = ('id', 'client')

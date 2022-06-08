@@ -335,6 +335,38 @@ class Valet(User):
         verbose_name_plural = 'Users: Valets'
 
 
+class FavoriteValets(models.Model):
+    client = models.ForeignKey(
+        Client,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='client_valets'
+    )
+    valet = models.ForeignKey(
+        Valet,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='clients_who_liked'
+    )
+    preferred = models.BooleanField(
+        null=True,
+        blank=True,
+        default=False
+    )
+    only = models.BooleanField(
+        null=True,
+        blank=True,
+        default=False
+    )
+    favorite = models.BooleanField(
+        null=True,
+        blank=True,
+        default=False
+    )
+
+
 class Device(models.Model):
     user = models.ForeignKey(
         User,
