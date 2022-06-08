@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
+from spray.api.v1.feedback.serializers import FeedbackSerializer
 from spray.users.models import Address, Client
 from spray.appointments.models import Price
 from spray.contrib.choices.appointments import CITY_CHOICES
@@ -61,6 +62,15 @@ class ClientAddressSerializer(serializers.ModelSerializer):
 
 
 class ClientGetSerializer(ModelSerializer):
+
+    feedback = FeedbackSerializer(many=True, required=False)
+
+    preferences = serializers.SerializerMethodField(
+        source='get_preferences',
+        read_only=True
+    )
+
+
     class Meta:
         model = Client
         fields = ('first_name',
@@ -71,6 +81,8 @@ class ClientGetSerializer(ModelSerializer):
                   'notification_email',
                   'notification_sms',
                   'notification_push',
+                  'feedback',
+                  'preferences',
                   'stripe_id',
                   'apple_id',
                   'docusign_envelope',
@@ -81,3 +93,16 @@ class ClientGetSerializer(ModelSerializer):
                   'is_new',
                   'is_blocked',
                   )
+
+    def get_preferences(self, obj):
+        only = obj.client_valets.filter(only=True)
+        preferred = obj.client_valets.filter(preferred=True)
+        favorite = obj.client_valets.filter(favorite=True)
+        result = {'only': [], 'preferred': [], 'favorite': []}
+        for valet in only:
+            result['only'].append(valet.valet.id)
+        for valet in preferred:
+            result['preferred'].append(valet.valet.id)
+        for valet in favorite:
+            result['favorite'].append(valet.valet.id)
+        return result
