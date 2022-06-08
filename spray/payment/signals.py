@@ -24,3 +24,4 @@ def create_payout(sender, instance, **kwargs):
 def create_billing(sender, instance, created, **kwargs):
     if created:
         Billing.objects.create(valet=instance)
+

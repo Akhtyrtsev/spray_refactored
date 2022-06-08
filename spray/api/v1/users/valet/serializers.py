@@ -12,7 +12,9 @@ from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.feedback.models import ValetFeed
 from spray.schedule.models import ValetScheduleOccupiedTime
 from spray.schedule.parse_schedule import get_time_range
-from spray.users.models import Address, Valet
+from spray.users.models import Address, Valet, FavoriteValets
+
+
 
 
 # ----------------------------------------------------------------------- #
@@ -60,6 +62,7 @@ class ValetGetSerializer(serializers.ModelSerializer):
 class ReAssignValetSerializer(serializers.Serializer):
     valet = serializers.IntegerField(required=False)
     notes = serializers.CharField(required=False, allow_blank=True)
+
 
 
 class ListValetFeedSerializer(serializers.ModelSerializer):
@@ -121,3 +124,18 @@ class CreateValetFeedSerializer(serializers.ModelSerializer):
                 ValetFeed.objects.create(appointment=instance, visible=False, shift=shift, **validated_data)
 
         return result
+
+      
+class FavoriteValetsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FavoriteValets
+        exclude = ('id', 'client')
+
+
+class ListFavoriteValetsSerializer(serializers.ModelSerializer):
+    valet = ValetGetSerializer(many=False)
+
+    class Meta:
+        model = FavoriteValets
+        exclude = ('id', 'client')
+
