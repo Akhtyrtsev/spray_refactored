@@ -4,8 +4,9 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework import viewsets, status, filters
 
+from spray.api.v1.appointments.serializers import ValetAddressSerializer
 from spray.users.models import Address, FavoriteValets
-from spray.api.v1.users.valet.serializers import ValetAddressSerializer, ValetGetSerializer, FavoriteValetsSerializer, \
+from spray.api.v1.users.valet.serializers import ValetGetSerializer, FavoriteValetsSerializer, \
     ListFavoriteValetsSerializer
 from spray.api.v1.users.client.permissions import IsValet
 from spray.users.models import Valet
