@@ -143,7 +143,7 @@ class ClientSubscriptionCreateManager(models.Manager):
                         }
                     )
             else:
-                if delta.seconds / 60 <= 30:
+                if delta.seconds / 60 <= 1:
                     raise ValidationError(
                         detail=
                         {

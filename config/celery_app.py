@@ -52,14 +52,14 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     're_new_subscription': {
         'task': 'spray.subscriptions.tasks.re_new_subscription',
-        'schedule': crontab(),
+        'schedule': crontab(0, 0),
         'options': {
             'queue': 'queue_schedule',
         },
     },
     'send_payout': {
         'task': 'spray.payment.tasks.send_payout',
-        'schedule': crontab(),
+        'schedule': crontab(0, 0),
         'options': {
             'queue': 'queue_schedule',
         },

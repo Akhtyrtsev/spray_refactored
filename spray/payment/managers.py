@@ -3,6 +3,7 @@ from datetime import datetime
 
 import stripe
 from django.db import models
+from rest_framework.exceptions import ValidationError
 
 import spray.payment.models as p
 
@@ -39,8 +40,11 @@ class PaymentsManager(models.Manager):
             log.info('Create customer object on stripe')
         user.stripe_id = customer.id
         user.save()
-        stripe_token = stripe.Token.retrieve(token)
-        log.info('Retrieve token from stripe')
+        try:
+            stripe_token = stripe.Token.retrieve(token)
+            log.info('Retrieve token from stripe')
+        except Exception:
+            raise ValidationError({'detail': 'Invalid token'})
         payment = p.Payments.objects.filter(stripe_id=stripe_token['card']['id'], user=user)
         if not payment:
             card = stripe.Customer.create_source(
