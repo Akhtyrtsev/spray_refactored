@@ -55,14 +55,24 @@ class AvailableValetView(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.
 
 
 class ValetScheduleViewSet(viewsets.ModelViewSet):
-    queryset = ValetScheduleDay.objects.filter(is_working=True)
-    permission_classes = [AllowAny]
+    queryset = ValetScheduleDay.objects.all()
+    permission_classes = [IsAuthenticated, ]
 
     def get_serializer_class(self):
         if self.request.method != 'GET':
             return ValetSchedulePostSerializer
         else:
             return ValetScheduleGetSerializer
+
+    def get_queryset(self):
+        if self.request.method != 'GET':
+            return ValetScheduleDay.objects.filter(is_working=True)
+        else:
+            valet = Valet.objects.filter(email=self.request.query_params.get('valet')).first()
+            if valet:
+                return ValetScheduleDay.objects.filter(valet=valet.id)
+            else:
+                return super().get_queryset()
 
 
 class ValetScheduleAdditionalTimeView(viewsets.ModelViewSet):
