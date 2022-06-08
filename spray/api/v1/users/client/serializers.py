@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
+from spray.api.v1.feedback.serializers import FeedbackSerializer
 from spray.users.models import Address, Client
 from spray.appointments.models import Price
 from spray.contrib.choices.appointments import CITY_CHOICES
@@ -61,10 +62,14 @@ class ClientAddressSerializer(serializers.ModelSerializer):
 
 
 class ClientGetSerializer(ModelSerializer):
+
+    feedback = FeedbackSerializer(many=True, required=False)
+
     preferences = serializers.SerializerMethodField(
         source='get_preferences',
         read_only=True
     )
+
 
     class Meta:
         model = Client
@@ -76,6 +81,7 @@ class ClientGetSerializer(ModelSerializer):
                   'notification_email',
                   'notification_sms',
                   'notification_push',
+                  'feedback',
                   'preferences',
                   'stripe_id',
                   'apple_id',

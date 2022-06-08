@@ -61,6 +61,7 @@ LOCAL_APPS = [
     "spray.schedule.apps.ScheduleConfig",
     "spray.membership.apps.MembershipConfig",
     "spray.notifications.apps.NotificationsConfig",
+    "spray.feedback.apps.FeedbackConfig",
 
 ]
 
