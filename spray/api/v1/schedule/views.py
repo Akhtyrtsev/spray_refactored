@@ -2,7 +2,7 @@ import datetime
 
 from rest_framework import viewsets, mixins, status
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from spray.api.v1.schedule.serializers import ValetScheduleAdditionalTimeSerializer, ValetScheduleGetSerializer, \
@@ -36,12 +36,13 @@ class AvailableTimesViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixi
 class AvailableValetView(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
     queryset = Valet.objects.all()
     serializer_class = GetAvailableValetSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated, ]
 
     def list(self, request, *args, **kwargs):
         city = request.query_params.get('city', None)
         date = request.query_params.get("date", None)
         time = request.query_params.get("time", None)
+        client = request.user
         if not city:
             raise ValidationError(detail='No city selected')
         if not date:
@@ -49,7 +50,7 @@ class AvailableValetView(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.
         if not time:
             raise ValidationError(detail='No time selected')
         date = datetime.datetime.strptime(date, '%d-%m-%Y')
-        valet = ValetSchedule.valet_filter(city=city, date=date, time=time)
+        valet = ValetSchedule.valet_filter(city=city, date=date, time=time, client=client)
         return Response({'valet': valet}, status=status.HTTP_200_OK)
 
 

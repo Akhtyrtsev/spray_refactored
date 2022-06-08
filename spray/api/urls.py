@@ -8,6 +8,7 @@ from spray.api.v1.schedule import urls as schedule_urls
 from spray.api.v1.device import urls as device_urls
 from spray.api.v1.notifications import urls as notification_urls
 from spray.api.v1.appointments import urls as appointment_urls
+from spray.api.v1.feedback import urls as feedback_urls
 
 app_name = "api"
 
@@ -25,6 +26,7 @@ urlpatterns = [
     # -------------------------- subscriptions -------------------------- #
     # ------------------------------------------------------------- #
     path("", include(subscriptions_urls)),
+    path("", include(subscriptions_urls)),
     # -------------------------- schedule -------------------------- #
     # ------------------------------------------------------------- #
     path("", include(schedule_urls)),
@@ -40,6 +42,9 @@ urlpatterns = [
     # -------------------------- appointments -------------------------- #
     # ------------------------------------------------------------- #
     path("", include(appointment_urls)),
+    # ---------------------------- feedback ---------------------------- #
+    # ------------------------------------------------------------------ #
+    path("", include(feedback_urls)),
 
 ]
 
