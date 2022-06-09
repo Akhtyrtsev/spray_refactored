@@ -9,3 +9,5 @@ WEEKDAYS = [
     ('Saturday', 'Saturday'),
     ('Sunday', 'Sunday'),
 ]
+
+CITY = ['Las Vegas', 'Los Angeles', 'Miami']

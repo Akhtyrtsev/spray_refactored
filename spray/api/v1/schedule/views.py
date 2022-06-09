@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from spray.api.v1.schedule.serializers import ValetScheduleAdditionalTimeSerializer, ValetScheduleGetSerializer, \
     ValetSchedulePostSerializer, GetAvailableValetSerializer
 from spray.api.v1.users.valet.serializers import ValetGetSerializer
+from spray.contrib.choices.schedule import CITY
 from spray.schedule.models import ValetScheduleDay, ValetScheduleAdditionalTime
 from spray.users.models import Valet
 from spray.schedule.get_availability_data import ValetSchedule, AvailableTime
@@ -43,15 +44,24 @@ class AvailableValetView(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.
         date = request.query_params.get("date", None)
         time = request.query_params.get("time", None)
         client = request.user
-        if not city:
-            raise ValidationError(detail='No city selected')
-        if not date:
-            raise ValidationError(detail='No date selected')
-        if not time:
-            raise ValidationError(detail='No time selected')
-        date = datetime.datetime.strptime(date, '%d-%m-%Y')
+        if city:
+            if city not in CITY:
+                cityes = ", ".join(CITY)
+                raise ValidationError(detail={'detail': f"City doesn't exist. Use one of these : {cityes}"})
+        try:
+            if not date:
+                raise ValidationError(detail={'detail': 'No date selected'})
+            date = datetime.datetime.strptime(date, '%d-%m-%Y')
+        except ValueError:
+            raise ValidationError(detail={'detail': 'Date has wrong format. Use format: DD-MM-YYYY.'})
+        try:
+            if not time:
+                raise ValidationError(detail={'detail': 'No time selected'})
+            datetime.datetime.strptime(time, '%H:%M')
+        except ValueError:
+            raise ValidationError(detail={'detail': 'Time has wrong format. Use format: hh:mm.'})
         valet = ValetSchedule.valet_filter(city=city, date=date, time=time, client=client)
-        return Response({'valet': valet}, status=status.HTTP_200_OK)
+        return Response({'valet': f'{valet}'}, status=status.HTTP_200_OK)
 
 
 class ValetScheduleViewSet(viewsets.ModelViewSet):
