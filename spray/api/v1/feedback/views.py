@@ -5,11 +5,14 @@ from django.utils import timezone
 from rest_framework import generics, status, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from spray.api.v1.feedback.serializers import FeedbackSerializer
 from spray.api.v1.users.valet.serializers import ListValetFeedSerializer, CreateValetFeedSerializer
+from spray.appointments.models import Appointment
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.feedback.models import Feedback, ValetFeed
+from spray.users.models import Valet, User
 
 
 class FeedbackView(generics.ListCreateAPIView):
@@ -21,6 +24,15 @@ class FeedbackView(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         appointment = serializer.validated_data.get('appointment')
         user = serializer.validated_data.get('user')
+        text = serializer.validated_data.get('text')
+        rate = serializer.validated_data.get('rate')
+        if not text:
+            raise ValidationError(detail={'detail': 'Text field must be not empty'})
+        if not rate:
+            raise ValidationError(detail={'detail': 'Rate field must be not empty'})
+        else:
+            if float(rate) not in range(1, 6):
+                raise ValidationError(detail={'detail': 'Rate must be in range 0-5'})
         instance = Feedback.objects.filter(appointment=appointment, user=user).first()
         if instance:
             serializer = FeedbackSerializer(instance=instance, data=request.data)
@@ -39,26 +51,17 @@ class FeedbackView(generics.ListCreateAPIView):
 
 class ValetFeedViewSet(viewsets.ModelViewSet):
     queryset = ValetFeed.objects.all().order_by('-date_created')
-    serializer_class = ListValetFeedSerializer
 
     def get_queryset(self):
-        queryset = ValetFeed.objects.filter(
-            Q(appointment__isnull=True, author=self.request.user) |
-            Q(~Q(appointment__status='Cancelled'), appointment__isnull=False, author=self.request.user)) | \
-                   ValetFeed.objects.filter(Q(assigned_to__isnull=True) | Q(assigned_to=self.request.user),
-                                            Q(author__city=self.request.user.city) |
-                                            Q(author__isnull=True, accepted_by=self.request.user) |
-                                            Q(appointment__address__city=self.request.user.city), visible=True,
-                                            deleted=False).order_by('-date_created')
-        my_only = self.request.query_params.get('my_only', None)
-        if my_only:
-            queryset = queryset.filter(accepted_by=self.request.user, shift__isnull=False)
-        return queryset
+        valet = self.request.query_params.get('valet', None)
+        if not valet:
+            raise ValidationError(detail={'detail': 'No valet selected'})
+        return ValetFeed.objects.filter(accepted_by=Valet.objects.filter(email=valet).first().id)
 
     def get_serializer_class(self):
-        if self.action in ('list', 'retrieve'):
-            return ListValetFeedSerializer
-        return CreateValetFeedSerializer
+        if self.request.method != 'GET':
+            return CreateValetFeedSerializer
+        return ListValetFeedSerializer
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -75,3 +78,12 @@ class ValetFeedViewSet(viewsets.ModelViewSet):
 
         serializer = ListValetFeedSerializer(instance=instance, many=False, context={'request': request})
         return Response(serializer.data)
+
+
+class CheckFeedback(APIView):
+    def get(self, request):
+        user = self.request.user
+        last_appointment = Appointment.objects.filter(Q(client=user) | Q(valet=user)).last()
+        if Feedback.objects.filter(appointment=last_appointment):
+            return Response({'detail': 'Feedback already exist'})
+        return Response({'detail': "Feedback doesn't exist"})
