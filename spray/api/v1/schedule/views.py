@@ -88,6 +88,10 @@ class ValetScheduleViewSet(viewsets.ModelViewSet):
 class ValetScheduleAdditionalTimeView(viewsets.ModelViewSet):
     serializer_class = ValetScheduleAdditionalTimeSerializer
     queryset = ValetScheduleAdditionalTime.objects.all()
+    permission_classes = [IsAuthenticated, ]
 
-    def get_queryset(self):
-        return self.queryset.filter(valet=self.request.user, is_confirmed=True).order_by('-date', '-start_time')
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
