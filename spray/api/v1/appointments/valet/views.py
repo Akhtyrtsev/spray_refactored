@@ -1,25 +1,16 @@
-import datetime
-
-from django.db import transaction
-from django.utils import timezone
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from spray.Pricing.get_price import Pricing
 from spray.api.v1.appointments.valet.serializers import ValetCancelSerializer, RescheduleValetSetDateSerializer, \
-    RescheduleValetConfirmSerializer
+    RescheduleValetConfirmSerializer, CompleteSerializer
 from spray.api.v1.appointments.serializers import AppointmentGetSerializer, AppointmentForValetSerializer, \
     MicroStatusSerializer, AddPeopleSerializer
 from spray.api.v1.users.client.permissions import IsValet
-from spray.api.v1.users.valet.serializers import ReAssignValetSerializer
 from spray.appointments.models import Appointment
 from spray.appointments.refund_helper import AutomaticRefund
-from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
-from spray.feedback.models import ValetFeed
 from spray.notifications.notify_processing import NotifyProcessing
-from spray.schedule.models import ValetScheduleOccupiedTime
 from spray.users.models import Valet
 
 
@@ -35,65 +26,6 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         valet = Valet.objects.get(pk=self.request.user.pk)
         return Appointment.objects.filter(valet=valet).exclude(status='New')
-
-    @action(detail=True, methods=['put'], url_path='re-assign', url_name='re-assign')
-    def re_assign(self, request, pk=None):
-        with transaction.atomic():
-            instance = self.get_object()
-            try:
-                now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[instance.timezone])
-            except Exception:
-                now = timezone.now()
-            if (now + datetime.timedelta(minutes=65)) > instance.date:
-                raise ValidationError(detail={'detail': "Too late to change"})
-            instance.time_valet_set = now - datetime.timedelta(hours=2)
-            instance.save()
-            serializer = ReAssignValetSerializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            valet = serializer.validated_data.get('valet', None)
-            notes = serializer.validated_data.get('notes', None)
-            if valet:
-                try:
-                    valet = Valet.objects.get(pk=valet)
-                except Exception:
-                    raise ValidationError(detail={'detail': 'No such Valet'})
-
-                ValetFeed.objects.create(
-                    author=request.user,
-                    assigned_to=valet,
-                    appointment=instance,
-                    notes=notes,
-                    type_of_request='Re-assign'
-                )
-
-                notify = NotifyProcessing(
-                    appointment=instance,
-                    text='Appointment was reassigned to you',
-                    user=valet,
-                )
-                notify.appointment_notification()
-
-                # create_chat(instance, request.user, valet)
-                return Response({'detail': 'Valet was changed'})
-
-            ValetFeed.objects.create(
-                author=request.user,
-                appointment=instance,
-                notes=notes,
-                type_of_request='Feed'
-            )
-            date = instance.date.date()
-            start_time = instance.date.strftime("%I:%M %p")
-            end_time = (instance.date + instance.duration).strftime("%I:%M %p")
-            ValetScheduleOccupiedTime.objects.create(
-                valet=request.user,
-                date=date,
-                start_time=start_time,
-                end_time=end_time,
-                is_confirmed=False
-            )
-
-            return Response({'detail': 'Post to Valet Feed was created successfully'})
 
     @action(detail=False, methods=['get'], url_path='unconfirmed', url_name='unconfirmed')
     def unconfirmed_list(self, request):
@@ -146,7 +78,7 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
         Appointment.setup_manager.setup_micro_status(micro_status=micro_status, instance=instance)
         return Response({'detail': 'Appointment updated'}, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=['put'], url_path='add-people', url_name='add_people')
+    @action(detail=True, methods=['patch'], url_path='add-people', url_name='add-people')
     def add_people(self, request, pk=None, ):
         appointment = self.get_object()
         serializer = AddPeopleSerializer(data=request.data)
@@ -156,7 +88,6 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
             number_of_people = appointment.additional_people + appointment.number_of_people
             price = Pricing(date=appointment.date, address=appointment.address, number_of_people=number_of_people)
             new_price = price.get_price()
-            new_price = new_price['pay_as_you_go']
             if appointment.promocode:
                 if appointment.promocode.code_type == 'discount':
                     new_price -= appointment.promocode.value
@@ -171,6 +102,13 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
                 print('people added')
                 appointment.people_added = True
                 appointment.confirmed_by_client = False
+                client_text = f'{appointment.additional_people} persons was added to your appointment, pls confirm it.'
+                new_notify_to_client = NotifyProcessing(
+                    appointment=appointment,
+                    text=client_text,
+                    user=appointment.client,
+                )
+                new_notify_to_client.appointment_notification()
             else:
                 print('people removed')
                 appointment.people_added = True
@@ -182,3 +120,14 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
             appointment.save()
         return Response({'detail': 'New people added to appointment'}, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=['patch'], url_path='complete', url_name='complete')
+    def appointment_complete(self, request, pk=None):
+        instance = self.get_object()
+        serializer = CompleteSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        to_complete = serializer.validated_data.get('to_complete')
+        Appointment.setup_manager.complete(instance=instance, to_complete=to_complete)
+        if to_complete:
+            return Response({'detail': 'Appointment completed'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'Appointment is not completed'}, status=status.HTTP_202_ACCEPTED)

@@ -14,6 +14,8 @@ def change_appointment_status(sender, instance, created, **kwargs):
     else:
         if instance.status == 'Cancelled':
             pass
+        elif instance.status == 'Completed':
+            pass
         elif instance.confirmed_by_valet and instance.confirmed_by_client:
             Appointment.objects.filter(pk=instance.pk).update(status='Upcoming')
         elif not instance.confirmed_by_valet or not instance.confirmed_by_client:
