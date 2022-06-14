@@ -134,5 +134,5 @@ class AvailableTime:
         if len(valets) < 1:
             raise ValidationError(detail="No valets available")
         for valet in valets:
-            available_time = set(available_time + ValetSchedule.get_available_valet(valet, date, city=city))
+            available_time = set(list(available_time) + list(ValetSchedule.get_available_valet(valet, date, city=city)))
         return sorted(available_time)
