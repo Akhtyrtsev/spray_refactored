@@ -1,6 +1,5 @@
 from django.db import models
 
-from spray.appointments.models import Appointment
 from spray.contrib.choices.feedback import TYPES_OF_REQUESTS
 from spray.contrib.choices.users import CITY_CHOICES
 from spray.schedule.models import ValetScheduleOccupiedTime
@@ -31,7 +30,7 @@ class Feedback(models.Model):
         related_name='written_feedback'
     )
     appointment = models.ForeignKey(
-        Appointment,
+        'appointments.Appointment',
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
@@ -58,7 +57,7 @@ class ValetFeed(models.Model):
         blank=True
     )
     appointment = models.ForeignKey(
-        Appointment,
+        'appointments.Appointment',
         on_delete=models.SET_NULL,
         related_name='feeds',
         null=True,

@@ -1,7 +1,9 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 from spray.api.v1.stripe_system.serializers import PaymentGetSerializer
 from spray.api.v1.users.client.serializers import ClientGetSerializer
+from spray.contrib.choices.subscriptions import SUBSCRIPTION_TYPES
 from spray.subscriptions.models import Subscription, ClientSubscription
 
 
@@ -41,7 +43,6 @@ class ClientSubscriptionPostSerializer(serializers.ModelSerializer):
 
 
 class PaymentClientSubscriptionSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = ClientSubscription
         fields = ('payment',)

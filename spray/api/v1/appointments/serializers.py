@@ -109,8 +109,12 @@ class AddPeopleSerializer(serializers.Serializer):
     people = serializers.IntegerField()
 
 
-class MicroStatusSerializer(serializers.Serializer):
-    micro_status = serializers.CharField(max_length=100)
+class MicroStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appointment
+        fields = (
+            'micro_status',
+        )
 
 
 class CancelCompleteSerializer(serializers.Serializer):

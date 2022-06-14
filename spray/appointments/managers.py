@@ -6,14 +6,14 @@ from rest_framework.exceptions import ValidationError, PermissionDenied
 from stripe.error import StripeError
 
 from spray.Pricing import get_price as pricing_class
-from spray.appointments.booking import get_valet
 from spray.appointments.refund_helper import AutomaticRefund
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
+from spray.feedback.models import ValetFeed
 from spray.payment.make_charge import ChargeProcessing
 from spray.notifications.notify_processing import NotifyProcessing
 from spray.appointments import models as appointment_models
 from spray.payment.managers import log
-from spray.users import models as users_models
+from spray.schedule.get_availability_data import ValetSchedule
 
 
 class AppointmentManager(models.Manager):
@@ -52,10 +52,33 @@ class AppointmentManager(models.Manager):
     def set_valet(self, *args, **kwargs):
         appointment = kwargs.get('instance')
         valet = kwargs.get('valet')
+        time = appointment.date.time()
+        time_in_str = time.strftime('%H:%M')
         if valet:
+            if valet.city != appointment.address.city:
+                raise ValidationError(
+                                detail={
+                                    'detail': 'Sorry, this valet does not serve this city'
+                                }
+                            )
+            valet = ValetSchedule().valet_is_free(
+                date=appointment.date,
+                time=time_in_str,
+                valet=valet
+            )
+            if not valet:
+                valet = ValetSchedule().valet_filter(
+                    city=appointment.address.city,
+                    date=appointment.date,
+                    time=time_in_str,
+                )
             appointment.valet = valet
         else:
-            valet = get_valet()
+            valet = ValetSchedule().valet_filter(
+                city=appointment.address.city,
+                date=appointment.date,
+                time=time_in_str,
+            )
             appointment.valet = valet
         appointment.save()
         return valet
@@ -94,13 +117,15 @@ class AppointmentManager(models.Manager):
             subscription=subscription,
             promo_code=promo,
         )
+        if subscription:
+            purchase_method = 'Subscription'
         if purchase_method == 'Subscription':
             pricing.get_price()
             dict_price = pricing.get_result_dict()
             initial_price = dict_price['subscription_price']
         else:
-            dict_price = pricing.get_result_dict()
             pricing.get_price()
+            dict_price = pricing.get_result_dict()
             initial_price = dict_price['initial_price']
         charge_obj = ChargeProcessing(
             amount=appointment.price,
@@ -128,13 +153,20 @@ class AppointmentManager(models.Manager):
         with transaction.atomic():
             appointment.save()
             client.save()
-        text = 'You booked the new appointment'
-        new_notify = NotifyProcessing(
+        text_for_client = 'You booked the new appointment'
+        new_client_notify = NotifyProcessing(
             appointment=appointment,
-            text=text,
+            text=text_for_client,
+            user=appointment.client,
+        )
+        new_client_notify.appointment_notification()
+        text_for_valet = 'Appointment with you was booked'
+        new_valet_notify = NotifyProcessing(
+            appointment=appointment,
+            text=text_for_valet,
             user=appointment.valet,
         )
-        new_notify.appointment_notification()
+        new_valet_notify.appointment_notification()
         return appointment
 
     def set_reschedule_date(self, *args, **kwargs):
@@ -207,7 +239,7 @@ class AppointmentManager(models.Manager):
         if is_confirmed and appointment.confirmed_by_valet:
             if appointment.additional_price > 0:
                 charge = ChargeProcessing(
-                    amount=appointment.price,
+                    amount=appointment.additional_price,
                     payment=payment,
                     appointment=appointment,
                     idempotency_key=appointment.idempotency_key,
@@ -233,14 +265,14 @@ class AppointmentManager(models.Manager):
             new_notify.appointment_notification()
             appointment.confirmed_by_client = True
         elif is_confirmed:
-            valet_text = 'You appointment was rescheduled, please confirm it'
+            valet_text = 'Your appointment was rescheduled, please confirm it'
             new_notify_to_valet = NotifyProcessing(
                 appointment=appointment,
                 text=valet_text,
                 user=appointment.valet,
             )
             new_notify_to_valet.appointment_notification()
-            client_text = 'You appointment was rescheduled, please wait for the valet confirm'
+            client_text = 'Your appointment was rescheduled, please wait for the valet confirm'
             new_notify_to_client = NotifyProcessing(
                 appointment=appointment,
                 text=client_text,
@@ -262,10 +294,10 @@ class AppointmentManager(models.Manager):
             address=appointment.address,
             number_of_people=appointment.number_of_people,
         )
-        result_dict = pricing.get_result_dict()['initial_price']
-        appointment.initial_price = result_dict
-        old_price = appointment.price
         new_price = pricing.get_price()
+        result_dict = pricing.get_result_dict()
+        appointment.initial_price = result_dict['initial_price']
+        old_price = appointment.price
         appointment.additional_price = new_price - old_price
         if appointment.additional_price > 0:
             text = f'The time of your appointment was changed on night,' \
@@ -296,9 +328,9 @@ class AppointmentManager(models.Manager):
         if not is_confirmed:
             if not appointment.initial_confirm_by_valet:
                 valet = appointment.valet
-                feed = users_models.ValetFeed.objects.filter(appointment=appointment, deleted=False).first()
+                feed = ValetFeed.objects.filter(appointment=appointment, deleted=False).first()
                 if not feed:
-                    users_models.ValetFeed.objects.create(
+                    ValetFeed.objects.create(
                         appointment=appointment,
                         type_of_request='Automatic',
                         author=valet
@@ -325,7 +357,7 @@ class AppointmentManager(models.Manager):
             new_notify_to_client = NotifyProcessing(
                 appointment=appointment,
                 text=client_text,
-                user=appointment.valet,
+                user=appointment.client,
             )
             new_notify_to_client.appointment_notification()
             return appointment
@@ -379,7 +411,7 @@ class AppointmentManager(models.Manager):
             else:
                 appointment.refund = 'full'
         else:
-            PermissionDenied(
+            raise PermissionDenied(
                 detail=
                 {
                     'detail': 'Clients are able to cancel only Pending or Upcoming appointments'
@@ -477,6 +509,21 @@ class AppointmentManager(models.Manager):
         appointment.save()
         return appointment
 
-
-
-
+    def complete(self, *args, **kwargs):
+        appointment = kwargs.get('instance')
+        to_complete = kwargs.get('to_complete')
+        if to_complete:
+            try:
+                now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[appointment.timezone])
+            except Exception:
+                now = timezone.now()
+            if appointment.date < now:
+                appointment.status = 'Completed'
+                appointment.save()
+            else:
+                raise ValidationError(
+                    detail=
+                    {
+                        'detail': 'You can’t finish appointment as the scheduled time and date didn’t start yet.'
+                    }
+                )

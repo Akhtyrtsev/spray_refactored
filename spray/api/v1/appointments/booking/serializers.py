@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from spray.appointments.booking import is_free
 from spray.appointments.models import Appointment
 from spray.subscriptions.models import ClientSubscription
 from spray.users.models import Client
@@ -60,30 +59,7 @@ class BookingSetValetSerializer(serializers.ModelSerializer):
         model = Appointment
         fields = (
             'valet',
-            'date',
         )
-
-    def validate(self, attrs):
-        valet = attrs['valet']
-        date = attrs['date']
-        user = self.context['request'].user
-        client = Client.objects.get(pk=user.pk)
-        appointment = Appointment.objects.get(client=client, date=date)
-        if valet:
-            if valet.city != appointment.address.city:
-                raise ValidationError(
-                    detail={
-                        'detail': 'Sorry, this valet does not serve this city'
-                    }
-                )
-            else:
-                if not is_free(valet=valet, date=date, duration=appointment.duration):
-                    raise ValidationError(
-                        detail={
-                            'detail': 'Please take an another slot because this is booked for that valet'
-                        }
-                    )
-        return attrs
 
 
 class BookingSetPriceSerializer(serializers.ModelSerializer):

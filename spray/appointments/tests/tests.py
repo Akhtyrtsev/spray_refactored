@@ -13,7 +13,7 @@ from spray.users.models import Client, Address, Valet
 
 
 class BookingManagerTestCase(TestCase):
-    fixtures = ['fixtures/Prices.json']
+    fixtures = ['fixtures/Prices.json', 'fixtures/BillingDetails.json']
 
     def setUp(self):
         client = Client.objects.create(
@@ -32,7 +32,8 @@ class BookingManagerTestCase(TestCase):
         )
         Valet.objects.create(
             email='valet@gmail.com',
-            password=make_password('12')
+            password=make_password('12'),
+            city='Los Angeles'
         )
         Payments.objects.create(
             user=client,
@@ -49,9 +50,12 @@ class BookingManagerTestCase(TestCase):
             appointments_left=4,
         )
 
+    @patch('spray.schedule.get_availability_data.ValetSchedule.valet_is_free', autospec=True)
     @patch('spray.notifications.send_notifications.Notifier.send_push', autospec=True)
     @patch('stripe.Charge', autospec=True)
-    def test_appointment_manager_sub(self, first_mock, second_mock):
+    def test_appointment_manager_sub(self, first_mock, second_mock, third_mock):
+        valet = Valet.objects.get(email='valet@gmail.com')
+        third_mock.return_value = valet
         appointment = Appointment.objects.first()
         date_time_str = '22/05/12 18:30:00'
         date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
@@ -63,16 +67,19 @@ class BookingManagerTestCase(TestCase):
         address = Address.objects.get(city='Los Angeles')
         Appointment.setup_manager.set_client_and_address(address=address, client=client, instance=appointment)
         Appointment.setup_manager.set_date(date=date, number_of_people=number_of_people, instance=appointment)
-        Appointment.setup_manager.set_valet(instance=appointment)
+        Appointment.setup_manager.set_valet(instance=appointment, valet=valet)
         Appointment.setup_manager.set_price(instance=appointment, subscription=subscription)
         Appointment.setup_manager.set_payment(instance=appointment, payment=payment, subscription=subscription,
                                               purchase_method='Subscription')
         self.assertEqual(appointment.initial_price, 50)
         self.assertEqual(appointment.price, 84)
 
+    @patch('spray.schedule.get_availability_data.ValetSchedule.valet_is_free', autospec=True)
     @patch('spray.notifications.send_notifications.Notifier.send_push', autospec=True)
     @patch('stripe.Charge.create')
-    def test_appointment_manager(self, first_mock, second_mock):
+    def test_appointment_manager(self, first_mock, second_mock, third_mock):
+        valet = Valet.objects.get(email='valet@gmail.com')
+        third_mock.return_value = valet
         first_mock.return_value = {
             'id': 'test'
         }
@@ -85,7 +92,7 @@ class BookingManagerTestCase(TestCase):
         address = Address.objects.get(city='Los Angeles')
         Appointment.setup_manager.set_client_and_address(address=address, client=client, instance=appointment)
         Appointment.setup_manager.set_date(date=date, number_of_people=number_of_people, instance=appointment)
-        Appointment.setup_manager.set_valet(instance=appointment)
+        Appointment.setup_manager.set_valet(instance=appointment, valet=valet)
         Appointment.setup_manager.set_price(instance=appointment)
         Appointment.setup_manager.set_payment(instance=appointment, payment=payment)
         self.assertEqual(appointment.initial_price, 150)
@@ -96,7 +103,7 @@ class RescheduleManagerTestCase(TestCase):
     fixtures = ['fixtures/Prices.json']
 
     def setUp(self):
-        date_time_str = '22/05/20 18:30:00'
+        date_time_str = '22/06/20 18:30:00'
         date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         client = Client.objects.create(
             email='test@gmail.com',
@@ -139,7 +146,7 @@ class RescheduleManagerTestCase(TestCase):
     @patch('stripe.Charge', autospec=True)
     def test_reschedule_by_client(self, mock_charge, mock_balance, mock_notify):
         mock_balance.return_value = {'fee': 1000}
-        date_time_str = '22/05/20 21:30:00'
+        date_time_str = '22/06/20 21:30:00'
         date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         appointment = Appointment.objects.get(client__email='test@gmail.com')
         Appointment.setup_manager.set_reschedule_date(instance=appointment, date=date)
@@ -165,6 +172,7 @@ class RescheduleManagerTestCase(TestCase):
         date_time_str = '22/05/20 18:30:00'
         date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         appointment = Appointment.objects.get(client__email='test@gmail.com')
+        appointment.save()
         Appointment.setup_manager.reschedule_valet_set_price_and_date(instance=appointment, date=date)
         self.assertEqual(appointment.additional_price, -6)
         self.assertEqual(appointment.price, 114)
@@ -180,8 +188,10 @@ class RescheduleManagerTestCase(TestCase):
 #
 
 class AppointmentCancelTestCase(TestCase):
+    fixtures = ['fixtures/BillingDetails.json', 'fixtures/Prices.json']
+
     def setUp(self):
-        date_time_str = '22/05/20 10:30:00'
+        date_time_str = '22/06/20 10:30:00'
         date = datetime.datetime.strptime(date_time_str, '%y/%m/%d %H:%M:%S')
         date_time_str_noshow = '22/05/18 19:30:00'
         date_noshow = datetime.datetime.strptime(date_time_str_noshow, '%y/%m/%d %H:%M:%S')

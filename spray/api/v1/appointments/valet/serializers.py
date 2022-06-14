@@ -24,3 +24,7 @@ class RescheduleValetSetDateSerializer(serializers.ModelSerializer):
 
 class RescheduleValetConfirmSerializer(serializers.Serializer):
     is_confirmed = serializers.BooleanField()
+
+
+class CompleteSerializer(serializers.Serializer):
+    to_complete = serializers.BooleanField()

@@ -1,11 +1,11 @@
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import MethodNotAllowed, ValidationError
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from spray.api.v1.subscriptions.serializers import SubscriptionSerializer, \
     ClientSubscriptionGetSerializer, ClientSubscriptionPostSerializer, PaymentClientSubscriptionSerializer
+from spray.api.v1.users.client.permissions import IsClient, IsAdminOrReadOnly
 from spray.subscriptions.models import Subscription, ClientSubscription
 from spray.users.models import Client
 
@@ -15,11 +15,12 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
     serializer_class = SubscriptionSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ('city',)
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class ClientSubscriptionViewSet(viewsets.ModelViewSet):
     queryset = ClientSubscription.objects.all()
+    permission_classes = [IsClient]
 
     def get_serializer_class(self):
         if self.request.method != 'GET':

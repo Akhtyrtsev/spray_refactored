@@ -54,7 +54,12 @@ class ChargeProcessing:
         return charge
 
     def _pay_by_subscription(self, client):
-        cs = sub_models.ClientSubscription.objects.get(client=client, subscription=self.subscription)
+        cs = sub_models.ClientSubscription.objects.get(
+            client=client,
+            subscription=self.subscription,
+            is_deleted=False,
+            is_paused=False,
+        )
         if cs.unused_appointments:
             cs.unused_appointments -= 1
             log.info('Client payed by unused appointment')
