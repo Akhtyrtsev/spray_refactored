@@ -12,6 +12,8 @@ class AppointmentChatsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mi
     serializer_class = AppointmentChatSerializer
     pagination_class = NotificationPagination
 
+    def get_queryset(self):
+        return AppointmentChat.objects.all().order_by('-created_at')
     # def get_queryset(self):
     #     last_message_subquery = TextMessage.objects.filter(appointment_chat__id=OuterRef('pk')).order_by('-created_at')
     #     unread_count_query = Q(
@@ -71,6 +73,9 @@ class TextMessageViewset(viewsets.GenericViewSet, mixins.CreateModelMixin,
     queryset = TextMessage.objects.all()
     serializer_class = TextMessageSerializer
     pagination_class = NotificationPagination
+
+    def get_queryset(self):
+        return TextMessage.objects.all().order_by('-created_at')
 
     # def get_queryset(self):
     #     user = self.request.user
