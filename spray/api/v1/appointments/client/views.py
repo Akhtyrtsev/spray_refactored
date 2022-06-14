@@ -37,7 +37,7 @@ class ClientAppointmentViewSet(viewsets.ModelViewSet):
         user = request.user
         client = Client.objects.get(pk=user.pk)
         appointments = []
-        if user.user_type.name == 'Client':
+        if client:
             appointments = Appointment.objects.filter(client=client, confirmed_by_client=False)
         serializer = AppointmentGetSerializer(appointments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
