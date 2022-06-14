@@ -13,7 +13,7 @@ class AppointmentChatsViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mi
     pagination_class = NotificationPagination
 
     def get_queryset(self):
-        return AppointmentChat.objects.all().order_by('-created_at')
+        return AppointmentChat.objects.all().order_by('-id')
     # def get_queryset(self):
     #     last_message_subquery = TextMessage.objects.filter(appointment_chat__id=OuterRef('pk')).order_by('-created_at')
     #     unread_count_query = Q(
