@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 from spray.appointments.models import Appointment
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
-from spray.users.models import Address
+from spray.users.models import Address, User
 
 
 class ValetAddressSerializer(serializers.ModelSerializer):
@@ -120,3 +120,24 @@ class MicroStatusSerializer(serializers.ModelSerializer):
 class CancelCompleteSerializer(serializers.Serializer):
     status = serializers.CharField(max_length=10)
     micro_status = serializers.CharField(max_length=32, required=False)
+
+
+class SimpleUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'last_login', 'email', 'first_name', 'last_name', 'phone', 'avatar_url',
+                  'user_type')
+
+
+class AppointmentSerializerWithUserInfo(serializers.ModelSerializer):
+    valet = SimpleUserSerializer(many=False)
+    client = SimpleUserSerializer(many=False)
+    address = ValetAddressSerializer()
+
+    class Meta:
+        model = Appointment
+        fields = ('id', 'address', 'client', 'valet', 'date', 'price', 'payments', 'payment_status', 'status',
+                  'confirmed_by_client', 'confirmed_by_valet', 'refund', 'duration', 'micro_status',)
+
+        extra_kwargs = {'client': {'required': True},
+                        }
