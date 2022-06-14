@@ -9,6 +9,7 @@ from spray.api.v1.device import urls as device_urls
 from spray.api.v1.notifications import urls as notification_urls
 from spray.api.v1.appointments import urls as appointment_urls
 from spray.api.v1.feedback import urls as feedback_urls
+from spray.api.v1.chat import urls as chat_urls
 
 app_name = "api"
 
@@ -45,6 +46,9 @@ urlpatterns = [
     # ---------------------------- feedback ---------------------------- #
     # ------------------------------------------------------------------ #
     path("", include(feedback_urls)),
+    # ------------------------------ chat ------------------------------ #
+    # ------------------------------------------------------------------ #
+    path("", include(chat_urls)),
 
 ]
 

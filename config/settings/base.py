@@ -63,6 +63,7 @@ LOCAL_APPS = [
     "spray.membership.apps.MembershipConfig",
     "spray.notifications.apps.NotificationsConfig",
     "spray.feedback.apps.FeedbackConfig",
+    "spray.chat.apps.ChatConfig",
 
 ]
 
