@@ -89,3 +89,7 @@ stripe==2.71.0
 
 # OneSignal
 onesignal_sdk==2.0.0
+
+# Channels
+channels==3.0.4
+channels-redis==3.3.1
