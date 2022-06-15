@@ -11,6 +11,7 @@ import os
 import sys
 from pathlib import Path
 
+import django
 from django.core.asgi import get_asgi_application
 from channels.routing import get_default_application
 
@@ -21,7 +22,7 @@ sys.path.append(str(ROOT_DIR / "spray"))
 
 # If DJANGO_SETTINGS_MODULE is unset, default to the local settings
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
-
+django.setup()
 # This application object is used by any ASGI server configured to use this file.
 application = get_default_application()
 # Apply ASGI middleware here.
