@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
+from . import views
 
 from spray.api.v1.chat.views import AppointmentChatsViewSet, TextMessageViewset
 
@@ -9,4 +10,6 @@ router.register(r'appointment-chats/(?P<chat_id>\d+)/messages', TextMessageViews
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('', views.index, name='index'),
+    path('<str:room_name>/', views.room, name='room'),
 ]
