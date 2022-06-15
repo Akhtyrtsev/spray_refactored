@@ -1,3 +1,5 @@
+from django.shortcuts import render
+
 from rest_framework import viewsets, mixins
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
@@ -127,3 +129,13 @@ class TextMessageViewset(viewsets.GenericViewSet, mixins.CreateModelMixin,
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+
+def index(request):
+    return render(request, 'chat/index.html')
+
+
+def room(request, room_name):
+    return render(request, 'chat/room.html', {
+        'room_name': room_name
+    })
