@@ -210,3 +210,13 @@ USER_AUTH_KEY = 'MzZmYmM3NGEtMTUyNS00NDhkLTljYmUtNjQxZGQzMzBkMmZm'
 ANDROID_APP_ID = '133914c9-70eb-45d4-ae2d-d8ec30d9a884'
 WEB_APP_ID = '90f78919-4a0e-488e-a7fe-54be9b2b924a'
 
+ASGI_APPLICATION = 'config.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
