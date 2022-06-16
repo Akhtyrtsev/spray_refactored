@@ -1,6 +1,6 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
-from spray.chat.routing import websocket_urlpatterns
+import spray.chat.routing
 from spray.chat.middlewares import TokenAuthMiddlewareStack
 
 application = ProtocolTypeRouter(
@@ -8,7 +8,7 @@ application = ProtocolTypeRouter(
         "http": get_asgi_application(),
         'websocket': TokenAuthMiddlewareStack(
             URLRouter(
-                websocket_urlpatterns
+                spray.chat.routing.websocket_urlpatterns
             )
         ),
     }
