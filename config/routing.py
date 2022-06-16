@@ -5,7 +5,6 @@ from spray.chat.middlewares import TokenAuthMiddlewareStack
 
 application = ProtocolTypeRouter(
     {
-        "http": get_asgi_application(),
         'websocket': TokenAuthMiddlewareStack(
             URLRouter(
                 spray.chat.routing.websocket_urlpatterns
