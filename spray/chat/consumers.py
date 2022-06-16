@@ -97,6 +97,7 @@ class ChatConsumer(WebsocketConsumer):
         text_data_json = json.loads(text_data)
         user = text_data_json.get('user', None)
         action = text_data_json.get('action', None)
+        print(action)
         chat = AppointmentChat.objects.get(pk=self.room_name)
         if user:
             self._check_online(user=user, action=action, chat=chat)

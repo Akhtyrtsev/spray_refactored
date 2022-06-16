@@ -14,18 +14,30 @@
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
     const chatSocket = new WebSocket(
-        'wss://'
-        + '127.0.0.1'
-        + '/ws/chat/'
-        + roomName
-        + '/'
-    );
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+    chatSocket.onopen = function (e) {
+        chatSocket.send(JSON.stringify({
+            'user': '7',
+            'action': 'login',
+        }))
+    }
+
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.message + '\n');
+        document.querySelector('#chat-log').value += (data['text'] + '\n');
     };
 
     chatSocket.onclose = function (e) {
+        chatSocket.send(JSON.stringify({
+            'user': '9',
+            'action': 'logout'
+        }))
         console.error('Chat socket closed unexpectedly');
     };
 

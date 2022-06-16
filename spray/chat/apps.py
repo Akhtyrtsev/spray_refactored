@@ -10,4 +10,3 @@ class ChatConfig(AppConfig):
             import spray.chat.signals  # noqa F401
         except ImportError:
             pass
-
