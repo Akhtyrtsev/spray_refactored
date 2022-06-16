@@ -14,15 +14,15 @@
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
     const chatSocket = new WebSocket(
-        'wss://'
-        + '127.0.0.1'
+        'ws://'
+        + window.location.host
         + '/ws/chat/'
         + roomName
         + '/'
     );
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.message + '\n');
+        document.querySelector('#chat-log').value += (data['text'] + '\n');
     };
 
     chatSocket.onclose = function (e) {

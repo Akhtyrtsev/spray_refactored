@@ -212,11 +212,20 @@ WEB_APP_ID = '90f78919-4a0e-488e-a7fe-54be9b2b924a'
 
 ASGI_APPLICATION = 'config.routing.application'
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": ['redis://redis:6379/0'],
         },
     },
 }
