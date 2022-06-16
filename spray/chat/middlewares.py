@@ -12,7 +12,7 @@ class TokenAuthMiddleware:
     def __init__(self, inner):
         self.inner = inner
 
-    def __call__(self, scope):
+    async def __call__(self, scope, receive, send):
         headers = dict(scope['headers'])
         if b'Authorization' in headers:
             try:
@@ -23,7 +23,7 @@ class TokenAuthMiddleware:
                     close_old_connections()
             except Token.DoesNotExist:
                 scope['user'] = AnonymousUser()
-        return self.inner(scope)
+        return await self.inner(scope, receive, send)
 
 
 TokenAuthMiddlewareStack = lambda inner: TokenAuthMiddleware(AuthMiddlewareStack(inner))
