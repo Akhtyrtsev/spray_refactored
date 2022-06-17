@@ -1,16 +1,30 @@
+import datetime
+from time import timezone
+
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
+
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 
 from spray.Pricing.get_price import Pricing
 from spray.api.v1.appointments.valet.serializers import ValetCancelSerializer, RescheduleValetSetDateSerializer, \
     RescheduleValetConfirmSerializer, CompleteSerializer
 from spray.api.v1.appointments.serializers import AppointmentGetSerializer, AppointmentForValetSerializer, \
     MicroStatusSerializer, AddPeopleSerializer
+from spray.api.v1.chat.serializers import AppointmentChatSerializer
 from spray.api.v1.users.client.permissions import IsValet
+from spray.api.v1.users.valet.serializers import ListValetFeedSerializer, CreateValetFeedSerializer
 from spray.appointments.models import Appointment
 from spray.appointments.refund_helper import AutomaticRefund
+from spray.chat.signals import create_chat
+from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
+from spray.feedback.models import ValetFeed
+from spray.notifications.notifications_paginator import NotificationPagination
 from spray.notifications.notify_processing import NotifyProcessing
+from spray.schedule.models import ValetScheduleAdditionalTime
 from spray.users.models import Valet
 
 
@@ -131,3 +145,79 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'Appointment completed'}, status=status.HTTP_200_OK)
         else:
             return Response({'detail': 'Appointment is not completed'}, status=status.HTTP_202_ACCEPTED)
+
+
+class ValetFeedViewSet(viewsets.ModelViewSet):
+    queryset = ValetFeed.objects.all().order_by('-date_created')
+    serializer_class = ListValetFeedSerializer
+    pagination_class = NotificationPagination
+
+    def get_queryset(self):
+        queryset = ValetFeed.objects.filter(
+            Q(appointment__isnull=True, author=self.request.user) |
+            Q(~Q(appointment__status='Cancelled'), appointment__isnull=False, author=self.request.user)) | \
+                   ValetFeed.objects.filter(Q(assigned_to__isnull=True) | Q(assigned_to=self.request.user),
+                                            Q(author__city=self.request.user.city) |
+                                            Q(author__isnull=True, accepted_by=self.request.user) |
+                                            Q(appointment__address__city=self.request.user.city), visible=True,
+                                            deleted=False).order_by('-date_created')
+        my_only = self.request.query_params.get('my_only', None)
+        if my_only:
+            queryset = queryset.filter(accepted_by=self.request.user, shift__isnull=False)
+        return queryset
+
+    def get_serializer_class(self):
+        if self.action in ('list', 'retrieve'):
+            return ListValetFeedSerializer
+        return CreateValetFeedSerializer
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        valet = request.user
+        if instance.accepted_by:
+            raise ValidationError(detail={'detail': 'It has been picked up already!'})
+        instance.accepted_by = valet
+        try:
+            now = timezone.now() + datetime.timedelta(hours=TIMEZONE_OFFSET[instance.timezone])
+        except Exception:
+            now = timezone.now()
+        instance.date_accepted = now
+        # complete_feed(instance, valet)
+
+        serializer = ListValetFeedSerializer(instance=instance, many=False, context={'request': request})
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['put'], url_path='create-chat', url_name='create_chat')
+    def create_chat(self, request, pk=None):
+        instance = self.get_object()
+        user1 = request.user
+        user2 = instance.author
+        if user2.user_type.pk == 1:
+            raise ValidationError(detail={'detail': 'You can`t create chat with admin'})
+        chat = create_chat(feed=instance, from_user=user1, to_user=user2, text=None)
+        serializer = AppointmentChatSerializer(chat, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=['put'], url_path='return-feed', url_name='return_feed')
+    def return_feed(self, request, pk=None):
+        feed = get_object_or_404(ValetFeed, pk=pk)
+        covered_shift = feed.shift
+
+        date = covered_shift.date
+        break_hours = covered_shift.break_hours
+        added_shift = ValetScheduleAdditionalTime.objects.filter(date=date, break_hours=break_hours,
+                                                                 valet=feed.accepted_by, is_confirmed=True).last()
+        feed.accepted_by = None
+        feed.date_accepted = None
+
+        if not feed.author:
+            feed.deleted = True
+
+        feed.save()
+
+        covered_shift.is_confirmed = False
+        covered_shift.save()
+
+        added_shift.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
