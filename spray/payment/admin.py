@@ -5,7 +5,6 @@ from django.utils import timezone
 
 from spray.payment.managers import log
 from spray.payment.models import Payments, Charges, Refund, Payout, Billing, BillingDetails
-from spray.users.models import Valet
 
 admin.site.register(Payments)
 

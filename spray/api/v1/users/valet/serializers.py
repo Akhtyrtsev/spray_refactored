@@ -1,7 +1,7 @@
 import datetime
 
 from django.utils import timezone
-from rest_framework import serializers, status
+from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from spray.api.v1.appointments.serializers import AppointmentGetSerializer
@@ -12,9 +12,7 @@ from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.feedback.models import ValetFeed
 from spray.schedule.models import ValetScheduleOccupiedTime
 from spray.schedule.parse_schedule import get_time_range
-from spray.users.models import Address, Valet, FavoriteValets
-
-
+from spray.users.models import Valet, FavoriteValets
 
 
 # ----------------------------------------------------------------------- #
@@ -64,7 +62,6 @@ class ReAssignValetSerializer(serializers.Serializer):
     notes = serializers.CharField(required=False, allow_blank=True)
 
 
-
 class ListValetFeedSerializer(serializers.ModelSerializer):
     author = ValetGetSerializer(read_only=True)
     accepted_by = ValetGetSerializer(read_only=True)
@@ -111,13 +108,23 @@ class CreateValetFeedSerializer(serializers.ModelSerializer):
             except Exception:
                 now = timezone.now()
             if (now + datetime.timedelta(minutes=65)) > start:
-                raise ValidationError(detail={'detail':
-                                                  "You cannot send a cover shift request less than 65 minutes before start time"})
+                raise ValidationError(
+                    detail={
+                        'detail':
+                            "You cannot send a cover shift request less than 65 minutes before "
+                            "start time"
+                    }
+                )
 
             for instance in appointments:
                 if (now + datetime.timedelta(minutes=65)) > instance.date:
-                    raise ValidationError(detail={'detail':
-                                                      "You cannot send a cover shift request less than 65 minutes before appointment"})
+                    raise ValidationError(
+                        detail={
+                            'detail':
+                                "You cannot send a cover shift request less than 65 minutes "
+                                "before appointment"
+                        }
+                    )
 
             result = ValetFeed.objects.create(shift=shift, **validated_data)
             for instance in appointments:
@@ -125,7 +132,7 @@ class CreateValetFeedSerializer(serializers.ModelSerializer):
 
         return result
 
-      
+
 class FavoriteValetsSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteValets
@@ -138,4 +145,3 @@ class ListFavoriteValetsSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteValets
         exclude = ('id', 'client')
-

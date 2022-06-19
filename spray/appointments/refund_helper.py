@@ -35,11 +35,9 @@ class AutomaticRefund:
             is_completed=True,
             date_completed=datetime.datetime.now(),
         )
-        print('Refund created: ', ref)
         return refund
 
     def get_refund_amount(self):
-        print(self.appointment.initial_price, 'blablabla')
         tips = self.appointment.initial_price * 0.2
         promo_code = self.appointment.promocode
         if promo_code:

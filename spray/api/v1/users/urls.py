@@ -17,7 +17,6 @@ router.register('favorite-valet', valet_views.FavoriteValetViewSet, basename='fa
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('hello/', client_views.HelloView.as_view(), name='hello'),
     path('get-token/', UserGetTokenView.as_view(), name='get_token'),
     path('convert-token/', SocialTokenView.as_view(), name='convert_token'),
     path('registration/', UserRegistrationView.as_view(), name='registration'),

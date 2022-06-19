@@ -1,5 +1,5 @@
 from django.urls import include, path
-from spray.api.v1.subscriptions.resources import ClientSubscriptionViewSet, SubscriptionViewSet
+from spray.api.v1.subscriptions.views import ClientSubscriptionViewSet, SubscriptionViewSet
 from rest_framework import routers
 
 router = routers.SimpleRouter()
