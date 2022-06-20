@@ -116,7 +116,12 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
                 appointment.people_added = True
                 appointment.confirmed_by_client = False
                 client_text = f'{appointment.additional_people} persons was added to your appointment, pls confirm it.'
-
+                new_notify_to_client = NotifyProcessing(
+                    appointment=appointment,
+                    text=client_text,
+                    user=appointment.client,
+                )
+                new_notify_to_client.appointment_notification()
             else:
                 appointment.people_added = True
                 if appointment.additional_people < 0:
