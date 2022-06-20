@@ -112,3 +112,30 @@ class ValetFeed(models.Model):
         null=True,
         blank=True
     )
+
+
+class RequestToConfirmShift(models.Model):
+    feed = models.ForeignKey(
+        ValetFeed,
+        on_delete=models.SET_NULL,
+        related_name='requests_to_confirm',
+        null=True
+    )
+    date_created = models.DateTimeField(
+        auto_now_add=True
+    )
+    is_confirmed = models.BooleanField(
+        default=False
+    )
+    notes = models.CharField(
+        max_length=255
+    )
+    timezone = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        choices=CITY_CHOICES
+    )
+
+    class Meta:
+        verbose_name_plural = 'Valets: Close shift/appointment requests'

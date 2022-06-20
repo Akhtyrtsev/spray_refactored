@@ -57,10 +57,10 @@ class AppointmentManager(models.Manager):
         if valet:
             if valet.city != appointment.address.city:
                 raise ValidationError(
-                                detail={
-                                    'detail': 'Sorry, this valet does not serve this city'
-                                }
-                            )
+                    detail={
+                        'detail': 'Sorry, this valet does not serve this city'
+                    }
+                )
             valet = ValetSchedule().valet_is_free(
                 date=appointment.date,
                 time=time_in_str,
@@ -527,3 +527,10 @@ class AppointmentManager(models.Manager):
                         'detail': 'You can’t finish appointment as the scheduled time and date didn’t start yet.'
                     }
                 )
+
+
+class NoValetAppointmentsManager(models.Manager):
+    def get_queryset(self):
+        return super(NoValetAppointmentsManager, self).get_queryset().filter(
+            valet__isnull=True
+        )
