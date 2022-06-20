@@ -5,6 +5,7 @@ from rest_framework import serializers
 
 from spray.appointments.models import Appointment
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
+from spray.feedback.models import ValetFeed
 from spray.users.models import Address, User
 
 
@@ -70,6 +71,11 @@ class AppointmentForValetSerializer(serializers.ModelSerializer):
 
     def get_is_valet_feedback(self, obj):
         if obj.feedbacks.filter(author__user_type__pk=3):
+            return True
+        return False
+
+    def get_has_feed(self, obj):
+        if ValetFeed.objects.filter(appointment=obj, deleted=False):
             return True
         return False
 
