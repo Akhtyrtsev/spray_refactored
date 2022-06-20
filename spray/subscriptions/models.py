@@ -2,7 +2,6 @@ from django.db import models
 from spray.payment.models import Payments
 from spray.contrib.choices.appointments import CITY_CHOICES
 from spray.contrib.choices.subscriptions import SUBSCRIPTION_TYPES
-from spray.users import models as users_models
 import spray.subscriptions.managers as sub_managers
 
 

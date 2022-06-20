@@ -310,4 +310,3 @@ class TestPayout(TestCase):
         sum_, result_dict = payout_obj.get_payout()
         self.assertEqual(sum_, 10)
         self.assertEqual(result_dict['cancelled_fee'], 10)
-

@@ -12,7 +12,7 @@ from spray.api.v1.users.valet.serializers import ListValetFeedSerializer, Create
 from spray.appointments.models import Appointment
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.feedback.models import Feedback, ValetFeed
-from spray.users.models import Valet, User
+from spray.users.models import Valet
 
 
 class FeedbackView(generics.ListCreateAPIView):
@@ -74,8 +74,6 @@ class ValetFeedViewSet(viewsets.ModelViewSet):
         except Exception:
             now = timezone.now()
         instance.date_accepted = now
-        # complete_feed(instance, valet)
-
         serializer = ListValetFeedSerializer(instance=instance, many=False, context={'request': request})
         return Response(serializer.data)
 

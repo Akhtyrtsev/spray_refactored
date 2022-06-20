@@ -12,13 +12,10 @@ def update_user_social_data(strategy, response, *args, **kwargs):
 
     backend = kwargs['backend']
     user = kwargs['user']
-
     if isinstance(backend, GoogleOAuth2):
         if response['picture']:
             avatar_url = response['picture']
             user.avatar_url = avatar_url
-
-
     elif isinstance(backend, FacebookOAuth2):
         fbuid = kwargs['response']['id']
         avatar_url = 'http://graph.facebook.com/%s/picture?type=large' % fbuid

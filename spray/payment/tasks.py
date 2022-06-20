@@ -27,4 +27,3 @@ def send_payout():
                 log.info('payout was send')
     except Exception as e:
         log.error(e)
-

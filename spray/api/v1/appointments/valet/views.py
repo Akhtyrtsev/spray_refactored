@@ -113,13 +113,11 @@ class ValetAppointmentViewSet(viewsets.ModelViewSet):
 
             appointment.changed_people = True
             if serializer.validated_data.get('people') > 0:
-                print('people added')
                 appointment.people_added = True
                 appointment.confirmed_by_client = False
                 client_text = f'{appointment.additional_people} persons was added to your appointment, pls confirm it.'
 
             else:
-                print('people removed')
                 appointment.people_added = True
                 if appointment.additional_people < 0:
                     appointment.people_removed = True

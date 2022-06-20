@@ -7,6 +7,7 @@ from spray.users.models import Valet
 # ----------------------------------------------------------------------- #
 # ----------------------------------------------------------------------- #
 
+
 class GetAvailableValetSerializer(serializers.ModelSerializer):
     city = serializers.CharField()
     date = serializers.DateField()

@@ -1,10 +1,7 @@
 from unittest.mock import patch, Mock
 
-import stripe
 from django.contrib.auth.hashers import make_password
 from django.test import TestCase
-from rest_framework.exceptions import ValidationError
-from stripe.error import StripeError
 
 from spray.payment.models import Payments
 from spray.subscriptions.models import Subscription, ClientSubscription
