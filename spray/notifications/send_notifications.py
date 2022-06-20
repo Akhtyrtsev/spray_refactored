@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from spray.contrib.timezones.timezones import TIMEZONE_OFFSET
 from spray.payment.managers import log
-from spray.schedule.check_working_hours import is_working_hours
+from spray.schedule import get_availability_data as valet_time
 from spray.users import models as users_models
 from onesignal_sdk.client import Client
 from django.conf import settings
@@ -89,7 +89,8 @@ class Notifier:
         valet = users_models.Valet.objects.filter(pk=user.pk).first()
         if users_models.Valet.objects.filter(pk=user.pk).exists():
             if valet.notification_only_working_hours:
-                return is_working_hours(valet=user, date=date)
+                av_valet = valet_time.ValetSchedule
+                return av_valet.get_available_valet(valet=user, date=date)
         return True
 
     def notify(self):

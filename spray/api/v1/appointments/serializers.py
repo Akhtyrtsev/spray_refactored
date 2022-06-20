@@ -68,19 +68,10 @@ class AppointmentForValetSerializer(serializers.ModelSerializer):
     def get_rating(self, obj):
         return obj.client.rating
 
-    # def get_price(self, obj):
-    #     result, _ = get_payout(obj)
-    #     return result
-
     def get_is_valet_feedback(self, obj):
         if obj.feedbacks.filter(author__user_type__pk=3):
             return True
         return False
-
-    # def get_has_feed(self, obj):
-    #     if ValetFeed.objects.filter(appointment=obj, deleted=False):
-    #         return True
-    #     return False
 
     def get_phone(self, obj):
         if obj.phone:
@@ -101,10 +92,6 @@ class AppointmentForValetSerializer(serializers.ModelSerializer):
         return obj.date - datetime.timedelta(hours=2) < now < obj.date + datetime.timedelta(hours=2)
 
 
-class ConfirmSerializer(serializers.Serializer):
-    is_confirmed = serializers.BooleanField()
-
-
 class AddPeopleSerializer(serializers.Serializer):
     people = serializers.IntegerField()
 
@@ -115,11 +102,6 @@ class MicroStatusSerializer(serializers.ModelSerializer):
         fields = (
             'micro_status',
         )
-
-
-class CancelCompleteSerializer(serializers.Serializer):
-    status = serializers.CharField(max_length=10)
-    micro_status = serializers.CharField(max_length=32, required=False)
 
 
 class SimpleUserSerializer(serializers.ModelSerializer):

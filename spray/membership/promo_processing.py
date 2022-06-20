@@ -26,18 +26,13 @@ class PromoProcessing:
             subscriptions = sub_models.ClientSubscription.objects.filter(client=client, is_deleted=False,
                                                                          cancellation_date__isnull=True)
             if not subscriptions:
-                # common_notifications(user, f'Your referral code was used! Here is your code to get 20% discount {
-                # code}')
-                new_promo = Promocode.objects.create(
+                Promocode.objects.create(
                     code=code,
                     value=20,
                     code_type='percent',
                     is_active=True,
                     only_base_discount=True
                 )
-            else:
-                ...
-                # common_notifications(user, f'Your referral code was used!')
             referrals = MemberReferral.objects.get(client=own_client)
             referrals.count += 1
             referrals.save()

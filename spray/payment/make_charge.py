@@ -22,17 +22,6 @@ class ChargeProcessing:
         self.idempotency_key = idempotency_key
         self.purchase_method = purchase_method
 
-    def single_charge(self):
-        stripe_id = self.payment['stripe_id']
-        customer_id = self.payment['user']['stripe_id']
-        charge = stripe.Charge.create(
-            amount=self.amount,
-            currency='usd',
-            source=stripe_id,
-            customer=customer_id
-        )
-        return charge
-
     def pay_subscription(self):
         """
         Creates stripe charge and returns charge object.

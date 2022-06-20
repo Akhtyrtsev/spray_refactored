@@ -70,7 +70,6 @@ class ClientGetSerializer(ModelSerializer):
         read_only=True
     )
 
-
     class Meta:
         model = Client
         fields = ('first_name',
